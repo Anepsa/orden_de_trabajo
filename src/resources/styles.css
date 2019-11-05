@@ -1,0 +1,297 @@
+.ot-color{
+    color:#6161c1;
+    margin: 20px;
+    width: auto;
+    font-size:1.1vw;
+}
+.ot-center{
+    text-align: center;
+
+}
+
+.ot-box-column{
+    display: flex;
+    flex-direction: column;
+    
+}
+.ot-box-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.center-box{
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    position: relative;
+
+
+}
+a span {
+    height: 1px;
+    width: 1px;
+    position: absolute;
+    overflow: hidden;
+    top: -10px;
+   }
+
+
+.modal-inner{
+    margin-left: 16.6%;
+    margin-top:30%;
+    width: 66%;
+    border: solid;
+
+    border-color: #80808054;
+    border-radius: 6px;
+    padding: 2%;
+    background-color: white;
+
+}
+
+.modal-inner-lista{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:30%;
+    width: 70%;
+    border: solid;
+    border-width: thin;
+    border-color: #80808054;
+    border-radius: 6px;
+    padding: 2%;
+    background-color: white;
+    
+    
+}
+
+.text-align-left{
+    text-align: left
+}
+
+.form-group-style{
+    border:none;
+    
+}
+.title-style{
+    display:none;
+}
+.space-between{
+    color:white;
+}
+.space-between:hover{
+    color:white
+}
+.form-style{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 65vh;
+}
+.login-left{
+    display:none;
+    
+}
+.back-login{
+    display: flex;
+}
+
+.login-right{
+    padding-left: 14%;
+    padding-right: 14%;
+    padding-top: 10%;
+    width: 50%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.font-label{
+    font-size: 3vw;
+    color: #151573;
+}
+.font-label-sub{
+    font-size: 1.7vw;
+    color: #7676a5;
+}
+.login{
+    text-align: center;
+}
+
+.text-important{
+    text-align: left !important;
+}
+
+
+.card-style{
+    width:25%!important;
+    display: inline-block !important;
+    margin-left: 4.16%;
+    margin-right: 4.16%;
+    margin-bottom: 4.16%;
+}
+.card-home{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2%;
+    height: 87vh;
+}
+.nav-style{
+    position: sticky;
+    top:0;
+    padding: 0px;
+    z-index:1;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2)
+}
+
+.tabla-style{
+    background: #114c75;
+    color: white;
+    position: sticky;
+    top:75px;
+}
+.list:hover{
+    background: #e5ebf1
+}
+.MuiPaper-elevation1 {
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)!important;
+}
+.log-out{
+    	width: 100%;
+	     position: absolute;
+	     left: 0px;
+	     bottom: 12%;
+         border-radius: 0px;
+         border-color:none!important;
+
+
+}
+.Overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0d0e0e8a;
+    z-index:5;
+}
+
+@media(min-width: 680px){
+
+    fieldset{
+        border: .1px solid;
+    border-color: #bbb2b2;
+    
+    
+}
+
+
+
+.login-left{
+    display:block;
+    width: 50%;
+    overflow: hidden;
+}
+    .collapsing{
+        
+        position: absolute!important;
+        background: white;
+        width: 25%;
+        padding-left:5%;
+        padding-bottom: 5%;
+        /* height: auto !important; */
+        margin-left: 75%;
+        /* transition: height .35s ease !important; */
+        /* height: 100vh !important;  */
+        
+        
+    }
+    .collapsing.in {
+        height: 100vh !important; /*Set the height here*/
+    }
+    .img-style{
+        height: 100vh;
+    }
+    .show
+    {
+     width: 25%;
+    background: white;
+    position: absolute !important;
+    margin-left: 75%;
+    padding-left:5%;
+    padding-bottom: 5%;
+    
+    }
+
+    .center-box{
+        margin-left: 4%;
+        margin-right: 4%;
+        
+
+        padding-top:2%;
+        border-width: thin;
+        border-color: gray;
+
+        
+
+    }
+    .flex-direction-row{
+        display: flex;
+        flex-direction: row;
+    }
+    .modal-inner{
+        margin-left:33%;
+        margin-top:10%;
+        width: 33%;
+    }
+
+    .modal-inner-lista{
+        margin-top:2%;
+       
+
+    }
+    
+    .form-group-style{
+        border:solid;
+        border-color: gray;
+        border-width: thin
+    }
+    .button-enviar{
+        margin-left: 42.5%;
+        width: 15%;
+    }
+    .div-form{
+        padding-top: 3%;
+        background: linear-gradient(to bottom, #e9f4ff 0%, #dde3f3 7%, #cdcde2 19%, #b8b5d0 31%, #ceccda 44%, #c3d1d8 55%, #cad9e0 67%, #e7e6ea 77%, #c3bde4 89%, #ccd3dc 100%)
+    }
+    .style-form{
+        
+        background: white;
+    }
+    .text-align-items{
+        text-align: center
+    }
+    .title-style{
+        padding:1%;
+        color:white;
+        display:block;
+
+    }
+    .width-input{
+        width: 50% !important;
+    }
+   .left{
+ 
+    width: 230px;
+    margin-top: 66%;
+    margin-bottom: 66%;
+    padding-left:15%;
+   }
+   .nav-item{
+       padding:5%;
+   }
+   .LogoAnepsa{
+    width: 100%;
+   }
+
+   
+   
+   
+}
