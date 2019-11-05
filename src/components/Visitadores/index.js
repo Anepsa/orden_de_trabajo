@@ -1,109 +1,137 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
+import {Table, Button, Input} from 'reactstrap';
+import CrearVisitador from '../Visitadores/CrearVisitador';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+import RotateLeftIcon from '@material-ui/icons/RotateLeft';
+
+import { Link } from 'react-router-dom';
+import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
 
-class  Visitadores extends React.Component {
-      
-    render(){
-        const {handleChange, handleSubmitVisitador, visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencion, telVisitador, extTel,emailVisitador } = this.context
-    return(
-        <div className="div-form">
-             
-             <Form  className="center-box style-form" id="formClear" onSubmit={handleSubmitVisitador}>
-           
-               
-           <h5 className="ot-color ot-center">Visitadores</h5>
-           <br/>
-        <fieldset className="fieldset">
-        <legend className="ot-color"> DATOS </legend>
-        <FormGroup >
-            
-        <FormGroup row>
-        <Col sm={7}>
-       
-            <Label sm={12}>Nombre <span className="text-danger">*</span>  </Label>
-            <Col >
-                <Input  className="form-size" type="text" name="visitadorNombre" value={visitadorNombre}   onChange={handleChange}/> 
-            </Col> 
-            </Col>
-        <Col sm={5}>
-      
-            <Label sm={12} >RFC </Label>
-            <Col >
-                <Input  type="text" name="rfcVisitador" value={rfcVisitador} onChange={handleChange}/> 
-            </Col>
-            </Col> 
-            
-        </FormGroup>
-       
-            <Label sm={12} >Dirección  </Label>
-            <Col sm={12}>
-            <Input  type="text" name="direccionVisitador" value={direccionVisitador} onChange={handleChange} /> 
-            </Col>
-        </FormGroup>
-        <FormGroup row>  
-            <Col sm={4}>
-            <Label sm={12}>Deleg/Municipio  </Label>
-            <Col>
-            <Input  type="text" name="delegacionVisitador"     value={delegacionVisitador} onChange={handleChange} /> 
-            </Col>
-             </Col> 
-             <Col sm={4}>
-           
-             <Label  sm={12}>Ciudad/EDO </Label>
-            <Col>
-             <Input  type="text" name="EDOVisitador"   value={EDOVisitador} onChange={handleChange} />
-                </Col>
-             </Col>
-             <Col sm={4}>
-             <Label  sm={12}>Atención </Label>
-            <Col sm={12}>
-                <Input  type="text" name="atencion" value={atencion} onChange={handleChange} /> </Col>
-             </Col>
-        </FormGroup>
-       
-        <FormGroup row>  
-            <Col sm={3}>
-            <Label sm={12} >Teléfono <span className="text-danger">*</span> </Label>
-            <Col>
-            <Input    type="text" name="telVisitador" value={telVisitador} onChange={handleChange} />
-            </Col>
-             </Col> 
-             <Col sm={2}>
-            <Label sm={12}>Exten </Label>
-            <Col>
-                <Input type="text"   name="extTel" value={extTel} onChange={handleChange} />
-                </Col>
-             </Col>
-             <Col sm={4}>
-             <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
-            <Col>
-            <Input   type="email" name="emailVisitador" value={emailVisitador} onChange={handleChange} /> 
-            </Col>
-            </Col>
-            <Col sm={3}>
-             <Label  sm={12}>Estatus <span className="text-danger">*</span> </Label>
-            <Col>
-            <Input type="select" name="nombreVendedor" onChange={handleChange}>
-                <option value="">Selecciona</option>
-                <option value="perdido">Perdido</option>
-                        <option value="contacto inicial">Contacto Inicial </option>
-                        <option value="posible cierre">Posible Cierre</option>
-                        <option value="estancado">Estancado</option>
-                        <option value="vendido">Vendido</option>
-                                 
+
+import { AppContext} from "../../AppContext";
+
+// OrdenCreada.contextType = AppContext;
+CrearVisitador.contextType =AppContext;
+// EditarOrden.contextType = AppContext;
+
+
+class  ListadoVisitadores extends React.Component {
+  render () {
+    const{ dataClientes, onDeleteCliente, onClickItemCliente, onClickItemUpdateCliente }=this.context
+      return (
+      <div>
+                  <Link  className="text-white " to="/CrearVisitador"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>
+              
+                  
+                  
+                  <Table>
+                  <thead>
+                </thead>
+                <tbody>
+          <tr  className="filtrar-style">
+            <th></th>
+            <th>Filtrar por</th>
+          <th>
+            <Input type="text" name="buscador" placeholder="Clave" >
             </Input>
-            </Col>
-            </Col>
-        </FormGroup>
-       </fieldset>
-       <hr/>
-       <Button className="button-enviar" type="submit"  >Enviar</Button><br/>
-       </Form>
-       </div>
+            
+          </th>
+          <th>
+            <Input type="select" name="nombreVendedor" >
+                <option value="">Vendedor</option>
+                <option value="Ameyalli Brito González">Ame</option>
+                        <option value="Yozebeth Brito González">Yoz</option>
+                        <option value="Lazo Santiago Rubens">Lazo Santiago Rubens</option>
+                        <option value="Vicente Galicia Salazar">Vicente Galicia Salazar</option>
+                        <option value="America Jimenez Carlon">America Jimenez Carlon</option>
+                        <option value="Daniel Hurtado Sanchez">Daniel Hurtado Sanchez</option>
+                
+            </Input>
+          </th>
+          <th>
+             <Input type="select" name="tipoProyecto" >
+                <option value="">Proyecto</option>
+               
+       
+                <option value="CIVIL">CIVIL</option>
+                         <option value="FINANCIERA">FINANCIERA</option>
+                         <option value="INDUSTRIAL">INDUSTRIAL</option>
+                         <option value="CIVIL-INDUSTRIAL">CIVIL-INDUSTRIAL</option>
+                         <option value="CIVIL-FINANCIERA">CIVIL-FINANCIERA</option>
+                         <option value="FINANCIERA-INDUSTRIAL">FINANCIERA-INDUSTRIAL</option>
+                         <option value="CIVIL-FINANCIERA-INDUSTRIAL">CIVIL-FINANCIERA-INDUSTRIAL</option>
+            </Input>
+          </th>
+          <th>
+          <Input type="date" name="fechaBuscador" >
+            Fecha
+            </Input>
+          </th>
+          <th>
+             <Input type="select" name="estatus" >
+                <option value="" >Estatus</option>
+                <option value="vendido">Vendido</option>
+                <option value="proceso">En proceso</option>
+                <option value="cancelado">Cancelado</option>
+            </Input>
+          </th>
+          <th><Button   color="warning text-white" ><RotateLeftIcon/> </Button></th>
+        </tr>
+        <tr><th></th></tr>
+        
+        </tbody>
+ 
+      <thead>
+       
+        <tr  className="tabla-style">
+        
 
-
-     ) }
+          <th></th>
+          <th className="text-center"><FolderOpenIcon/></th>
+          <th >Clave</th>
+          <th>Nombre</th>
+          <th>Vendedor</th>
+          <th>Fecha</th>
+          <th>Estatus</th>
+          <th></th>
+          
+        </tr>
+       
+      </thead>
+      
+      <tbody>
+      {dataClientes.map(item =>(
+            
+            
+     
+        <tr  className="list">
+          <td></td>
+          <td className="text-center"><EditOutlinedIcon id={item.clave} onClick={onClickItemUpdateCliente}/><FindInPageOutlinedIcon  id={item.clave} onClick={onClickItemCliente}/></td>
+          <td>{item.clave}</td>
+          <td>{item.nombre}</td>
+          <td>{item.vendedor}</td>
+          <td>{item.getNewDate}</td>
+          <td>{item.estatus}</td>
+          
+          <td><DeleteOutlineOutlinedIcon  id={item.clave} onClick={onDeleteCliente}/></td>
+        </tr>
+     
+        ))
+      }
+      </tbody>
+     
+      </Table>
+   
+  
+    </div>
+  );
+}
 }
 
-export default Visitadores
+
+
+export default ListadoVisitadores;
+

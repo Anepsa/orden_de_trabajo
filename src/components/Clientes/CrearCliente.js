@@ -2,35 +2,42 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
 
 
-class  Vendedores extends React.Component {
+class  DirectorioClientes extends React.Component {
       
     render(){
-        const {handleChange, handleSubmitVendedor, VendedorNombre, rfcVendedor, direccionVendedor, delegacionVendedor, EDOVendedor, atencion, telVendedor, extTel,emailVendedor } = this.context
+        const {handleChange, handleSubmitCliente,  empresa, clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencion, telCliente, extTel,emailCliente } = this.context
     return(
         <div className="div-form">
              
-             <Form  className="center-box style-form" id="formClear" onSubmit={handleSubmitVendedor}>
+             <Form  className="center-box style-form" id="formClear" onSubmit={handleSubmitCliente}>
            
                
-           <h5 className="ot-color ot-center">Vendedores</h5>
+           <h5 className="ot-color ot-center">NUEVO CLIENTE</h5>
            <br/>
         <fieldset className="fieldset">
-        <legend className="ot-color"> DATOS </legend>
+        <legend className="ot-color"> DATOS DEL CLIENTE</legend>
         <FormGroup >
             
         <FormGroup row>
-        <Col sm={7}>
+        <Col sm={4}>
        
             <Label sm={12}>Nombre <span className="text-danger">*</span>  </Label>
             <Col >
-                <Input  className="form-size" type="text" name="VendedorNombre" value={VendedorNombre}   onChange={handleChange}/> 
+                <Input  className="form-size" type="text" name="clienteNombre" value={clienteNombre}  onChange={handleChange} /> 
             </Col> 
             </Col>
-        <Col sm={5}>
+            <Col sm={4}>
+      
+      <Label sm={12} >Empresa </Label>
+      <Col >
+          <Input  type="text" name="empresa" value={empresa} onChange={handleChange}/> 
+      </Col>
+      </Col> 
+        <Col sm={4}>
       
             <Label sm={12} >RFC </Label>
             <Col >
-                <Input  type="text" name="rfcVendedor" value={rfcVendedor} onChange={handleChange}/> 
+                <Input  type="text" name="rfcCliente" value={rfcCliente} onChange={handleChange}/> 
             </Col>
             </Col> 
             
@@ -38,21 +45,21 @@ class  Vendedores extends React.Component {
        
             <Label sm={12} >Dirección  </Label>
             <Col sm={12}>
-            <Input  type="text" name="direccionVendedor" value={direccionVendedor} onChange={handleChange} /> 
+            <Input  type="text" name="direccionCliente" value={direccionCliente} onChange={handleChange} /> 
             </Col>
         </FormGroup>
         <FormGroup row>  
             <Col sm={4}>
             <Label sm={12}>Deleg/Municipio  </Label>
             <Col>
-            <Input  type="text" name="delegacionVendedor"     value={delegacionVendedor} onChange={handleChange} /> 
+            <Input  type="text" name="delegacionCliente"     value={delegacionCliente} onChange={handleChange} /> 
             </Col>
              </Col> 
              <Col sm={4}>
            
              <Label  sm={12}>Ciudad/EDO </Label>
             <Col>
-             <Input  type="text" name="EDOVendedor"   value={EDOVendedor} onChange={handleChange} />
+             <Input  type="text" name="EDOCliente"   value={EDOCliente} onChange={handleChange} />
                 </Col>
              </Col>
              <Col sm={4}>
@@ -66,7 +73,7 @@ class  Vendedores extends React.Component {
             <Col sm={3}>
             <Label sm={12} >Teléfono <span className="text-danger">*</span> </Label>
             <Col>
-            <Input    type="text" name="telVendedor" value={telVendedor} onChange={handleChange} />
+            <Input    type="text" name="telCliente" value={telCliente} onChange={handleChange} />
             </Col>
              </Col> 
              <Col sm={2}>
@@ -78,7 +85,7 @@ class  Vendedores extends React.Component {
              <Col sm={4}>
              <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
             <Col>
-            <Input   type="email" name="emailVendedor" value={emailVendedor} onChange={handleChange} /> 
+            <Input   type="email" name="emailCliente" value={emailCliente} onChange={handleChange} /> 
             </Col>
             </Col>
             <Col sm={3}>
@@ -106,4 +113,4 @@ class  Vendedores extends React.Component {
      ) }
 }
 
-export default Vendedores
+export default DirectorioClientes

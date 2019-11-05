@@ -1,9 +1,8 @@
 import React from 'react';
 import {Table, Button, Input} from 'reactstrap';
-import DirectorioClientes from '../DirectorioClientes';
+import CrearCliente from './CrearCliente';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
-
 import { Link } from 'react-router-dom';
 import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
@@ -14,7 +13,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import { AppContext} from "../../AppContext";
 
 // OrdenCreada.contextType = AppContext;
-DirectorioClientes.contextType =AppContext;
+CrearCliente.contextType =AppContext;
 // EditarOrden.contextType = AppContext;
 
 
@@ -23,7 +22,7 @@ class  ListadoClientes extends React.Component {
     const{ dataClientes, onDeleteCliente, onClickItemCliente, onClickItemUpdateCliente }=this.context
       return (
       <div>
-                  <Link  className="text-white " to="/DirectorioClientes"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>
+                  <Link  className="text-white " to="/CrearCliente"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>
               
                   
                   

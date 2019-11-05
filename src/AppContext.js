@@ -4,9 +4,6 @@ import db from "./Fire.js";
 import firebase from 'firebase';
 
 
-
-
-
 export const AppContext = React.createContext()
 
  export class AppContextProvider extends Component {
@@ -23,6 +20,9 @@ export const AppContext = React.createContext()
             consulta:[],
             consultaCliente:[],
             obtDataCliente:[],
+            obtDataEmpresa:[],
+            listaVisitador:[],
+            ugeList:[],
             buscador:"",
             newestatus:"",
             getName:"",
@@ -35,21 +35,22 @@ export const AppContext = React.createContext()
             dataClientes:[],
             contClientes:[],
             nombresClientes:[],
+            nombresEmpresas:[],
             estatusEmpresa:"",
-            nombreCliente:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",
+            clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",
             visitadorNombre:"", rfcVisitador:"", direccionVisitador:"", delegacionVisitador:"", EDOVisitador:"", atencionVisitador:"", telvisitador:"", extTelVisitador:"",emailVisitador:"",
-            vendedorNombre:"", rfcVendedor:"", direccionVendedor:"", delegacionVendedor:"", EDOVendedor:"", atencionVendedor:"", telVendedor:"", extTelVendedor:"",emailVendedor:"", 
-            
+           
            
         }
     this.handleSubmitCliente = this.handleSubmitCliente.bind(this);
     this.handleSubmitVisitador = this.handleSubmitVisitador.bind(this);
-    this.handleSubmitVendedor = this.handleSubmitVendedor.bind(this)
+    this.handleSelectUge = this.handleSelectUge.bind(this)
     this.onClickItem = this.onClickItem.bind(this)
     this.onClickItemUpdate =this.onClickItemUpdate.bind(this)
     this.onClickItemCliente = this.onClickItemCliente.bind(this)
     this.onClickItemUpdateCliente =this.onClickItemUpdateCliente.bind(this)
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleChangeDate= this.handleChangeDate.bind(this)
     this.handleChangeFound = this.handleChangeFound.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -91,6 +92,39 @@ export const AppContext = React.createContext()
         
         
     } 
+    handleClick = (e) =>{
+      const list = this.state.ugeList
+     const value=  e.target.value;
+     const newvalue = [value, ...list]
+      
+     this.setState({
+       ugeList: newvalue
+     }, () => {console.log(this.state.ugeList)})
+    }
+
+    handleSelectUge = (e) =>{
+
+  const ugeSelect = e.target.value;
+  console.log(ugeSelect)
+  this.setState({
+    uge:ugeSelect
+  })
+
+  db.collection("visitadores").where("uge", "array-contains", ugeSelect)
+  .get()
+  .then(querySnapshot => {
+      const data = querySnapshot.docs.map(doc => doc.data().nombre);
+    console.log(data)
+          
+          this.setState({
+            listaVisitador:data,
+
+
+          })
+          
+          
+      });
+}
     handleEmpresa = (e) =>{
      
       const empresa = e.target.value
@@ -98,6 +132,7 @@ export const AppContext = React.createContext()
       this.setState({ 
       estatusEmpresa: empresa
     })
+
       db.collection("clientes").where("nombre", "==", empresa )
       .get()
       .then(querySnapshot => {
@@ -111,13 +146,34 @@ export const AppContext = React.createContext()
               
               
           });
-
-
-     
-
-
-
     }
+  
+
+handleCliente = (e) =>{
+  const empresa = e.target.value
+      console.log(empresa)
+      this.setState({ 
+      estatusEmpresa: empresa
+    })
+
+      db.collection("clientes").where("nombre", "==", empresa )
+      .get()
+      .then(querySnapshot => {
+          const data = querySnapshot.docs.map(doc => doc.data());
+          console.log(data[0])
+              
+              this.setState({
+                obtDataCliente:data[0],
+
+              })
+              
+              
+          });
+    
+  }
+
+
+
     handleChangeCost = (e)=>{
         
       this.setState({ 
@@ -329,7 +385,7 @@ handleChangeProject= (e)=>{
 
       db.collection("clientes").add({
         
-        nombre: this.state.nombreCliente,
+        nombre: this.state.clienteNombre,
         rfc: this.state.rfcCliente,      
         direccion: this.state.direccionCliente,
         delegacion: this.state.delegacionCliente,
@@ -339,6 +395,7 @@ handleChangeProject= (e)=>{
         clave: claveUnica,
         email:this.state.emailCliente,
         contador:contador,
+        empresa: this.state.empresa,
         vendedor:this.state.getName,
         date: firebase.firestore.FieldValue.serverTimestamp(),
         getNewDate: new Date().toLocaleString(),
@@ -351,6 +408,7 @@ handleChangeProject= (e)=>{
      }, () => {console.log(this.state.mes)})
 
   }
+
 
   handleSubmitVisitador =(e)=>{
 
@@ -367,6 +425,7 @@ handleChangeProject= (e)=>{
         telefono: this.state.telvisitador,
         email:this.state.emailVisitador,
         vendedor:this.state.getName,
+        uge:this.state.ugeList,
         date: firebase.firestore.FieldValue.serverTimestamp(),
         getNewDate: new Date().toLocaleString(),
 
@@ -375,7 +434,7 @@ handleChangeProject= (e)=>{
 
      
       this.setState({
-        nombreVisitador:"", rfcVisitador:"", direccionVisitador:"", delegacionVisitador:"", EDOVisitador:"", atencionVisitador:"", telVisitador:"", extTelVisitador:"",emailVisitador:"",
+        nombreVisitador:"", rfcVisitador:"", direccionVisitador:"", delegacionVisitador:"", EDOVisitador:"", atencionVisitador:"", telVisitador:"", extTelVisitador:"",emailVisitador:"",ugeList:[],
      }, () => {console.log(this.state.mes)})
 
   }
@@ -558,25 +617,17 @@ handleChangeProject= (e)=>{
             db.collection("clientes").orderBy("date", "desc")
               .get()
               .then(querySnapshot => {
-                const data = querySnapshot.docs.map(doc =>  doc.data())
-                  const news = data[0].contador
+                const dataClientes = querySnapshot.docs.map(doc =>  doc.data())
+                  const news = dataClientes[0].contador
+                  const dataNombres = querySnapshot.docs.map(doc =>  doc.data().nombre)
+                 const dataEmpresa = querySnapshot.docs.map(doc =>  doc.data().empresa)
                   console.log(news)
-                this.setState({ dataClientes:data, contClientes: news});
+                  console.log(dataEmpresa)
+                this.setState({ dataClientes:dataClientes, nombresClientes:dataNombres, contClientes: news,  nombresEmpresas: dataEmpresa});
                 
               
               }, console.log(this.state.dataClientes));
-              db.collection("clientes").orderBy("date", "desc")
-              .get()
-              .then(querySnapshot => {
-                const data = querySnapshot.docs.map(doc =>  doc.data().nombre)
-                  const news = data
-                  console.log(news)
-                this.setState({ nombresClientes:data, });
-                
-              
-              }, console.log(this.state.dataClientes));
-
-
+    
             } else{
               db.collection("clientes").orderBy("date", "desc").limit(1)
               .get()
@@ -601,6 +652,7 @@ handleChangeProject= (e)=>{
 
 
     componentDidMount() {
+
       const user =  firebase.auth().currentUser.email
       this.setState({
         user:user,
@@ -740,16 +792,16 @@ handleChangeProject= (e)=>{
 
   
     render() {
-        const {newOrder, list,dataClientes, estatusEmpresa,items, 
+        const {newOrder, list,dataClientes, estatusEmpresa,items, listaVisitador, nombresEmpresas,
         visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
-         vendedorNombre, rfcVendedor, direccionVendedor, delegacionVendedor, EDOVendedor, atencionVendedor, telVendedor, extTelVendedor,emailVendedor, 
-        consulta,getName,clienteAtencion, clienteCiudad,clienteCorreo,clienteDelegacion,clienteDireccion,clienteRFC,clienteTel, user, dateNew,obtDataCliente,  clienteNombre,message, rol, montoVendido, comision, nombresClientes,presupuesto} = this.state;
+          consulta,getName,clienteAtencion, clienteCiudad,clienteCorreo,clienteDelegacion,clienteDireccion,clienteRFC,clienteTel, user, dateNew,obtDataCliente,  clienteNombre,message, rol, montoVendido, comision, nombresClientes,presupuesto} = this.state;
       return (
         <AppContext.Provider
         value={{
         
           onClickItem: this.onClickItem,
           onClickItemUpdate: this.onClickItemUpdate,
+          handleSelectUge: this.handleSelectUge,
           handleEmpresa: this.handleEmpresa,
           handleChange: this.handleChange,
           handleChangeFound: this.handleChangeFound,
@@ -757,6 +809,7 @@ handleChangeProject= (e)=>{
           handleChangeSeller:this.handleChangeSeller,
           handleChangeProject:this.handleChangeProject,
           handleChangeSelect: this.handleChangeSelect,
+          handleClick: this.handleClick,
           handleSubmitCliente: this.handleSubmitCliente,
           handleSubmitVisitador: this.handleSubmitVisitador,
           handleSubmitVendedor: this.handleSubmitVendedor,
@@ -770,7 +823,6 @@ handleChangeProject= (e)=>{
           handleUpdate:this.handleUpdate,
           onDelete: this.onDelete,
           onDeleteCliente: this.onDeleteCliente,
-          vendedorNombre, rfcVendedor, direccionVendedor, delegacionVendedor, EDOVendedor, atencionVendedor, telVendedor, extTelVendedor,emailVendedor,
          visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
           clienteAtencion,
           clienteCiudad,
@@ -795,7 +847,9 @@ handleChangeProject= (e)=>{
           montoVendido,
           comision,
           nombresClientes,
+          nombresEmpresas,
           presupuesto,
+          listaVisitador,
          
 
         }}

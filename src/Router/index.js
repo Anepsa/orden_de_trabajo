@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
-// import Navegador from '../components/Navbar'
 import {BrowserRouter, Route} from 'react-router-dom'
 import Home from '../components/Home'
-import ListaOrdenes from '../components/ListaOrdenes'
-
-import OrdenTrabajo from "../components/OrdenTrabajo"
-import DirectorioClientes from "../components/DirectorioClientes"
+import ListaOrdenes from '../components/OrdenTrabajo'
+import OrdenTrabajo from "../components/OrdenTrabajo/CrearOrden"
+import CrearCliente from "../components/Clientes/CrearCliente"
 import Visitadores from "../components/Visitadores"
-import Vendedores from "../components/Vendedores"
-import ListadoClientes from "../components/ListadoClientes"
-// import OrdenCreada from "./components/OrdenCreada"
+import CrearVisitador from "../components/Visitadores/CrearVisitador"
+
+import ListadoClientes from "../components/Clientes"
 import { AppContext} from "../AppContext";
 import { NavLink } from "react-router-dom";
 import AnepsaLogo from "../assets/anepsa.png"
@@ -32,10 +30,11 @@ import {
 
 OrdenTrabajo.contextType = AppContext;
 ListaOrdenes.contextType = AppContext;
-DirectorioClientes.contextType = AppContext;
+CrearCliente.contextType = AppContext;
 ListadoClientes.contextType =AppContext;
 Visitadores.contextType = AppContext;
-Vendedores.contextType = AppContext;
+CrearVisitador.contextType = AppContext;
+
 
 
 
@@ -107,7 +106,7 @@ class Menu extends Component  {
             </NavItem>
             <NavItem><NavLink to="/ListadoClientes">Directorio Clientes</NavLink></NavItem>
             <NavItem  > 
-                         <NavLink   to="/DirectorioClientes">Crear</NavLink>
+                         <NavLink   to="/CrearCliente">Crear</NavLink>
             
             
             </NavItem>
@@ -144,13 +143,13 @@ class Menu extends Component  {
        
             <NavItem><NavLink to="/Visitadores">Visitadores</NavLink></NavItem>
             <NavItem  > 
-                         <NavLink   to="/Directorio Clientes">Crear</NavLink>
+                         <NavLink   to="/CrearVisitador">Crear</NavLink>
             
             
             </NavItem>
             <NavItem><NavLink to="/Vendedores">Vendedores</NavLink></NavItem>
             <NavItem  > 
-                         <NavLink   to="/Directorio Clientes">Crear</NavLink>
+                         <NavLink   to="/CrearVendedor">Crear</NavLink>
             
             
             </NavItem>
@@ -177,9 +176,11 @@ class Menu extends Component  {
             <Route exact path="/" render={() => <Home />} />
             <Route path="/OrdenTrabajo" render={() => <OrdenTrabajo />} />
             <Route path="/ListaOrdenes" render={() => <ListaOrdenes />} />
-            <Route path="/DirectorioClientes" render={() => <DirectorioClientes />} />
+            <Route path="/CrearCliente" render={() => <CrearCliente />} />
             <Route path="/ListadoClientes" render={() => <ListadoClientes />} />
             <Route path="/Visitadores" render={() => <Visitadores />} />
+            <Route path="/CrearVisitador" render={() => <CrearVisitador />} />
+    
            
    </div>
       
