@@ -17,7 +17,7 @@ class  Home extends React.Component {
       </CardContent>
       <CardActions>
       <Button size="small"><Link to="/ListadoClientes">Ver Lista</Link></Button>
-        <Button size="small"><Link to="/DirectorioClientes">Crear</Link></Button>
+        <Button size="small"><Link to="/CrearCliente">Crear</Link></Button>
       </CardActions>
       </Card>
             <Card className="card-style">

@@ -46,17 +46,14 @@ class OrdenCreada extends React.Component {
               <Label> UGE: </Label> 
               <Input type="text" name="uge" value={item.uge}></Input>
               </Col>
-              <Col sm={2}>
+              <Col sm={4}>
               <Label> FECHA OT: </Label> 
-              <Input name="dateNew" type="text" value={item.dateNew}></Input>
+              <Input name="dateNew" type="text" value={item.getNewDate}></Input>
               </Col>
-              <Col sm={2}>
-              <Label> ESTATUS: </Label> 
-              <Input type="text" defaultValue="" name="newestatus" value={newestatus}  ></Input>
-              </Col>
+              
               <Col sm={4}>
               <Label> COPIA PARA </Label> 
-              <Input type="text" ></Input>
+              <Input type="text"  ></Input>
               </Col>
               </FormGroup>
               <FormGroup  row>
@@ -93,16 +90,20 @@ class OrdenCreada extends React.Component {
               <Label> Nombre: </Label>
               <Input type="text"  ></Input>
               </Col>
-             <Col sm={8}>
-              <Label>Dirección:</Label>
+              <Col sm={4}>
+              <Label> Empresa: </Label>
+              <Input type="text"  ></Input>
+              </Col>
+             <Col sm={4}>
+              <Label>Atencion:</Label>
               <Input type="text"></Input>
               </Col>
-              <Col sm={4}>
-              <Label> Ciudad/EDO: </Label> 
+              <Col sm={8}>
+              <Label> Dirección: </Label> 
               <Input type="text" ></Input>
               </Col>
-              <Col sm={8}>
-              <Label> Atención: </Label> 
+              <Col sm={4}>
+              <Label> Ciudad/EDO </Label> 
               <Input type="text" ></Input>
               </Col>
               <Col sm={4}>
@@ -235,16 +236,16 @@ class OrdenCreada extends React.Component {
               <hr/>
              
              </Col>
-             <Col sm={4}>
+             <Col sm={3}>
+              <Label className="ot-color">COMISIÓN EXTERNA</Label>
+              <Input type="text"  ></Input>
+              </Col>
+              <Col sm={3}>
               <Label className="ot-color">PRESUPUESTO</Label>
               <Input type="text"  ></Input>
               </Col>
               <Col sm={4}>
-              <Label className="ot-color">MONTO VENDIDO</Label>
-              <Input type="text"  ></Input>
-              </Col>
-              <Col sm={2}>
-              <Label className="ot-color">ELABORO</Label>
+              <Label className="ot-color">MONTO NETO VENDIDO</Label>
               <Input type="text"  ></Input>
               </Col>
               <Col sm={2}>

@@ -12,7 +12,7 @@ import {Button,   Form, FormGroup, Label, Input, Col } from 'reactstrap';
 class OrdenCreada extends React.Component {
 
     render() {
-        const{ closeModal, modalIsOpen, consulta, handleUpdate, newestatus, handleChange, vendedor}=this.context
+        const{ closeModal, modalIsOpen, consulta, handleChange, vendedor}=this.context
  
         // const{ list} = this.context}
         
@@ -46,14 +46,11 @@ class OrdenCreada extends React.Component {
               <Label> UGE: </Label> 
               <Input type="text" value={item.uge}></Input>
               </Col>
-              <Col sm={2}>
+              <Col sm={4}>
               <Label> FECHA OT: </Label> 
-              <Input type="text" value={item.dateNew}></Input>
+              <Input type="text" value={item.getNewDate}></Input>
               </Col>
-              <Col sm={2}>
-              <Label> ESTATUS: </Label> 
-              <Input type="text" name="newestatus" value={newestatus}  ></Input>
-              </Col>
+            
               <Col sm={4}>
               <Label> COPIA PARA </Label> 
               <Input type="text" ></Input>

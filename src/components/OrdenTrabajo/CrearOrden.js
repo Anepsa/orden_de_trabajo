@@ -8,6 +8,7 @@ class  OrdenTrabajo extends React.Component {
   
     render(){
     const{ rol,nombresClientes, nombresEmpresas, handleSelectUge, listaVisitador, handleCliente, obtDataCliente, handleEmpresa, getName, vendedor,uge,  copia,  oferta,
+    fechaIns, inicio, entrega, 
     cedido, proyecto, tipoCliente,  
     nombreCliente, rfcCliente, direccionCliente, delegacionCliente, 
     EDOCliente, atencion,telCliente, extTel, 
@@ -31,24 +32,24 @@ class  OrdenTrabajo extends React.Component {
             <Col sm={3}>
                  <Label sm={12} >UGE <span className="text-danger">*</span>   </Label>
                  <Col >
-                     <Input type="select" name="uge" value={uge} onChange={handleSelectUge}>
-                        <option value="">Selecciona</option>
-                         <option value="civil">CIVIL</option>
-                         <option value="financiera">FINANCIERA</option>
-                         <option value="industrial">INDUSTRIAL</option>
-                         <option value="civil-industrial">CIVIL-INDUSTRIAL</option>
-                         <option value="civil-financiera">CIVIL-FINANCIERA</option>
-                         <option value="financiera-industrial">FINANCIERA-INDUSTRIAL</option>
-                         <option value="civiil-financiera-indutrial">CIVIL-FINANCIERA-INDUSTRIAL</option>
-                    </Input>
+                     <Input type="select"  className="obligatorio" name="uge" value={uge} onChange={handleSelectUge}>
+                        <option value="" selected>Selecciona</option>
+                        <option value="CIVIL">CIVIL</option>
+                         <option value="FINANCIERA">FINANCIERA</option>
+                         <option value="INDUSTRIAL">INDUSTRIAL</option>
+                         <option value="CIVIL-INDUSTRIAL">CIVIL-INDUSTRIAL</option>
+                         <option value="CIVIL-FINANCIERA">CIVIL-FINANCIERA</option>
+                         <option value="FINANCIERA-INDUSTRIAL">FINANCIERA-INDUSTRIAL</option>
+                         <option value="CIVIL-FINANCIERA-INDUSTRIAL">CIVIL-FINANCIERA-INDUSTRIAL</option>
+            </Input>
                  </Col>
                  </Col>
          
                 <Col sm={3}>
                 <Label sm={12}  >Vendedor Ejecutivo <span className="text-danger">*</span> </Label>
                 <Col >
-                    <Input  type="select" name="vendedor" value={vendedor} onChange={handleChange} >
-                    <option value="">Selecciona</option>
+                    <Input   className="obligatorio" type="select" name="vendedor" value={vendedor} onChange={handleChange} >
+                    <option value="" selected>Selecciona</option>
                         <option value="Ameyalli Brito González">Ame</option>
                         <option value="Yozebeth Brito González">Yoz</option>
                         <option value="Lazo Santiago Rubens">Lazo Santiago Rubens</option>
@@ -174,18 +175,25 @@ class  OrdenTrabajo extends React.Component {
                 </FormGroup>
                 <FormGroup row>
                   
-                    <Col sm={7}>
+                    <Col sm={5}>
                    
                         <Label sm={12}>Nombre <span className="text-danger">*</span>  </Label>
                         <Col >
                             <Input readOnly  value={obtDataCliente.nombre} className="form-size" type="text" name="nombreCliente" /> 
                         </Col> 
                         </Col>
-                    <Col sm={5}>
+                        <Col sm={3}>
+                   
+                   <Label sm={12}>Empresa<span className="text-danger">*</span>  </Label>
+                   <Col >
+                       <Input readOnly  value={obtDataCliente.empresa} className="form-size" type="text" name="empresa" /> 
+                   </Col> 
+                   </Col>
+                    <Col sm={4}>
                   
                         <Label sm={12} >RFC </Label>
                         <Col >
-                            <Input readOnly  type="text" name="rfcCliente" /> 
+                            <Input readOnly value={obtDataCliente.rfc}  type="text" name="rfcCliente" /> 
                         </Col>
                         </Col> 
                         
@@ -193,27 +201,27 @@ class  OrdenTrabajo extends React.Component {
                    
                         <Label sm={12} >Dirección  </Label>
                         <Col sm={12}>
-                        <Input readOnly  type="text" name="direccionCliente"  /> 
+                        <Input readOnly   value={obtDataCliente.direccion} type="text" name="direccionCliente"  /> 
                         </Col>
                     </FormGroup>
                     <FormGroup row>  
                         <Col sm={4}>
                         <Label sm={12}>Deleg/Municipio  </Label>
                         <Col>
-                        <Input  readOnly  type="text" name="delegacionCliente"   /> 
+                        <Input  readOnly  value={obtDataCliente.delegacion} type="text" name="delegacionCliente"   /> 
                         </Col>
                          </Col> 
                          <Col sm={4}>
                        
                          <Label  sm={12}>Ciudad/EDO </Label>
                         <Col>
-                         <Input  readOnly  type="text" name="EDOCliente"    />
+                         <Input  readOnly value={obtDataCliente.estado}  type="text" name="EDOCliente"    />
                             </Col>
                          </Col>
                          <Col sm={4}>
                          <Label  sm={12}>Atención </Label>
                         <Col sm={12}>
-                            <Input  readOnly  type="text" name="atencion"  /> </Col>
+                            <Input  readOnly value={obtDataCliente.atencion} type="text" name="atencion"  /> </Col>
                          </Col>
                     </FormGroup>
                    
@@ -221,7 +229,7 @@ class  OrdenTrabajo extends React.Component {
                         <Col sm={4}>
                         <Label sm={12} >Teléfono <span className="text-danger">*</span> </Label>
                         <Col>
-                        <Input readOnly    type="text" name="telCliente"  />
+                        <Input readOnly  value={obtDataCliente.telefono}  type="text" name="telCliente"  />
                         </Col>
                          </Col> 
                          <Col sm={2}>
@@ -233,7 +241,7 @@ class  OrdenTrabajo extends React.Component {
                          <Col sm={6}>
                          <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
                         <Col>
-                        <Input  readOnly  type="email" name="emailCliente"/> 
+                        <Input  readOnly  value={obtDataCliente.email} type="email" name="emailCliente"/> 
                         </Col>
                         </Col>
                     </FormGroup>
@@ -249,7 +257,7 @@ class  OrdenTrabajo extends React.Component {
                
                     <Label sm={12}>Nombre <span className="text-danger">*</span>  </Label>
                     <Col >
-                        <Input  className="form-size" type="text" name="nombreCliente" value={nombreCliente} onChange={handleChange} /> 
+                        <Input  className="form-size" type="text" name="nombreCliente" value={nombreCliente} onChange={handleChange} required/> 
                     </Col> 
                     </Col>
                 <Col sm={5}>
@@ -416,7 +424,7 @@ class  OrdenTrabajo extends React.Component {
                 <Col sm={3}>
                 <Label sm={12}>Fecha <span className="text-danger">*</span>  </Label>
                 <Col >
-                <Input type="date"/>
+                <Input type="date" name="fechaIns" value={fechaIns}/>
                 </Col>
                 </Col>
            
@@ -498,14 +506,14 @@ class  OrdenTrabajo extends React.Component {
                 <Col sm={6}>
                 <Label sm={10} >Inicio de Proyecto </Label>
                 <Col >
-                    <Input type="date"/>
+                    <Input name="inicio" value={inicio} type="date"/>
                 </Col>
                 </Col>
               
                 <Col sm={6}>
                 <Label sm={12}>Entrega de Proyecto</Label>
                 <Col>
-                <Input type="date"/>
+                <Input name="entrega" value={entrega} type="date"/>
                 </Col>
                 </Col>
             </FormGroup>
@@ -547,6 +555,7 @@ class  OrdenTrabajo extends React.Component {
             </FormGroup>
             </fieldset>
             <hr/>
+            <p className="text-muted">Todos los montos son sin objeto de IVA</p>
             <fieldset className="fieldset">
             <FormGroup row>
                      <Col sm={3}>
@@ -565,7 +574,7 @@ class  OrdenTrabajo extends React.Component {
                     <Label sm={12}className="ot-color">MONTO NETO VENDIDO <span className="text-danger">*</span> </Label>
                     <Col>
                     <Input readOnly  type="number" name="montoVendido" value={montoVendido}  /> 
-                    <p className="text-muted">Todos los montos son sin objeto de IVA</p>
+                    
                     </Col>
                     </Col>
                    
@@ -1086,6 +1095,7 @@ class  OrdenTrabajo extends React.Component {
                 </FormGroup>
                 </fieldset>
                 <hr/>
+                <p className="text-muted">Todos los montos son sin objeto de IVA</p>
                 <fieldset className="fieldset">
                 <FormGroup row>
                      <Col sm={3}>
@@ -1104,7 +1114,7 @@ class  OrdenTrabajo extends React.Component {
                     <Label sm={12}className="ot-color">MONTO NETO VENDIDO <span className="text-danger">*</span> </Label>
                     <Col>
                     <Input readOnly  type="number" name="montoVendido" value={montoVendido}  /> 
-                    <p className="text-muted">Todos los montos son sin objeto de IVA</p>
+                    
                     </Col>
                     </Col>
                    
@@ -1129,7 +1139,7 @@ class  OrdenTrabajo extends React.Component {
             
               > 
               <div>
-              <h5 className="text-danger text-center">¡Atencion!</h5>
+              <h5 className="text-danger text-center">Anepsa dice</h5>
               <hr/>
               <p>{message}</p>
              

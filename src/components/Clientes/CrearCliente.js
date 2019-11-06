@@ -1,11 +1,10 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
 
-
 class  DirectorioClientes extends React.Component {
       
     render(){
-        const {handleChange, handleSubmitCliente,  empresa, clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencion, telCliente, extTel,emailCliente } = this.context
+        const {handleChange, handleSubmitCliente,  estatus,empresa, clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencion, telCliente, extTel,emailCliente } = this.context
     return(
         <div className="div-form">
              
@@ -91,7 +90,7 @@ class  DirectorioClientes extends React.Component {
             <Col sm={3}>
              <Label  sm={12}>Estatus <span className="text-danger">*</span> </Label>
             <Col>
-            <Input type="select" name="nombreVendedor" onChange={handleChange}>
+            <Input type="select" name="estatus" value={estatus} onChange={handleChange}>
                 <option value="">Selecciona</option>
                 <option value="perdido">Perdido</option>
                         <option value="contacto inicial">Contacto Inicial </option>

@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormLabel from '@material-ui/core/FormLabel';
+
 
 class  Visitadores extends React.Component {
       
@@ -86,28 +86,29 @@ class  Visitadores extends React.Component {
         
         <Col sm={1}></Col>
         <Col sm={2}>
-        <FormControlLabel control={<Checkbox  value="civil"  onChange={handleClick}/>} label="Civil" />
+
+        <FormControlLabel control={<Checkbox  value="CIVIL"  onChange={handleClick}/>} label="Civil" />
         </Col>
         <Col sm={3}>
-        <FormControlLabel control={<Checkbox value="financiera" onChange={handleClick} />} label="Financiera" />
+        <FormControlLabel control={<Checkbox value="FINANCIERA" onChange={handleClick} />} label="Financiera" />
         </Col>
         <Col sm={3}>
-        <FormControlLabel control={<Checkbox value="industrial" onChange={handleClick} />} label="Industrial" />
+        <FormControlLabel control={<Checkbox value="INDUSTRIAL" onChange={handleClick} />} label="Industrial" />
         </Col>
         <Col sm={3}>
-        <FormControlLabel control={<Checkbox value="civil-industrial" onChange={handleClick} />} label="Civil-Industrial" />
+        <FormControlLabel control={<Checkbox value="CIVIL-INDUSTRIAL" onChange={handleClick} />} label="Civil-Industrial" />
         </Col>
         </FormGroup>
         <FormGroup row>
             <Col sm={2}></Col>
         <Col sm={3}>
-        <FormControlLabel control={<Checkbox value="civil-financiera" onChange={handleClick} />} label="Civil-Financiera" />
+        <FormControlLabel control={<Checkbox value="CIVIL-FINANCIERA" onChange={handleClick} />} label="Civil-Financiera" />
         </Col>
         <Col sm={3}>
-        <FormControlLabel control={<Checkbox value="financiera-industrial" onChange={handleClick} />} label="Financiera-Industrial" />
+        <FormControlLabel control={<Checkbox value="FINANCIERA-INDUSTRIAL" onChange={handleClick} />} label="Financiera-Industrial" />
         </Col>
         <Col sm={3}>
-        <FormControlLabel control={<Checkbox value="civil-financiera-industrial" onChange={handleClick} />} label=" Civil-Financiera-Industrial" />
+        <FormControlLabel control={<Checkbox value="CIVIL-FINANCIERA-INDUSTRIAL" onChange={handleClick} />} label=" Civil-Financiera-Industrial" />
         </Col>
         </FormGroup> 
      

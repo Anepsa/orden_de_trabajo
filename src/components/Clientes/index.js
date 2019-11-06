@@ -22,10 +22,7 @@ class  ListadoClientes extends React.Component {
     const{ dataClientes, onDeleteCliente, onClickItemCliente, onClickItemUpdateCliente }=this.context
       return (
       <div>
-                  <Link  className="text-white " to="/CrearCliente"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>
-              
-                  
-                  
+                  <Link  className="text-white " to="/CrearCliente"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>    
                   <Table>
                   <thead>
                 </thead>
@@ -39,7 +36,11 @@ class  ListadoClientes extends React.Component {
             
           </th>
           <th>
-            <Input type="select" name="nombreVendedor" >
+          <Input type="text" name="buscador" placeholder="Cliente" >
+            </Input>
+          </th>
+          <th>
+          <Input type="select" name="nombreVendedor" >
                 <option value="">Vendedor</option>
                 <option value="Ameyalli Brito González">Ame</option>
                         <option value="Yozebeth Brito González">Yoz</option>
@@ -48,20 +49,6 @@ class  ListadoClientes extends React.Component {
                         <option value="America Jimenez Carlon">America Jimenez Carlon</option>
                         <option value="Daniel Hurtado Sanchez">Daniel Hurtado Sanchez</option>
                 
-            </Input>
-          </th>
-          <th>
-             <Input type="select" name="tipoProyecto" >
-                <option value="">Proyecto</option>
-               
-       
-                <option value="CIVIL">CIVIL</option>
-                         <option value="FINANCIERA">FINANCIERA</option>
-                         <option value="INDUSTRIAL">INDUSTRIAL</option>
-                         <option value="CIVIL-INDUSTRIAL">CIVIL-INDUSTRIAL</option>
-                         <option value="CIVIL-FINANCIERA">CIVIL-FINANCIERA</option>
-                         <option value="FINANCIERA-INDUSTRIAL">FINANCIERA-INDUSTRIAL</option>
-                         <option value="CIVIL-FINANCIERA-INDUSTRIAL">CIVIL-FINANCIERA-INDUSTRIAL</option>
             </Input>
           </th>
           <th>

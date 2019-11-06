@@ -147,12 +147,6 @@ class Menu extends Component  {
             
             
             </NavItem>
-            <NavItem><NavLink to="/Vendedores">Vendedores</NavLink></NavItem>
-            <NavItem  > 
-                         <NavLink   to="/CrearVendedor">Crear</NavLink>
-            
-            
-            </NavItem>
            
             <NavItem>
            
