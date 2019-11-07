@@ -63,6 +63,20 @@ a span {
     
     
 }
+.modal-inner-lista-cliente{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:30%;
+    width: 30%;
+    border: solid;
+    border-width: thin;
+    border-color: #80808054;
+    border-radius: 6px;
+    padding: 2%;
+    background-color: white;
+    
+    
+}
 
 .text-align-left{
     text-align: left

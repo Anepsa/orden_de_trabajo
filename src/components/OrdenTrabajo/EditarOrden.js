@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import {Button,   Form, FormGroup, Label, Input, Col } from 'reactstrap';
 
 
@@ -12,7 +11,7 @@ import {Button,   Form, FormGroup, Label, Input, Col } from 'reactstrap';
 class OrdenCreada extends React.Component {
 
     render() {
-        const{ closeModal, modalIsOpen, consulta, handleUpdate, newestatus, handleChange, vendedor}=this.context
+        const{ closeModal, modalIsOpen, consulta, handleUpdate,  handleChange, }=this.context
  
         // const{ list} = this.context}
         
@@ -35,30 +34,30 @@ class OrdenCreada extends React.Component {
                   <FormGroup row>
                     <Col sm={4}>
               <Label> Clave: </Label>
-              <Input type="text"  value={item.productClave} ></Input>
+              <Input type="text"  value={item.productClave} readOnly></Input>
               </Col>
              <Col sm={8}>
                
               <Label>Vendedor Ejecutivo:</Label>
-              <Input name="vendedor" defaultValue={item.vendedor} onChange={handleChange} ></Input>
+              <Input name="vendedor" defaultValue={item.vendedor} readOnly></Input>
               </Col>
               <Col sm={4}>
               <Label> UGE: </Label> 
-              <Input type="text" name="uge" value={item.uge}></Input>
+              <Input type="text" name="uge" value={item.uge} readOnly></Input>
               </Col>
               <Col sm={4}>
               <Label> FECHA OT: </Label> 
-              <Input name="dateNew" type="text" value={item.getNewDate}></Input>
+              <Input name="dateNew" type="text" value={item.getNewDate} readOnly></Input>
               </Col>
               
               <Col sm={4}>
               <Label> COPIA PARA </Label> 
-              <Input type="text"  ></Input>
+              <Input type="text"  readOnly></Input>
               </Col>
               </FormGroup>
               <FormGroup  row>
                   <Col sm={3}>
-              <Label className="ot-color label-input">1. TIPO DE OFERTA </Label>
+              <Label className="ot-color label-input" >1. TIPO DE OFERTA </Label>
               
                   <Input  type="text" />
               </Col>
@@ -88,35 +87,35 @@ class OrdenCreada extends React.Component {
              </Col>
              <Col sm={4}>
               <Label> Nombre: </Label>
-              <Input type="text"  ></Input>
+              <Input type="text"  value={item.cliente.nombre} readOnly></Input>
               </Col>
               <Col sm={4}>
               <Label> Empresa: </Label>
-              <Input type="text"  ></Input>
+              <Input type="text"  value={item.cliente.empresa} readOnly ></Input>
               </Col>
              <Col sm={4}>
               <Label>Atencion:</Label>
-              <Input type="text"></Input>
+              <Input type="text" value={item.cliente.atencion} readOnly></Input>
               </Col>
               <Col sm={8}>
               <Label> Dirección: </Label> 
-              <Input type="text" ></Input>
+              <Input type="text" value={item.cliente.direccion} readOnly></Input>
               </Col>
               <Col sm={4}>
               <Label> Ciudad/EDO </Label> 
-              <Input type="text" ></Input>
+              <Input type="text" value={item.cliente.estado} readOnly></Input>
               </Col>
               <Col sm={4}>
               <Label> Teléfono: </Label> 
-              <Input type="text"></Input>
+              <Input type="text" value={item.cliente.telefono} readOnly></Input>
               </Col>
               <Col sm={2}>
               <Label> Extension: </Label> 
-              <Input type="text" ></Input>
+              <Input type="text" value={item.cliente.extTel} readOnly></Input>
               </Col>
               <Col sm={6}>
               <Label> Correo Electrónico: </Label> 
-              <Input type="text" ></Input>
+              <Input type="text" value={item.cliente.email} readOnly></Input>
               </Col>
               <Col sm={12}>
               <hr/>

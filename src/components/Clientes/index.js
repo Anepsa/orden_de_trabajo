@@ -1,6 +1,7 @@
 import React from 'react';
 import {Table, Button, Input} from 'reactstrap';
 import CrearCliente from './CrearCliente';
+import EditarCliente from './EditarCliente'
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import { Link } from 'react-router-dom';
@@ -11,6 +12,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
 
 import { AppContext} from "../../AppContext";
+EditarCliente.contextType =AppContext
 
 // OrdenCreada.contextType = AppContext;
 CrearCliente.contextType =AppContext;
@@ -19,7 +21,7 @@ CrearCliente.contextType =AppContext;
 
 class  ListadoClientes extends React.Component {
   render () {
-    const{ dataClientes, onDeleteCliente, onClickItemCliente, onClickItemUpdateCliente }=this.context
+    const{ dataClientes, onDeleteCliente, onClickItemCliente, onClickItemUpdateCliente , handleChangeCliente}=this.context
       return (
       <div>
                   <Link  className="text-white " to="/CrearCliente"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>    
@@ -31,12 +33,12 @@ class  ListadoClientes extends React.Component {
             <th></th>
             <th>Filtrar por</th>
           <th>
-            <Input type="text" name="buscador" placeholder="Clave" >
+            <Input type="text" name="buscador" onChange={handleChangeCliente} placeholder="Clave" >
             </Input>
             
           </th>
           <th>
-          <Input type="text" name="buscador" placeholder="Cliente" >
+          <Input type="text" name="buscadorClienteNombre"  placeholder="Cliente" >
             </Input>
           </th>
           <th>
@@ -95,14 +97,15 @@ class  ListadoClientes extends React.Component {
      
         <tr  className="list">
           <td></td>
-          <td className="text-center"><EditOutlinedIcon id={item.clave} onClick={onClickItemUpdateCliente}/><FindInPageOutlinedIcon  id={item.clave} onClick={onClickItemCliente}/></td>
+          <td className="text-center"><Button className="mr-1 " color="white" id={item.clave} onClick={onClickItemUpdateCliente}><EditOutlinedIcon id={item.clave} onClick={onClickItemUpdateCliente}/></Button>
+          <Button color="white" id={item.clave} onClick={onClickItemUpdateCliente}><FindInPageOutlinedIcon  id={item.clave} onClick={onClickItemUpdateCliente}/></Button></td>
           <td>{item.clave}</td>
           <td>{item.nombre}</td>
           <td>{item.vendedor}</td>
           <td>{item.getNewDate}</td>
           <td>{item.estatus}</td>
           
-          <td><DeleteOutlineOutlinedIcon  id={item.clave} onClick={onDeleteCliente}/></td>
+          <td><Button color="white"><DeleteOutlineOutlinedIcon  id={item.clave} onClick={onDeleteCliente}/></Button></td>
         </tr>
      
         ))
@@ -110,7 +113,8 @@ class  ListadoClientes extends React.Component {
       </tbody>
      
       </Table>
-   
+  
+  <EditarCliente/>
   
     </div>
   );

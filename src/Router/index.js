@@ -62,8 +62,9 @@ class Menu extends Component  {
       });
     }
   render(){
-    const{handleLogout, getName, dateNew} = this.context
-  return (
+    const{handleLogout, getName, dateNew, rol} = this.context
+ if(rol === "admin") {
+   return (
     <BrowserRouter>
   <Col sm={12} className="nav-style" >
     <Navbar  color="white" light expand="md">
@@ -181,7 +182,131 @@ class Menu extends Component  {
       </BrowserRouter>
       
   );
+}else {
+
+  return (
+    <BrowserRouter>
+  <Col sm={12} className="nav-style" >
+    <Navbar  color="white" light expand="md">
+      
+    <Col sm={2}>
+        <NavbarBrand > <NavLink  to="/"><img src={AnepsaLogo} alt="logo-anepsa" className="LogoAnepsa"></img></NavLink></NavbarBrand>
+        </Col>
+        <Col sm={6}></Col>
+       <Col sm={3}>
+        {/* <p>{user} </p> */}
+        <p>Hola, {getName} </p>
+        <p>{dateNew}</p>
+        </Col>
+        <Col sm={1}>
+        
+        <Button  color="white "  onClick={this.toggle} style={{ marginBottom: '1rem' }}><MenuIcon className="text-right"/></Button>
+    
+        </Col>
+       
+       
+      </Navbar>
+      </Col>
+    
+        <Drawer
+        anchor="right"
+        open={this.state.drawerOpen}
+        onClose={this.toggle}
+       >
+        
+
+          <Nav  navbar className="navbar-style">
+            
+            <NavItem className="text-right "  ><CloseOutlinedIcon onClick={this.toggle}/></NavItem>
+            <div className="left ml-10 text-left ">
+            <NavItem  > <NavLink to="/ListaOrdenes">Orden de trabajo</NavLink></NavItem>
+            <NavItem  > 
+                         <NavLink   to="/OrdenTrabajo">Crear</NavLink>
+            
+            
+            </NavItem>
+            <NavItem><NavLink to="/ListadoClientes">Directorio Clientes</NavLink></NavItem>
+            <NavItem  > 
+                         <NavLink   to="/CrearCliente">Crear</NavLink>
+            
+            
+            </NavItem>
+            <NavItem>Historial de Ventas</NavItem>
+            <NavItem>Agenda del vendedor</NavItem>
+           
+            <NavItem>
+           
+         <Button  onClick={handleLogout} className="log-out center">Cerrar Sesión</Button>
+    
+            </NavItem>
+
+            <NavItem>
+              
+            </NavItem>
+            </div>
+          </Nav>
+     
+        </Drawer>
+        <Drawer
+        anchor="right"
+        open={this.state.drawerOpenConfig}
+        onClose={this.toggleConfig}
+       >
+        
+
+          <Nav  navbar className="navbar-style">
+            
+            <NavItem className="text-right "  ><CloseOutlinedIcon onClick={this.toggleConfig}/></NavItem>
+            <div className="left ml-10 text-left ">
+          
+            
+            
+       
+            <NavItem><NavLink to="/Visitadores">Visitadores</NavLink></NavItem>
+            <NavItem  > 
+                         <NavLink   to="/CrearVisitador">Crear</NavLink>
+            
+            
+            </NavItem>
+           
+            <NavItem>
+           
+         <Button  onClick={handleLogout} className="log-out center">Cerrar Sesión</Button>
+    
+            </NavItem>
+
+            <NavItem>
+              
+            </NavItem>
+            </div>
+          </Nav>
+     
+        </Drawer>
+  
+  
+ 
+  
+    <div className="App">
+         
+            <Route exact path="/" render={() => <Home />} />
+            <Route path="/OrdenTrabajo" render={() => <OrdenTrabajo />} />
+            <Route path="/ListaOrdenes" render={() => <ListaOrdenes />} />
+            <Route path="/CrearCliente" render={() => <CrearCliente />} />
+            <Route path="/ListadoClientes" render={() => <ListadoClientes />} />
+            <Route path="/Visitadores" render={() => <Visitadores />} />
+            <Route path="/CrearVisitador" render={() => <CrearVisitador />} />
+    
+           
+   </div>
+      
+      </BrowserRouter>
+      
+  );
+
 }
+  
+  
+  }
 }
 
 export default Menu;

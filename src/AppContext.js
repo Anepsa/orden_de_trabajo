@@ -11,13 +11,12 @@ export const AppContext = React.createContext()
         super(props)
         //Datos que se obtienen de las respuestas del formulario
         this.state ={
+            // dataOrden:[copia, oferta, cedido, ],
             uge:"", vendedor:"", copia:"", proyecto:"", tipoCliente:"",  nombreCliente:"", telCliente:"", emailCliente:"", presentarse:"", fechaIns:"", dirInsp:"", inicio:"", entrega:"",
             presupuesto: 0,
             comision:0,
-            montoVendido:0,  
-           
+            montoVendido:0,             
             estatus:"",   empresaSelect:"",    
-          
             productClave:"",
             items:[] ,
             newcontador: 0,
@@ -34,7 +33,7 @@ export const AppContext = React.createContext()
             newestatus:"",
             getName:"",
             idItem:"",
-            oferta:"",
+    
             dataClientes:[],
             contClientes:[],
             nombresClientes:[],
@@ -45,6 +44,8 @@ export const AppContext = React.createContext()
            
            
         }
+    this.handleChangeCliente = this.handleChangeCliente.bind(this)
+    this.handleUpdateCliente = this.handleUpdateCliente.bind(this)
     this.handleSubmitCliente = this.handleSubmitCliente.bind(this);
     this.handleCliente = this.handleCliente.bind(this)
     this.handleSubmitVisitador = this.handleSubmitVisitador.bind(this);
@@ -228,15 +229,13 @@ handleCliente = (e) =>{
     handleChangeFound= (e)=>{
         
       const handle = e.target.value
-      
       console.log(handle)
       console.log(this.state.buscador)
       if(handle === ""){
-       
+
         db.collection("orden").onSnapshot(this.obtenerBD)
-     
         }else {
-          db.collection("orden").where("productClave", "==", handle )
+          db.collection("orden").where("productClave", "==", handle)
           .get()
           .then(querySnapshot => {
               const data = querySnapshot.docs.map(doc => doc.data());
@@ -252,6 +251,29 @@ handleCliente = (e) =>{
       
       
   } 
+  
+  handleChangeCliente= (e)=>{
+        
+    const clave = e.target.value;
+   
+    
+    console.log(clave)
+  
+        db.collection("clientes").where("clave", "==", clave)
+        .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+                
+                this.setState({
+                  dataClientes:data
+  
+                })
+                
+                
+            });
+      
+    
+    
+} 
   handleChangeSeller= (e)=>{
         
     const handle = e.target.value
@@ -368,6 +390,21 @@ handleChangeProject= (e)=>{
         querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
             db.collection("orden").doc(doc.id).update({ vendedor: vendedor    });
+        });
+   })
+  }
+  handleUpdateCliente=(e) =>{
+
+               
+    const newid=  this.state.idItem
+    console.log(newid)
+    const estatus = this.state.estatus
+    db.collection("clientes").where("clave", "==", newid )
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            console.log(doc.id, " => ", doc.data());
+            db.collection("clientes").doc(doc.id).update({ estatus: estatus });
         });
    })
   }
@@ -650,22 +687,30 @@ db.collection("visitadores").orderBy("date", "desc")
     
     
             } else{
-              db.collection("clientes").orderBy("date", "desc").limit(1)
-              .get()
-              .then(querySnapshot => {
-                const data = querySnapshot.docs.map(doc =>  doc.data())
-                  const news = data[0].contador
-                  console.log(news)
-                this.setState({  contClientes: news});
-              })
+
+           
 
               db.collection("clientes").where("vendedor", "==", obtName).orderBy("date", "desc")
               .get()
-              .then(querySnapshot => {
-               const data =  querySnapshot.docs.map(doc => doc.data());
-                console.log(data)
+              .then(querySnapshot => { 
+               const dataClientes =  querySnapshot.docs.map(doc => doc.data());
+               const news = dataClientes[0].contador
+          
+               const dataEmpresa = querySnapshot.docs.map(doc =>  doc.data().empresa)
+                console.log(dataEmpresa)
                
-                this.setState({ dataClientes:data});
+                this.setState({  dataClientes:dataClientes, contClientes: news,  nombresEmpresas: dataEmpresa});
+              });
+
+              db.collection("clientes").where("vendedor", "==", obtName).where("estatus","==","vendido")
+              .get()
+              .then(querySnapshot => { 
+               
+               const dataNombres = querySnapshot.docs.map(doc =>  doc.data().nombre)
+              
+                console.log(dataNombres)
+               
+                this.setState({ nombresClientes:dataNombres, });
               });
           }
      }
@@ -762,6 +807,7 @@ db.collection("visitadores").orderBy("date", "desc")
        
        
        let newid=  e.target.id
+       console.log(newid)
         db.collection("clientes").where("clave", "==", newid)
       .get()
       .then(querySnapshot => {
@@ -814,13 +860,13 @@ db.collection("visitadores").orderBy("date", "desc")
 
   
     render() {
-        const {newOrder, list,dataClientes, estatusEmpresa,items, listaVisitador, nombresEmpresas, dataVisitadores,
+        const {consultaCliente,newOrder, list,dataClientes, estatusEmpresa,items, listaVisitador, nombresEmpresas, dataVisitadores,
         visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
           consulta,getName,clienteAtencion, clienteCiudad,clienteCorreo,clienteDelegacion,clienteDireccion,clienteRFC,clienteTel, user, dateNew,obtDataCliente,  clienteNombre,message, rol, montoVendido, comision, nombresClientes,presupuesto} = this.state;
       return (
         <AppContext.Provider
         value={{
-        
+          handleChangeCliente: this.handleChangeCliente,
           onClickItem: this.onClickItem,
           onClickItemUpdate: this.onClickItemUpdate,
           handleSelectUge: this.handleSelectUge,
@@ -832,6 +878,7 @@ db.collection("visitadores").orderBy("date", "desc")
           handleChangeProject:this.handleChangeProject,
           handleChangeSelect: this.handleChangeSelect,
           handleClick: this.handleClick,
+          handleUpdateCliente: this.handleUpdateCliente,
           handleSubmitCliente: this.handleSubmitCliente,
           handleSubmitVisitador: this.handleSubmitVisitador,
           handleSubmitVendedor: this.handleSubmitVendedor,
@@ -846,8 +893,11 @@ db.collection("visitadores").orderBy("date", "desc")
           onDelete: this.onDelete,
           onDeleteCliente: this.onDeleteCliente,
           handleCliente: this.handleCliente,
+          onClickItemCliente:this.onClickItemCliente,
+          onClickItemUpdateCliente: this.onClickItemUpdateCliente,
          visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
           clienteAtencion,
+          consultaCliente,
           clienteCiudad,
           clienteCorreo,
           clienteDelegacion,
