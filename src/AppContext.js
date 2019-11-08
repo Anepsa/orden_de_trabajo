@@ -12,11 +12,11 @@ export const AppContext = React.createContext()
         //Datos que se obtienen de las respuestas del formulario
         this.state ={
             // dataOrden:[copia, oferta, cedido, ],
-            uge:"", vendedor:"", copia:"", proyecto:"", tipoCliente:"",  nombreCliente:"", telCliente:"", emailCliente:"", presentarse:"", fechaIns:"", dirInsp:"", inicio:"", entrega:"",
+            uge:"", vendedor:"", copia:"", oferta:"", cedido:"", proyecto:"", tipoCliente:"",  nombreSolicitante:"", empresaSolicitante:"", rfcSolicitante:"", direccionSolicitante:"", delegacionSolicitante:"", EDOSolicitante:"", telSolicitante:"", extTelSolicitante:"", emailSolicitante:"", objetivo:"", otroObj:"", proposito:"", otroProp:"", presentarse:"",visitador:"", fechaIns:"", telInsp:"", extInsp:"", emailInsp:"", dirInsp:"",  observaciones:"", bienes:"", otroBien:"", info:"", otraInfo:"", inicio:"", entrega:"",  facturar:"",
             presupuesto: 0,
             comision:0,
             montoVendido:0,             
-            estatus:"",   empresaSelect:"",    
+            empresaSelect:"",    
             productClave:"",
             items:[] ,
             newcontador: 0,
@@ -39,7 +39,8 @@ export const AppContext = React.createContext()
             nombresClientes:[],
             nombresEmpresas:[],
             estatusEmpresa:"",
-            clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",
+          
+            clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",
             visitadorNombre:"", rfcVisitador:"", direccionVisitador:"", delegacionVisitador:"", EDOVisitador:"", atencionVisitador:"", telvisitador:"", extTelVisitador:"",emailVisitador:"",
            
            
@@ -82,6 +83,7 @@ export const AppContext = React.createContext()
       }
    //Actualizacion del estado por cada cambio de valor
     handleChange = (e)=>{
+   
         
         this.setState({ 
             [e.target.name]:e.target.value
@@ -379,17 +381,57 @@ handleChangeProject= (e)=>{
   
 
   }
-    handleUpdate=(e) =>{
+    handleUpdate =(e) =>{
 
                
     const newid=  this.state.idItem
-    const vendedor = this.state.vendedor
+    
+
     db.collection("orden").where("productClave", "==", newid )
     .get()
-    .then(function(querySnapshot) {
+    .then(querySnapshot =>  {
         querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
-            db.collection("orden").doc(doc.id).update({ vendedor: vendedor    });
+            db.collection("orden").doc(doc.id).update({
+
+                oferta:this.state.oferta,
+                cedido:this.state.cedido,
+                proyecto: this.state.proyecto,
+                visitador: this.state.visitador,
+                tipoCliente:this.state.tipoCliente,
+                nombreSolicitante: this.state.nombreSolicitante,
+                empresaSolicitante: this.state.empresaSolicitante,
+                rfcSolicitante:this.state.rfcSolicitante,
+                direccionSolicitante: this.state.direccionSolicitante,
+                delegacionSolicitante:this.state.delegacionSolicitante,
+                EDOSolicitante:this.state.EDOSolicitante,
+                telSolicitante:this.state.telSolicitante,
+                emailSolicitante: this.state.emailSolicitante,
+                objetivo:this.state.objetivo,
+                otroObj:this.state.otroObj,
+                proposito:this.state.proposito,
+                otroProp: this.state.otroProp,
+                presentarse: this.state.presentarse,
+                fechaIns: this.state.fechaIns,
+                telInsp: this.state.telInsp,
+                extInsp: this.state.extInsp,
+                emailInsp: this.state.emailInsp,
+                dirInsp: this.state.dirInsp,
+                observaciones:this.state.observaciones,
+                bienes: this.state.bienes,
+                otroBien: this.state.otroBien,
+                info:this.state.info ,
+                otrainfo: this.state.otraInfo,
+                inicio: this.state.inicio,
+                entrega:this.state.entrega,
+                facturar:this.state.facturar,
+                presupuesto: this.state.presupuesto,
+                comision:this.state.presupuesto,
+                montoVendido:this.state.montoVendido,  
+                  
+            }          
+            );  
+          
         });
    })
   }
@@ -428,7 +470,7 @@ handleChangeProject= (e)=>{
         direccion: this.state.direccionCliente,
         delegacion: this.state.delegacionCliente,
         estado: this.state.EDOCliente,
-        atencion:this.state.atencion,
+        atencion:this.state.atencionCliente,
         telefono: this.state.telCliente,
         clave: claveUnica,
         email:this.state.emailCliente,
@@ -436,7 +478,7 @@ handleChangeProject= (e)=>{
         empresa: this.state.empresa,
         vendedor:this.state.getName,
         estatus:this.state.estatus,
-        extTel:this.state.extTel,
+        extTel:this.state.extTelCliente,
         date: firebase.firestore.FieldValue.serverTimestamp(),
         getNewDate: new Date().toLocaleString(),
       })
@@ -453,7 +495,8 @@ handleChangeProject= (e)=>{
   handleSubmitVisitador =(e)=>{
 
     e.preventDefault();
-
+    document.getElementById("formClear").reset();
+   
 
       db.collection("visitadores").add({
         nombre: this.state.visitadorNombre,
@@ -471,7 +514,7 @@ handleChangeProject= (e)=>{
 
       })
 
-      this.setState({
+      this.setState({ modalIsOpen:true,
         nombreVisitador:"", rfcVisitador:"", direccionVisitador:"", delegacionVisitador:"", EDOVisitador:"", atencionVisitador:"", telVisitador:"", extTelVisitador:"",emailVisitador:"",ugeList:[],
      }, () => {console.log(this.state.mes)})
 
@@ -503,19 +546,54 @@ handleChangeProject= (e)=>{
               } else { 
                  claveUnica = newDate + dateClave + ugeClave + contador
               }
-                                       
+ 
+         
           db.collection("orden").add({
-            vendedor: this.state.vendedor,
-            uge: this.state.uge,      
-            estatus: this.state.estatus,
+          
             productClave: claveUnica,
             contador: contador,
             mes:dateClave,
             date: firebase.firestore.FieldValue.serverTimestamp(),
             getNewDate: new Date().toLocaleString(),
             cliente: this.state.obtDataCliente,
+            vendedor: this.state.vendedor,
+            uge: this.state.uge,      
+            copia:this.state.copia,
+            oferta:this.state.oferta,
+            cedido:this.state.cedido,
+            proyecto: this.state.proyecto,
             visitador: this.state.visitador,
-            nombreCliente:this.state.nombreCliente,
+            tipoCliente:this.state.tipoCliente,
+            nombreSolicitante: this.state.nombreSolicitante,
+            empresaSolicitante: this.state.empresaSolicitante,
+            rfcSolicitante:this.state.rfcSolicitante,
+            direccionSolicitante: this.state.direccionSolicitante,
+            delegacionSolicitante:this.state.delegacionSolicitante,
+            EDOSolicitante:this.state.EDOSolicitante,
+            telSolicitante:this.state.telSolicitante,
+            emailSolicitante: this.state.emailSolicitante,
+            objetivo:this.state.objetivo,
+            otroObj:this.state.otroObj,
+            proposito:this.state.proposito,
+            otroProp: this.state.otroProp,
+            presentarse: this.state.presentarse,
+            fechaIns: this.state.fechaIns,
+            telInsp: this.state.telInsp,
+            extInsp: this.state.extInsp,
+            emailInsp: this.state.emailInsp,
+            dirInsp: this.state.dirInsp,
+            observaciones:this.state.observaciones,
+            bienes: this.state.bienes,
+            otroBien: this.state.otroBien,
+           info:this.state.info ,
+           otrainfo: this.state.otraInfo,
+            inicio: this.state.inicio,
+            entrega:this.state.entrega,
+            facturar:this.state.facturar,
+            presupuesto: this.state.presupuesto,
+            comision:this.state.presupuesto,
+            montoVendido:this.state.montoVendido, 
+
 
           })
          
@@ -524,7 +602,7 @@ handleChangeProject= (e)=>{
             uge:"",
             fecha:"",
             estatus:"",
-            productClave:"",
+    
             newcontador: contador,
            
             
@@ -538,23 +616,57 @@ handleChangeProject= (e)=>{
     const claveUnica = newDate + dateClave + ugeClave + '00'+ contador
 
       db.collection("orden").add({
-      
-        vendedor: this.state.vendedor,
-        uge: this.state.uge,      
-        estatus: this.state.estatus,
         productClave: claveUnica,
         contador: contador,
         mes:dateClave,
         date: firebase.firestore.FieldValue.serverTimestamp(),
-        getNewDate: new Date().toLocaleDateString(),
+        getNewDate: new Date().toLocaleString(),
         cliente: this.state.obtDataCliente,
+        vendedor: this.state.vendedor,
+        uge: this.state.uge,      
+        copia:this.state.copia,
+        oferta:this.state.oferta,
+        cedido:this.state.cedido,
+        proyecto: this.state.proyecto,
+        visitador: this.state.visitador,
+        tipoCliente:this.state.tipoCliente,
+        nombreSolicitante: this.state.nombreSolicitante,
+        empresaSolicitante: this.state.empresaSolicitante,
+        rfcSolicitante:this.state.rfcSolicitante,
+        direccionSolicitante: this.state.direccionSolicitante,
+        delegacionSolicitante:this.state.delegacionSolicitante,
+        EDOSolicitante:this.state.EDOSolicitante,
+        telSolicitante:this.state.telSolicitante,
+        emailSolicitante: this.state.emailSolicitante,
+        objetivo:this.state.objetivo,
+        otroObj:this.state.otroObj,
+        proposito:this.state.proposito,
+        otroProp: this.state.otroProp,
+        presentarse: this.state.presentarse,
+        fechaIns: this.state.fechaIns,
+        telInsp: this.state.telInsp,
+        extInsp: this.state.extInsp,
+        emailInsp: this.state.emailInsp,
+        dirInsp: this.state.dirInsp,
+        observaciones:this.state.observaciones,
+        bienes: this.state.bienes,
+        otroBien: this.state.otroBien,
+       info:this.state.info ,
+       otrainfo: this.state.otraInfo,
+        inicio: this.state.inicio,
+        entrega:this.state.entrega,
+        facturar:this.state.facturar,
+        presupuesto: this.state.presupuesto,
+        comision:this.state.presupuesto,
+        montoVendido:this.state.montoVendido, 
+
       
      })
     this.setState({
       vendedor:"",
       uge:"",
       fecha:"",
-      estatus:"",
+
       productClave:"",
       newcontador: contador,
    
@@ -861,8 +973,11 @@ db.collection("visitadores").orderBy("date", "desc")
   
     render() {
         const {consultaCliente,newOrder, list,dataClientes, estatusEmpresa,items, listaVisitador, nombresEmpresas, dataVisitadores,
+          // clienteNombre, rfcCliente, direccionCliente, delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",
+         
         visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
-          consulta,getName,clienteAtencion, clienteCiudad,clienteCorreo,clienteDelegacion,clienteDireccion,clienteRFC,clienteTel, user, dateNew,obtDataCliente,  clienteNombre,message, rol, montoVendido, comision, nombresClientes,presupuesto} = this.state;
+          consulta,getName,
+           user, dateNew,obtDataCliente, message, rol, montoVendido, comision, nombresClientes,presupuesto} = this.state;
       return (
         <AppContext.Provider
         value={{
@@ -896,15 +1011,9 @@ db.collection("visitadores").orderBy("date", "desc")
           onClickItemCliente:this.onClickItemCliente,
           onClickItemUpdateCliente: this.onClickItemUpdateCliente,
          visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
-          clienteAtencion,
+     
           consultaCliente,
-          clienteCiudad,
-          clienteCorreo,
-          clienteDelegacion,
-          clienteDireccion,
-          clienteRFC,
-          clienteTel,
-          clienteNombre,
+         
           obtDataCliente,
           estatusEmpresa,
           rol,

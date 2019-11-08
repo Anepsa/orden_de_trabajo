@@ -3,12 +3,19 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Modal from 'react-modal';
+import { Link } from 'react-router-dom';
 
 
 class  Visitadores extends React.Component {
-      
+  
+    
+
+    
     render(){
-        const {handleChange, handleSubmitVisitador, visitadorNombre,handleClick, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencion, telVisitador, extTel,emailVisitador } = this.context
+       
+        
+        const {modalIsOpen, closeModal,handleChange, handleSubmitVisitador, visitadorNombre,handleClick, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencion, telVisitador, extTel,emailVisitador } = this.context
     return(
         <div className="div-form">
              
@@ -26,7 +33,7 @@ class  Visitadores extends React.Component {
        
             <Label sm={12}>Nombre <span className="text-danger">*</span>  </Label>
             <Col >
-                <Input  className="form-size" type="text" name="visitadorNombre" value={visitadorNombre}   onChange={handleChange}/> 
+                <Input  type="text" name="visitadorNombre" value={visitadorNombre}   onChange={handleChange}/> 
             </Col> 
             </Col>
         <Col sm={5}>
@@ -118,6 +125,24 @@ class  Visitadores extends React.Component {
        </fieldset>
        <hr/>
        <Button className="button-enviar" type="submit"  >Enviar</Button><br/>
+       <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              className="modal-inner"
+              overlayClassName="Overlay"
+            
+              > 
+              <div>
+              <h5 className="text-info text-center">Visitador Creado</h5>
+              <hr/>
+              <Link to="./Visitadores"> Ver Lista </Link>
+              <Button onClick={() => {window.print()}}>Imprimir</Button>
+              
+             
+                    <hr/>   
+                    <Button onClick={closeModal} >Cerrar</Button>
+             </div>
+             </Modal>
        </Form>
        </div>
 

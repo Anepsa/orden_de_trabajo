@@ -53,31 +53,31 @@ class OrdenCreada extends React.Component {
             
               <Col sm={4}>
               <Label> COPIA PARA </Label> 
-              <Input type="text" ></Input>
+              <Input  type="text"  value={item.copia}></Input>
               </Col>
               </FormGroup>
               <FormGroup  row>
                   <Col sm={3}>
               <Label className="ot-color label-input">1. TIPO DE OFERTA </Label>
               
-                  <Input  type="text" />
+                  <Input  type="text" value={item.oferta} />
               </Col>
              <Col sm={3}>
                   <Label className="ot-color label-input">1.1 CEDIDO DE  </Label>
                   
-                  <Input  type="text"  />
+                  <Input  type="text"  value={item.cedido} />
                  
              </Col>
              <Col sm={3}>
               <Label   className="ot-color label-input">2. TIPO DE PROYECTO </Label>
               
-                  <Input  type="text" />
+                  <Input  type="text" value={item.proyecto} />
               
               </Col>
              <Col sm={3}>
                   <Label  className="ot-color label-input">3. TIPO DE CLIENTE  </Label>
                  
-                  <Input  type="text"  />
+                  <Input  type="text"  value={item.tipoCliente} />
                  
                   
              </Col>
@@ -88,7 +88,7 @@ class OrdenCreada extends React.Component {
              </Col>
              <Col sm={4}>
               <Label> Nombre: </Label>
-              <Input type="text"  ></Input>
+              <Input type="text" value={item.cliente.nombre} ></Input>
               </Col>
              <Col sm={8}>
               <Label>Dirección:</Label>

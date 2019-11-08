@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
 class  DirectorioClientes extends React.Component {
       
     render(){
-        const {handleChange, handleSubmitCliente,  estatus,empresa, clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencion, telCliente, extTel,emailCliente } = this.context
+        const {handleChange, handleSubmitCliente,  estatus,empresa, clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente } = this.context
     return(
         <div className="div-form">
              
@@ -22,14 +22,14 @@ class  DirectorioClientes extends React.Component {
        
             <Label sm={12}>Nombre <span className="text-danger">*</span>  </Label>
             <Col >
-                <Input  className="form-size" type="text" name="clienteNombre" value={clienteNombre}  onChange={handleChange} /> 
+                <Input  className="form-size" type="text" name="clienteNombre" value={clienteNombre}  onChange={handleChange}  required/> 
             </Col> 
             </Col>
             <Col sm={4}>
       
       <Label sm={12} >Empresa </Label>
       <Col >
-          <Input  type="text" name="empresa" value={empresa} onChange={handleChange}/> 
+          <Input  type="text" name="empresa" value={empresa} onChange={handleChange} required/> 
       </Col>
       </Col> 
         <Col sm={4}>
@@ -64,7 +64,7 @@ class  DirectorioClientes extends React.Component {
              <Col sm={4}>
              <Label  sm={12}>Atención </Label>
             <Col sm={12}>
-                <Input  type="text" name="atencion" value={atencion} onChange={handleChange} /> </Col>
+                <Input  type="text" name="atencion" value={atencionCliente} onChange={handleChange} /> </Col>
              </Col>
         </FormGroup>
        
@@ -78,7 +78,7 @@ class  DirectorioClientes extends React.Component {
              <Col sm={2}>
             <Label sm={12}>Exten </Label>
             <Col>
-                <Input type="text"   name="extTel" value={extTel} onChange={handleChange} />
+                <Input type="text"   name="extTel" value={extTelCliente} onChange={handleChange} />
                 </Col>
              </Col>
              <Col sm={4}>
@@ -90,7 +90,7 @@ class  DirectorioClientes extends React.Component {
             <Col sm={3}>
              <Label  sm={12}>Estatus <span className="text-danger">*</span> </Label>
             <Col>
-            <Input type="select" name="estatus" value={estatus} onChange={handleChange}>
+            <Input type="select" name="estatus" value={estatus} onChange={handleChange} required>
                 <option value="">Selecciona</option>
                 <option value="perdido">Perdido</option>
                         <option value="contacto inicial">Contacto Inicial </option>

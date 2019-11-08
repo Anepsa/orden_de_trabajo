@@ -34,7 +34,7 @@ class OrdenCreada extends React.Component {
                   <FormGroup row>
                     <Col sm={4}>
               <Label> Clave: </Label>
-              <Input type="text"  value={item.productClave} readOnly></Input>
+              <Input type="text"  defaultValue={item.productClave} readOnly></Input>
               </Col>
              <Col sm={8}>
                
@@ -52,42 +52,43 @@ class OrdenCreada extends React.Component {
               
               <Col sm={4}>
               <Label> COPIA PARA </Label> 
-              <Input type="text"  readOnly></Input>
+              <Input  type="text"  defaultValue={item.copia} onChange={handleChange}></Input>
               </Col>
               </FormGroup>
               <FormGroup  row>
                   <Col sm={3}>
-              <Label className="ot-color label-input" >1. TIPO DE OFERTA </Label>
+              <Label className="ot-color label-input">1. TIPO DE OFERTA </Label>
               
-                  <Input  type="text" />
+                  <Input  type="text" defaultValue={item.oferta}  onChange={handleChange}></Input>
               </Col>
              <Col sm={3}>
                   <Label className="ot-color label-input">1.1 CEDIDO DE  </Label>
                   
-                  <Input  type="text"  />
+                  <Input  type="text"  defaultValue={item.cedido}  onChange={handleChange}></Input> 
                  
              </Col>
              <Col sm={3}>
               <Label   className="ot-color label-input">2. TIPO DE PROYECTO </Label>
               
-                  <Input  type="text" />
+                  <Input  type="text" defaultValue={item.proyecto}  onChange={handleChange}></Input>
               
               </Col>
              <Col sm={3}>
                   <Label  className="ot-color label-input">3. TIPO DE CLIENTE  </Label>
                  
-                  <Input  type="text"  />
+                  <Input  type="text"  defaultValue={item.tipoCliente}  onChange={handleChange}></Input>
                  
                   
              </Col>
              <Col sm={12}>
                <hr/>
     
+    
              <h6 className="ot-color">4. DATOS DEL CLIENTE</h6>
              </Col>
              <Col sm={4}>
               <Label> Nombre: </Label>
-              <Input type="text"  value={item.cliente.nombre} readOnly></Input>
+              <Input type="text"  defaultValue={item.cliente.nombre} onChange={handleChange}></Input>
               </Col>
               <Col sm={4}>
               <Label> Empresa: </Label>
@@ -123,27 +124,31 @@ class OrdenCreada extends React.Component {
              </Col>
              <Col sm={4}>
               <Label> Nombre Solicitante: </Label>
-              <Input type="text"  ></Input>
+              <Input  type="text"  defaultValue={item.nombreSolicitante}  onChange={handleChange}>></Input>
               </Col>
-             <Col sm={8}>
+              <Col sm={4}>
+              <Label> Empresa </Label>
+              <Input  type="text"  defaultValue={item.empresaSolicitante}  onChange={handleChange}> ></Input>
+              </Col>
+             <Col sm={4}>
               <Label>Dirección:</Label>
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.direccionSolicitant}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={4}>
               <Label> RFC </Label> 
-              <Input type="text" ></Input>
+              <Input type="text"  defaultValue={item.rfcSolicitante}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={4}>
               <Label> Deleg/Municipio: </Label> 
-              <Input type="text" ></Input>
+              <Input type="text" defaultValue={item.delegacion}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={4}>
               <Label> Ciudad/Estado </Label> 
-              <Input type="text" ></Input>
+              <Input type="text"  defaultValue = {item.EDOSolicitante} onChange={handleChange}> ></Input>
               </Col>
               <Col sm={4}>
               <Label> Teléfono: </Label> 
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.telSolicitante}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={2}>
               <Label> Extension: </Label> 
@@ -151,18 +156,18 @@ class OrdenCreada extends React.Component {
               </Col>
               <Col sm={6}>
               <Label> Correo Electrónico: </Label> 
-              <Input type="text" ></Input>
+              <Input type="text" defaultValue={item.emailSolicitante}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={12}><hr/></Col>
               
            
              <Col sm={6}>
               <Label className="ot-color"> 6. OBJETIVO DEL AVALÚO</Label>
-              <Input type="text"  ></Input>
+              <Input type="text" defaultValue={item.objetivo}  onChange={handleChange}>></Input>
               </Col>
              <Col sm={6}>
               <Label className="ot-color">7. PROPOSITO DEL AVALÚO:</Label>
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.proposito}  onChange={handleChange}>> </Input>
               </Col>
               <Col sm={12}>
               <hr/>
@@ -170,35 +175,35 @@ class OrdenCreada extends React.Component {
              </Col>
              <Col sm={6}>
               <Label>Presentarse con:</Label>
-              <Input type="text"  ></Input>
+              <Input type="text"  defaultValue={item.presentarse}  onChange={handleChange}>></Input>
               </Col>
              <Col sm={6}>
               <Label>Visitador</Label>
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.visitador}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={3}>
               <Label>Fecha</Label>
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.fechaIns}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={3}>
               <Label>Teléfono</Label>
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.telInsp} onChange={handleChange}> ></Input>
               </Col>
               <Col sm={2}>
               <Label>Exten</Label>
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.extInsp} onChange={handleChange}>></Input>
               </Col>
               <Col sm={4}>
               <Label>Correo Electrónico</Label>
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.emailInsp} onChange={handleChange}>></Input>
               </Col>
               <Col sm={7}>
               <Label>Dirección</Label>
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.dirInsp} onChange={handleChange}>></Input>
               </Col>
               <Col sm={5}>
               <Label>Observaciones</Label>
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.observaciones} onChange={handleChange}>></Input>
               </Col>
              
               <Col sm={12}>
@@ -209,7 +214,7 @@ class OrdenCreada extends React.Component {
               <Label className="ot-color"> 9. BIENES A VALUAR</Label>
               <Col sm={12}>
               <Label>Bienes</Label>
-              <Input type="text"  ></Input>
+              <Input type="text" defaultValue={item.bienes}  onChange={handleChange}>></Input>
               </Col>
               </Col>
              <Col sm={6}>
@@ -217,11 +222,11 @@ class OrdenCreada extends React.Component {
               <FormGroup row >
                 <Col sm={6}>
                 <Label>Inicio</Label>
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.inicio} onChange={handleChange}>></Input>
               </Col>
               <Col sm={6}>
                 <Label>Entrega</Label>
-              <Input type="text"></Input>
+              <Input type="text" defaultValue={item.entrega} onChange={handleChange}>></Input>
               </Col>
               </FormGroup>
               </Col>
@@ -237,19 +242,19 @@ class OrdenCreada extends React.Component {
              </Col>
              <Col sm={3}>
               <Label className="ot-color">COMISIÓN EXTERNA</Label>
-              <Input type="text"  ></Input>
+              <Input type="text" defaultValue={item.comision}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={3}>
               <Label className="ot-color">PRESUPUESTO</Label>
-              <Input type="text"  ></Input>
+              <Input type="text" defaultValue={item.presupuesto}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={4}>
               <Label className="ot-color">MONTO NETO VENDIDO</Label>
-              <Input type="text"  ></Input>
+              <Input type="text" defaultValue={item.montoVendido} onChange={handleChange}> ></Input>
               </Col>
               <Col sm={2}>
               <Label className="ot-color">FACTURAR</Label>
-              <Input type="text"  ></Input>
+              <Input type="text"  defaultValue={item.facturar} onChange={handleChange}>></Input>
               </Col>
 
               </FormGroup>

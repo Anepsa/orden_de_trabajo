@@ -80,14 +80,14 @@ class  ListaOrdenes extends React.Component {
             Fecha
             </Input>
           </th>
-          <th>
+          {/* <th>
              <Input type="select" name="estatus" onChange={handleChangeSelect}>
                 <option value="" >Estatus</option>
                 <option value="vendido">Vendido</option>
                 <option value="proceso">En proceso</option>
                 <option value="cancelado">Cancelado</option>
             </Input>
-          </th>
+          </th> */}
           <th><Button   color="warning text-white" onClick={deleteFilter}><RotateLeftIcon/> </Button></th>
         </tr>
         <tr><th></th></tr>
@@ -119,7 +119,7 @@ class  ListaOrdenes extends React.Component {
           <th>Vendedor</th>
           <th>Proyecto</th>
           <th>Fecha</th>
-          <th>Estatus</th>
+         
           <th></th>
           
         </tr>
@@ -133,12 +133,13 @@ class  ListaOrdenes extends React.Component {
      
         <tr key={index}  className="list">
           <td></td>
-          <td className="text-center"><EditOutlinedIcon id={item.productClave} onClick={onClickItemUpdate} /><FindInPageOutlinedIcon  id={item.productClave} onClick={onClickItem}/></td>
+          <td className="text-center"><Button className="mr-1" color="white"><EditOutlinedIcon id={item.productClave} onClick={onClickItemUpdate} /></Button>
+          <Button color="white"><FindInPageOutlinedIcon  id={item.productClave} onClick={onClickItem}/></Button></td>
           <td>{item.productClave}</td>
           <td>{item.vendedor}</td>
           <td>{item.uge}</td>
           <td>{item.getNewDate}</td>
-          <td>{item.estatus}</td>
+          {/* <td>{item.estatus}</td> */}
           <td><DeleteOutlineOutlinedIcon id={item.productClave} onClick={onDelete}/></td>
         </tr>
         
