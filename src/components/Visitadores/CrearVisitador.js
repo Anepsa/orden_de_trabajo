@@ -136,7 +136,7 @@ class  Visitadores extends React.Component {
               <h5 className="text-info text-center">Visitador Creado</h5>
               <hr/>
               <Link to="./Visitadores"> Ver Lista </Link>
-              <Button onClick={() => {window.print()}}>Imprimir</Button>
+              <Button onClick={() => {window.print(document.getElementById(""))}}>Imprimir</Button>
               
              
                     <hr/>   

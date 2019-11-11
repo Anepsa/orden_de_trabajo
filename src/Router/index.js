@@ -15,6 +15,7 @@ import Drawer from '@material-ui/core/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 import SettingsIcon from '@material-ui/icons/Settings';
+import firebase from 'firebase';
 import {
 
   Navbar,
@@ -44,6 +45,7 @@ class Menu extends Component  {
   
       this.toggle = this.toggle.bind(this);
       this.toggleConfig = this.toggleConfig.bind(this)
+      this.handleLogout = this.handleLogout.bind(this)
       this.state = {
         drawerOpen: false,
         drawerOpenConfig: false
@@ -61,6 +63,13 @@ class Menu extends Component  {
         drawerOpenConfig: !this.state.drawerOpenConfig
       });
     }
+    
+  handleLogout(){
+    firebase.auth().signOut()
+    .then(result => console.log(`${result.user.email} ha salido`))
+    .catch(error => console.log(`Error ${error.code}: ${error.message}`));
+  }
+
   render(){
     const{handleLogout, getName, dateNew, rol} = this.context
  if(rol === "admin") {
@@ -151,7 +160,7 @@ class Menu extends Component  {
            
             <NavItem>
            
-         <Button  onClick={handleLogout} className="log-out center">Cerrar Sesión</Button>
+         <Button  onClick={this.handleLogout} className="log-out center">Cerrar Sesión</Button>
     
             </NavItem>
 

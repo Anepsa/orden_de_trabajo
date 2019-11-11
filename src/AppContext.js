@@ -33,13 +33,12 @@ export const AppContext = React.createContext()
             newestatus:"",
             getName:"",
             idItem:"",
-    
             dataClientes:[],
             contClientes:[],
             nombresClientes:[],
             nombresEmpresas:[],
-            estatusEmpresa:"",
-          
+            estatusEmpresa:"",    
+           
             clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",
             visitadorNombre:"", rfcVisitador:"", direccionVisitador:"", delegacionVisitador:"", EDOVisitador:"", atencionVisitador:"", telvisitador:"", extTelVisitador:"",emailVisitador:"",
            
@@ -61,17 +60,13 @@ export const AppContext = React.createContext()
     this.handleChangeFound = this.handleChangeFound.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.deleteFilter = this.deleteFilter.bind(this)
-    this.handleChangeSelect = this.handleChangeSelect.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
+    this.obtenerBD = this.obtenerBD.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleChangeSeller = this.handleChangeSeller.bind(this);
     this.handleChangeProject = this.handleChangeProject.bind(this)
     this.handleEmpresa = this.handleEmpresa.bind(this)
-    this.onDelete = this.onDelete.bind(this)
-    this.onDeleteCliente = this.onDeleteCliente.bind(this)
-  
+
     }
     //Funcion para cuando aparece el modal
     openModal() {
@@ -139,7 +134,12 @@ export const AppContext = React.createContext()
       this.setState({ 
       estatusEmpresa: empresa
     })
-
+    if(empresa === ""){
+      this.setState({
+        obtDataCliente:[],
+      })  
+      
+    }else{
       db.collection("clientes").where("nombre", "==", empresa )
       .get()
       .then(querySnapshot => {
@@ -150,7 +150,7 @@ export const AppContext = React.createContext()
               })   
           });
     }
-  
+    }
 
 handleCliente = (e) =>{
   e.preventDefault();
@@ -188,44 +188,8 @@ handleCliente = (e) =>{
       
       
   } 
-    onDelete(e){
-       
-     const newid=  e.target.id
-     console.log(newid)
-     db.collection("orden").where("productClave", "==", newid )
-     .get()
-     .then(querySnapshot => {
-      querySnapshot.forEach((doc) => {
-        doc.ref.delete().then(() => {
-          console.log("Document successfully deleted!");
-        }).catch(function(error) {
-          console.error("Error removing document: ", error);
-        });
-      });
-    })
-    .catch(function(error) {
-      console.log("Error getting documents: ", error);
-    });
-    }
-    onDeleteCliente(e){
-       
-      const newid=  e.target.id
-      console.log(newid)
-      db.collection("clientes").where("clave", "==", newid )
-      .get()
-      .then(querySnapshot => {
-       querySnapshot.forEach((doc) => {
-         doc.ref.delete().then(() => {
-           console.log("Document successfully deleted!");
-         }).catch(function(error) {
-           console.error("Error removing document: ", error);
-         });
-       });
-     })
-     .catch(function(error) {
-       console.log("Error getting documents: ", error);
-     });
-     }
+   
+
 
 
     handleChangeFound= (e)=>{
@@ -255,13 +219,19 @@ handleCliente = (e) =>{
   } 
   
   handleChangeCliente= (e)=>{
-        
-    const clave = e.target.value;
-   
     
-    console.log(clave)
-  
-        db.collection("clientes").where("clave", "==", clave)
+    const name = e.target.name
+    console.log(name)
+    const handle = e.target.value;
+ 
+    console.log(handle)
+   
+    if(handle === ""){
+
+      db.collection("clientes").onSnapshot(this.obtenerClientes)
+      }else  if(name === "buscadorClave"){
+        db.collection("clientes").where("clave", "==", handle)
+        .get()
         .then(querySnapshot => {
             const data = querySnapshot.docs.map(doc => doc.data());
                 
@@ -272,10 +242,78 @@ handleCliente = (e) =>{
                 
                 
             });
-      
-    
-    
+      }  else if(name === "buscadorNombre"){
+        db.collection("clientes").where("nombre", "==", handle)
+        .get()
+        .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+                
+                this.setState({
+                  dataClientes:data
+  
+                })
+                
+                
+            });
+
+      }  else if (name === "fechaCliente"){
+        const fecha = handle.replace(/-/g,"/")
+        db.collection("clientes").where("dateToCompare", "==", fecha)
+        .get()
+        .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+                
+                this.setState({
+                  dataClientes:data
+  
+                })
+                
+                
+            });
+
+      }else if(name === "estatus"){
+        db.collection("clientes").where("estatus", "==", handle)
+        .get()
+        .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+                
+                this.setState({
+                  dataClientes:data
+  
+                })
+                
+                
+            });
+
+      }
 } 
+handleChangeNombre = (e) =>{
+  const name = e.target.name
+  console.log(name)
+  const handle = e.target.value;
+  console.log(handle)
+   
+  if(handle === ""){
+
+    db.collection("clientes").onSnapshot(this.obtenerClientes)
+    }else {
+      db.collection("clientes").where("clave", "==", handle)
+      .get()
+      .then(querySnapshot => {
+          const data = querySnapshot.docs.map(doc => doc.data());
+              
+              this.setState({
+                dataClientes:data
+
+              })
+              
+              
+          });
+    }    
+} 
+
+
+
   handleChangeSeller= (e)=>{
         
     const handle = e.target.value
@@ -341,7 +379,7 @@ handleChangeProject= (e)=>{
       db.collection("orden").onSnapshot(this.obtenerBD)
    
       }else {
-        db.collection("orden").where("getNewDate", "==", handle )
+        db.collection("orden").where("dateToCompare", "==", handle )
         .get()
         .then(querySnapshot => {
             const data = querySnapshot.docs.map(doc => doc.data());
@@ -353,34 +391,7 @@ handleChangeProject= (e)=>{
       }
   }
 
-  handleChangeSelect = (e) =>{
 
-    const handle = e.target.value
-      
-    console.log(handle)
-    
-    if(handle === "estatus"){
-     
-      db.collection("orden").onSnapshot(this.obtenerBD)
-   
-      }else {
-        db.collection("orden").where("estatus", "==", handle )
-        .get()
-        .then(querySnapshot => {
-            const data = querySnapshot.docs.map(doc => doc.data());
-                
-                this.setState({
-                  items:data
-  
-                })
-                
-                
-            });
-      }
-    
-  
-
-  }
     handleUpdate =(e) =>{
 
                
@@ -480,6 +491,7 @@ handleChangeProject= (e)=>{
         estatus:this.state.estatus,
         extTel:this.state.extTelCliente,
         date: firebase.firestore.FieldValue.serverTimestamp(),
+        dateToCompare: new Date().toLocaleDateString("zh-TW"),
         getNewDate: new Date().toLocaleString(),
       })
 
@@ -523,9 +535,7 @@ handleChangeProject= (e)=>{
     handleSubmit = (e)  => {
         
         e.preventDefault();
-        if(!this.validate()){
-            return
-        }   
+       
            
             let obtDate=  new Date().toLocaleDateString("zh-TW");   
             const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
@@ -554,6 +564,7 @@ handleChangeProject= (e)=>{
             contador: contador,
             mes:dateClave,
             date: firebase.firestore.FieldValue.serverTimestamp(),
+            dateToCompare: new Date().toLocaleDateString("zh-TW"),
             getNewDate: new Date().toLocaleString(),
             cliente: this.state.obtDataCliente,
             vendedor: this.state.vendedor,
@@ -598,11 +609,7 @@ handleChangeProject= (e)=>{
           })
          
           this.setState({
-            vendedor:"",
-            uge:"",
-            fecha:"",
-            estatus:"",
-    
+            modalIsOpen:true,
             newcontador: contador,
            
             
@@ -674,12 +681,6 @@ handleChangeProject= (e)=>{
 
       }, () => {console.log(this.state.mes)})
     }
-  }
-
-  handleLogout(){
-    firebase.auth().signOut()
-    .then(result => console.log(`${result.user.email} ha salido`))
-    .catch(error => console.log(`Error ${error.code}: ${error.message}`));
   }
 
 
@@ -855,26 +856,7 @@ db.collection("visitadores").orderBy("date", "desc")
           }
     
 
-    onClickItem(e){
-      
-      
-     let newid=  e.target.id
-     console.log(newid)
 
-      db.collection("orden").where("productClave", "==", newid)
-      .get()
-      .then(querySnapshot => {
-        const data = querySnapshot.docs.map(doc => doc.data());
-            
-            console.log(data);
-            this.setState({ consulta: data , modalIsOpen:true})
-            
-        });
-    
-       
-          
-
-    }
     onClickItemUpdate(e){
       
       
@@ -894,6 +876,23 @@ db.collection("visitadores").orderBy("date", "desc")
         
            
  
+     }
+     onClickItem(e){
+      
+      
+      let newid=  e.target.id
+      console.log(newid)
+  
+       db.collection("orden").where("productClave", "==", newid)
+       .get()
+       .then(querySnapshot => {
+         const data = querySnapshot.docs.map(doc => doc.data());
+             
+             console.log(data);
+             this.setState({ consulta: data , modalIsOpen:true})
+             
+         });      
+  
      }
      onClickItemCliente(e){
       
@@ -936,36 +935,8 @@ db.collection("visitadores").orderBy("date", "desc")
             
   
       }
-    deleteFilter() {
-      document.getElementsByName("estatus")[0].value  = "";
-      document.getElementsByName("buscador")[0].value = "";
-      document.getElementsByName("fechaBuscador")[0].value = "";
-      document.getElementsByName("nombreVendedor")[0].value= "";
-      document.getElementsByName("tipoProyecto")[0].value="";
-      db.collection("orden").onSnapshot(this.obtenerBD)
 
-    
-    }
-    
-    validate(){
-        const state = this.state.uge
-       
-        if(state === "" ){
-            this.setState({
-                modalIsOpen:true,
-                message:'Contesta los campos obligatorios'
 
-            })
-                return   false
-        }
-       
-        this.setState({
-          modalIsOpen:true,
-          message:'Se ha enviado correctamente'
-
-      })
-        return true
-    }
     //Generador de clave unica
 
     
@@ -991,22 +962,21 @@ db.collection("visitadores").orderBy("date", "desc")
           handleChangeDate: this.handleChangeDate,
           handleChangeSeller:this.handleChangeSeller,
           handleChangeProject:this.handleChangeProject,
-          handleChangeSelect: this.handleChangeSelect,
+        
           handleClick: this.handleClick,
           handleUpdateCliente: this.handleUpdateCliente,
           handleSubmitCliente: this.handleSubmitCliente,
           handleSubmitVisitador: this.handleSubmitVisitador,
           handleSubmitVendedor: this.handleSubmitVendedor,
-          deleteFilter: this.deleteFilter,
+       
           handleSubmit: this.handleSubmit ,
-          handleLogout:this.handleLogout,
+          obtenerBD: this.obtenerBD,
           productClave:this.state.productClave,
           modalIsOpen:this.state.modalIsOpen,
           openModal:this.openModal,
           closeModal:this.closeModal,
           handleUpdate:this.handleUpdate,
-          onDelete: this.onDelete,
-          onDeleteCliente: this.onDeleteCliente,
+          
           handleCliente: this.handleCliente,
           onClickItemCliente:this.onClickItemCliente,
           onClickItemUpdateCliente: this.onClickItemUpdateCliente,

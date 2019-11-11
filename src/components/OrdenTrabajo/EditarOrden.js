@@ -11,7 +11,8 @@ import {Button,   Form, FormGroup, Label, Input, Col } from 'reactstrap';
 class OrdenCreada extends React.Component {
 
     render() {
-        const{ closeModal, modalIsOpen, consulta, handleUpdate,  handleChange, }=this.context
+    
+        const{ closeModal, modalIsOpen,  consulta, handleUpdate,  handleChange, }=this.context
  
         // const{ list} = this.context}
         

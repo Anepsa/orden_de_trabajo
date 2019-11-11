@@ -1,12 +1,41 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 
 class  OrdenTrabajo extends React.Component {
+    constructor() {
+        super();
+    
+        this.imprimir = this.imprimir.bind(this);
+        this.crearNuevo = this.crearNuevo.bind(this)
+    
+     
+      }
+    
+    imprimir(){
+            const {closeModal} = this.context
+            closeModal()
+            // .then(() =>{
+            //     window.print()
+            // })
+            setTimeout(()=>{ window.print(); }, 100);
+            
+               
+    }
+    crearNuevo(){
+        const {closeModal} = this.context
+        closeModal()
+        document.getElementById("formClear").reset();
+
+    }
     
   
     render(){
+
+    
+        
     const{ rol,nombresClientes, nombresEmpresas, handleSelectUge, listaVisitador, handleCliente, obtDataCliente, handleEmpresa, getName, vendedor,uge,  copia,  oferta,
     fechaIns, inicio, entrega, 
     cedido, proyecto, tipoCliente,  
@@ -18,7 +47,7 @@ class  OrdenTrabajo extends React.Component {
     if(rol === "admin"){
     return ( 
         //Ceacion formulario
-        <div className="div-form">
+        <div id="OrdenCreada"className="div-form">
             
             <Form  className="center-box style-form" id="formClear" onSubmit={handleSubmit}>
            
@@ -603,18 +632,22 @@ class  OrdenTrabajo extends React.Component {
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
           className="modal-inner"
+          overlayClassName="Overlay"
         
           > 
-          <div>
-          <h5 className="text-danger text-center">¡Atencion!</h5>
-          <hr/>
-          <p>{message}</p>
-          {/* <h6 className="text-danger text center">{No se pudo enviar el formulario}</h6> */}
-                
-            {/* <div>Porfavor contesta todos los campos obligatorios</div> */}
-                <hr/>   
-                <Button onClick={closeModal} >Cerrar</Button>
-         </div>
+             <div>
+              <h5 className="text-info text-center">Orden Creada</h5>
+              <hr/>
+              <Link to="./Visitadores"> Ver Lista </Link>
+              <Button onClick={this.imprimir}>Imprimir</Button>
+              <Button onClick={this.crearNuevo}>Crear Nuevo</Button>
+              
+             
+                    <hr/>   
+                    <Button onClick={closeModal} >Cerrar</Button>
+             </div>
+           
+            
          </Modal>
         </Form>
         </div>
@@ -1201,12 +1234,15 @@ class  OrdenTrabajo extends React.Component {
               isOpen={modalIsOpen}
               onRequestClose={closeModal}
               className="modal-inner"
+              overlayClassName="Overlay"
             
               > 
-              <div>
-              <h5 className="text-danger text-center">Anepsa dice</h5>
+                <div>
+              <h5 className="text-info text-center">Visitador Creado</h5>
               <hr/>
-              <p>{message}</p>
+              <Link to="./Visitadores"> Ver Lista </Link>
+              <Button onClick={this.imprimir}>Imprimir</Button>
+              
              
                     <hr/>   
                     <Button onClick={closeModal} >Cerrar</Button>

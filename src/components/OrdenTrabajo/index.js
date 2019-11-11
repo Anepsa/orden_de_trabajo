@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import db from "../../Fire.js";
 
 
 
@@ -21,13 +22,55 @@ EditarOrden.contextType = AppContext;
 
 
 class  ListaOrdenes extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.onDelete = this.onDelete.bind(this);
+    this.deleteFilter = this.deleteFilter.bind(this)
  
+
+ 
+  }
+
+  onDelete(e){
+       
+    const newid=  e.target.id
+    console.log(newid)
+    db.collection("orden").where("productClave", "==", newid )
+    .get()
+    .then(querySnapshot => {
+     querySnapshot.forEach((doc) => {
+       doc.ref.delete().then(() => {
+         console.log("Document successfully deleted!");
+       }).catch(function(error) {
+         console.error("Error removing document: ", error);
+       });
+     });
+   })
+   .catch(function(error) {
+     console.log("Error getting documents: ", error);
+   });
+  }
+  deleteFilter() {
+
+    const {obtenerBD} = this.context;
+    document.getElementsByName("buscador")[0].value = "";
+    document.getElementsByName("fechaBuscador")[0].value = "";
+    document.getElementsByName("nombreVendedor")[0].value= "";
+    document.getElementsByName("tipoProyecto")[0].value="";
+    db.collection("orden").onSnapshot(obtenerBD)
+
+  
+  }
+
   render () {
-    const{items, onClickItem, rol, handleUpdate, onClickItemUpdate, getName, handleChangeFound , onDelete,  handleChangeDate, handleChangeSelect, deleteFilter, handleChangeSeller, handleChangeProject}=this.context
+   
+    const{items, rol, handleUpdate, onClickItem,onClickItemUpdate, getName, handleChangeFound ,   handleChangeDate, handleChangeSelect, handleChangeSeller, handleChangeProject}=this.context
     if(rol === "admin") {
       return (
+        
       <div>
-         
+       
          
                 
              
@@ -88,7 +131,7 @@ class  ListaOrdenes extends React.Component {
                 <option value="cancelado">Cancelado</option>
             </Input>
           </th> */}
-          <th><Button   color="warning text-white" onClick={deleteFilter}><RotateLeftIcon/> </Button></th>
+          <th><Button   color="warning text-white" onClick={this.deleteFilter}><RotateLeftIcon/> </Button></th>
         </tr>
         <tr><th></th></tr>
         
@@ -140,7 +183,7 @@ class  ListaOrdenes extends React.Component {
           <td>{item.uge}</td>
           <td>{item.getNewDate}</td>
           {/* <td>{item.estatus}</td> */}
-          <td><DeleteOutlineOutlinedIcon id={item.productClave} onClick={onDelete}/></td>
+          <td><DeleteOutlineOutlinedIcon id={item.productClave} onClick={this.onDelete}/></td>
         </tr>
         
         
@@ -214,7 +257,7 @@ class  ListaOrdenes extends React.Component {
               <option value="cancelado">Cancelado</option>
           </Input>
         </th>
-        <th><Button   color="warning text-white" onClick={deleteFilter}><RotateLeftIcon/> </Button></th>
+        <th><Button   color="warning text-white" onClick={this.deleteFilter}><RotateLeftIcon/> </Button></th>
       </tr>
       <tr><th></th></tr>
       
@@ -275,7 +318,7 @@ class  ListaOrdenes extends React.Component {
     </tbody>
    
     </Table>
-  <OrdenCreada/>
+  <OrdenCreada />
   <EditarOrden/>
 
   </div>
