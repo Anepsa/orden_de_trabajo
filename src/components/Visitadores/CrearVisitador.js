@@ -8,8 +8,19 @@ import { Link } from 'react-router-dom';
 
 
 class  Visitadores extends React.Component {
-  
+    constructor() {
+        super();
+        this.crearNuevo = this.crearNuevo.bind(this)
     
+     
+      }
+  
+    crearNuevo(){
+        const {closeModal} = this.context
+        closeModal()
+        document.getElementById("formClear").reset();
+
+    }
 
     
     render(){
@@ -134,13 +145,9 @@ class  Visitadores extends React.Component {
               > 
               <div>
               <h5 className="text-info text-center">Visitador Creado</h5>
-              <hr/>
-              <Link to="./Visitadores"> Ver Lista </Link>
-              <Button onClick={() => {window.print(document.getElementById(""))}}>Imprimir</Button>
-              
-             
-                    <hr/>   
-                    <Button onClick={closeModal} >Cerrar</Button>
+              <hr/> 
+              <Button color="info" ><Link to="./Visitadores" className="text-white" onClick={closeModal}> Ver Lista </Link></Button>
+              <Button color="info" className="float-right" onClick={this.crearNuevo}>Crear Nuevo</Button>
              </div>
              </Modal>
        </Form>

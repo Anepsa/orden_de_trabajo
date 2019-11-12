@@ -37,7 +37,9 @@ export const AppContext = React.createContext()
             contClientes:[],
             nombresClientes:[],
             nombresEmpresas:[],
-            estatusEmpresa:"",    
+            estatusEmpresa:"", 
+        
+             
            
             clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",
             visitadorNombre:"", rfcVisitador:"", direccionVisitador:"", delegacionVisitador:"", EDOVisitador:"", atencionVisitador:"", telvisitador:"", extTelVisitador:"",emailVisitador:"",
@@ -160,6 +162,11 @@ handleCliente = (e) =>{
       estatusEmpresa: cliente,
     
     })
+    if(cliente === ""){
+      this.setState({
+        obtDataCliente:[],
+      })  
+    }else{
 
       db.collection("clientes").where("empresa", "==", cliente )
       .get()
@@ -176,6 +183,7 @@ handleCliente = (e) =>{
           });
     
   }
+}
 
 
 
@@ -256,7 +264,21 @@ handleCliente = (e) =>{
                 
             });
 
-      }  else if (name === "fechaCliente"){
+      }  else if(name === "nombreVendedor"){
+        db.collection("clientes").where("vendedor", "==", handle)
+        .get()
+        .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+                
+                this.setState({
+                  dataClientes:data
+  
+                })
+                
+                
+            });
+          
+        }else if (name === "fechaCliente"){
         const fecha = handle.replace(/-/g,"/")
         db.collection("clientes").where("dateToCompare", "==", fecha)
         .get()
@@ -396,7 +418,45 @@ handleChangeProject= (e)=>{
 
                
     const newid=  this.state.idItem
-    
+    const oferta = this.state.oferta
+    const copia = this.state.copia
+    const visitador = this.state.visitador
+    const cedido = this.state.cedido
+    const proyecto= this.state.proyecto
+               const tipoCliente = this.state.tipoCliente
+               const  nombreSolicitante = this.state.nombreSolicitante
+               const  empresaSolicitante = this.state.empresaSolicitante
+               const rfcSolicitante=this.state.rfcSolicitante
+               const direccionSolicitante= this.state.direccionSolicitante
+               const delegacionSolicitante=this.state.delegacionSolicitante
+               const    EDOSolicitante=this.state.EDOSolicitante
+               const   telSolicitante=this.state.telSolicitante
+               const  emailSolicitante =this.state.emailSolicitante
+            
+               const objetivo=this.state.objetivo
+               const otroObj=this.state.otroObj
+               const proposito=this.state.proposito
+               const otroProp= this.state.otroProp
+               const presentarse= this.state.presentarse
+               const fechaIns= this.state.fechaIns
+               const telInsp= this.state.telInsp
+               const extInsp= this.state.extInsp
+               const emailInsp= this.state.emailInsp
+               const dirInsp= this.state.dirInsp
+               const observaciones=this.state.observaciones
+               const bienes= this.state.bienes
+               const otroBien= this.state.otroBien
+               const info=this.state.info 
+              //  const otraInfo = this.state.otraInfo
+               const inicio=this.state.inicio
+               const entrega=this.state.entrega
+               const facturar=this.state.facturar
+               const presupuesto= this.state.presupuesto
+               const comision=this.state.comision
+               const montoVendido=this.state.montoVendido  
+       
+
+    console.log(newid)
 
     db.collection("orden").where("productClave", "==", newid )
     .get()
@@ -404,41 +464,39 @@ handleChangeProject= (e)=>{
         querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
             db.collection("orden").doc(doc.id).update({
-
-                oferta:this.state.oferta,
-                cedido:this.state.cedido,
-                proyecto: this.state.proyecto,
-                visitador: this.state.visitador,
-                tipoCliente:this.state.tipoCliente,
-                nombreSolicitante: this.state.nombreSolicitante,
-                empresaSolicitante: this.state.empresaSolicitante,
-                rfcSolicitante:this.state.rfcSolicitante,
-                direccionSolicitante: this.state.direccionSolicitante,
-                delegacionSolicitante:this.state.delegacionSolicitante,
-                EDOSolicitante:this.state.EDOSolicitante,
-                telSolicitante:this.state.telSolicitante,
-                emailSolicitante: this.state.emailSolicitante,
-                objetivo:this.state.objetivo,
-                otroObj:this.state.otroObj,
-                proposito:this.state.proposito,
-                otroProp: this.state.otroProp,
-                presentarse: this.state.presentarse,
-                fechaIns: this.state.fechaIns,
-                telInsp: this.state.telInsp,
-                extInsp: this.state.extInsp,
-                emailInsp: this.state.emailInsp,
-                dirInsp: this.state.dirInsp,
-                observaciones:this.state.observaciones,
-                bienes: this.state.bienes,
-                otroBien: this.state.otroBien,
-                info:this.state.info ,
-                otrainfo: this.state.otraInfo,
-                inicio: this.state.inicio,
-                entrega:this.state.entrega,
-                facturar:this.state.facturar,
-                presupuesto: this.state.presupuesto,
-                comision:this.state.presupuesto,
-                montoVendido:this.state.montoVendido,  
+            
+              copia:copia, oferta:oferta, cedido:cedido,proyecto: proyecto, visitador:visitador, 
+          
+                tipoCliente:tipoCliente,
+                nombreSolicitante: nombreSolicitante,
+                empresaSolicitante: empresaSolicitante,
+                rfcSolicitante:rfcSolicitante,
+                direccionSolicitante: direccionSolicitante,
+                delegacionSolicitante:delegacionSolicitante,
+                EDOSolicitante:EDOSolicitante,
+                telSolicitante:telSolicitante,
+                emailSolicitante: emailSolicitante,
+                objetivo:objetivo,
+                otroObj:otroObj,
+                proposito:proposito,
+                otroProp:otroProp,
+                presentarse: presentarse,
+                fechaIns: fechaIns,
+                telInsp: telInsp,
+                extInsp: extInsp,
+                emailInsp: emailInsp,
+                dirInsp: dirInsp,
+                observaciones:observaciones,
+                bienes: bienes,
+                otroBien: otroBien,
+                info:info ,
+                // otrainfo: otraInfo,
+                inicio: inicio,
+                entrega:entrega,
+                facturar:facturar,
+                presupuesto: presupuesto,
+                comision:comision,
+                montoVendido:montoVendido,  
                   
             }          
             );  
@@ -497,7 +555,7 @@ handleChangeProject= (e)=>{
 
 
      
-      this.setState({
+      this.setState({modalIsOpen:true,
         contClientes:"",nombreCliente:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencion:"", telCliente:"", extTel:"",emailCliente:"",
      }, () => {console.log(this.state.mes)})
 
@@ -887,9 +945,38 @@ db.collection("visitadores").orderBy("date", "desc")
        .get()
        .then(querySnapshot => {
          const data = querySnapshot.docs.map(doc => doc.data());
-             
-             console.log(data);
-             this.setState({ consulta: data , modalIsOpen:true})
+        
+        console.log(data[0])
+             this.setState({
+              idItem:newid, 
+              getNewDate:data[0].getNewDate,
+              comision:data[0].comision,
+              presupuesto:data[0].presupuesto,
+              montoVendido:data[0].montoVendido, 
+              uge:data[0].uge,
+              vendedor:data[0].vendedor, 
+              copia:data[0].copia,
+              oferta:data[0].oferta, 
+              cedido:data[0].cedido, 
+              proyecto:data[0].proyecto,
+              nombreSolicitante:data[0].nombreSolicitante,
+              empresaSolicitante:data[0].empresaSolicitante,
+              direccionSolicitante:data[0].direccionSolicitante,
+              delegacionSolicitante:data[0].delegacionSolicitante,
+              EDOSolicitante:data[0].EDOSolicitante,
+              telSolicitante:data[0].telSolicitante,
+              extTelSolicitante:data[0].extTelSolicitante,
+              emailSolicitante:data[0].emailSolicitante,
+              objetivo:data[0].objetivo, otroObj:data[0].otroObj,
+              proposito:data[0].proposito, otroProp:data[0].otroProp,
+              presentarse:data[0].presentarse,visitador:data[0].visitador,
+              fechaIns:data[0].fechaIns, telInsp:data[0].telInsp, 
+              extInsp:data[0].extInsp, emailInsp:data[0].emailInsp,
+              dirInsp:data[0].dirInsp,
+              bienes:data[0].bienes, otroBien:data[0].otroBien, info:data[0].info, 
+              otraInfo:data[0].otraInfo, inicio:data[0].inicio,
+             entrega:data[0].entrega,  facturar:data[0].facturar, productClave:data[0].productClave,
+              modalIsOpen:true},() => {console.log(this.state)})
              
          });      
   
@@ -941,11 +1028,12 @@ db.collection("visitadores").orderBy("date", "desc")
 
     
 
-  
+      
     render() {
         const {consultaCliente,newOrder, list,dataClientes, estatusEmpresa,items, listaVisitador, nombresEmpresas, dataVisitadores,
           // clienteNombre, rfcCliente, direccionCliente, delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",
-         
+          uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,
+          
         visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
           consulta,getName,
            user, dateNew,obtDataCliente, message, rol, montoVendido, comision, nombresClientes,presupuesto} = this.state;
@@ -981,9 +1069,10 @@ db.collection("visitadores").orderBy("date", "desc")
           onClickItemCliente:this.onClickItemCliente,
           onClickItemUpdateCliente: this.onClickItemUpdateCliente,
          visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
-     
+          
           consultaCliente,
-         
+          uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,
+          
           obtDataCliente,
           estatusEmpresa,
           rol,

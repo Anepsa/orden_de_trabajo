@@ -638,13 +638,12 @@ class  OrdenTrabajo extends React.Component {
              <div>
               <h5 className="text-info text-center">Orden Creada</h5>
               <hr/>
-              <Link to="./Visitadores"> Ver Lista </Link>
-              <Button onClick={this.imprimir}>Imprimir</Button>
-              <Button onClick={this.crearNuevo}>Crear Nuevo</Button>
+              <Button color="info" className="mr-1"><Link onClick={closeModal} className="text-white" to="./ListaOrdenes" > Ver Lista </Link></Button>       
+              <Button color="info" className="float-right" onClick={this.crearNuevo}>Crear Nuevo</Button>
               
              
                     <hr/>   
-                    <Button onClick={closeModal} >Cerrar</Button>
+                    <Button color="success" onClick={this.imprimir}>Guardar PDF</Button>
              </div>
            
             
@@ -1237,15 +1236,16 @@ class  OrdenTrabajo extends React.Component {
               overlayClassName="Overlay"
             
               > 
-                <div>
-              <h5 className="text-info text-center">Visitador Creado</h5>
+                       <div>
+              <h5 className="text-info text-center">Orden Creada</h5>
               <hr/>
-              <Link to="./Visitadores"> Ver Lista </Link>
-              <Button onClick={this.imprimir}>Imprimir</Button>
+              <Button color="info" className="mr-1"><Link onClick={closeModal} className="text-white" to="./ListaOrdenes" > Ver Lista </Link></Button>
+              
+              <Button color="info" className="float-right" onClick={this.crearNuevo}>Crear Nuevo</Button>
               
              
                     <hr/>   
-                    <Button onClick={closeModal} >Cerrar</Button>
+                    <Button color="success" onClick={this.imprimir}>Guardar PDF</Button>
              </div>
              </Modal>
             </Form>

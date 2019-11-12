@@ -10,6 +10,11 @@ import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import db from "../../Fire.js";
+import { CSVLink, CSVDownload } from "react-csv";
+import PictureAsPdfOutlinedIcon from '@material-ui/icons/PictureAsPdfOutlined';
+import Icon from '@material-ui/core/Icon';
+import "font-awesome/css/font-awesome.css";
+
 
 
 
@@ -68,19 +73,14 @@ class  ListaOrdenes extends React.Component {
     const{items, rol, handleUpdate, onClickItem,onClickItemUpdate, getName, handleChangeFound ,   handleChangeDate, handleChangeSelect, handleChangeSeller, handleChangeProject}=this.context
     if(rol === "admin") {
       return (
-        
-      <div>
        
-         
-                
-             
-
-
-                  <Link  className="text-white " to="/OrdenTrabajo"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>
-              
-                  
-                  
-                  <Table>
+        <div> 
+           <Link  className="text-white " to="/OrdenTrabajo"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>                 
+               
+        <Button  color="white" className=" mt-2 mb-2 mr-3 float-right text-black">< PictureAsPdfOutlinedIcon /></Button> 
+                 
+        <Button className=" mt-2 mb-2 mr-3 float-right"><CSVLink  data={items}>download</CSVLink></Button> 
+                    <Table>
                   <thead>
                 </thead>
                 <tbody>
@@ -134,22 +134,9 @@ class  ListaOrdenes extends React.Component {
           <th><Button   color="warning text-white" onClick={this.deleteFilter}><RotateLeftIcon/> </Button></th>
         </tr>
         <tr><th></th></tr>
-        
-       
-          
-       
-        
+
         </tbody>
 
-        
-         
-
-        
-               
-            
-            
-           
-        
  
       <thead>
        

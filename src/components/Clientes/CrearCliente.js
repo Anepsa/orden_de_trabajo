@@ -1,10 +1,26 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
+import Modal from 'react-modal';
+import { Link } from 'react-router-dom';
 
 class  DirectorioClientes extends React.Component {
+    constructor() {
+        super();
+    
+       
+        this.crearNuevo = this.crearNuevo.bind(this)
+    
+     
+      }
+      crearNuevo(){
+        const {closeModal} = this.context
+        closeModal()
+        document.getElementById("formClear").reset();
+
+    }
       
     render(){
-        const {handleChange, handleSubmitCliente,  estatus,empresa, clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente } = this.context
+        const {modalIsOpen, closeModal, handleChange, handleSubmitCliente,  estatus,empresa, clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente } = this.context
     return(
         <div className="div-form">
              
@@ -105,6 +121,20 @@ class  DirectorioClientes extends React.Component {
        </fieldset>
        <hr/>
        <Button className="button-enviar" type="submit"  >Enviar</Button><br/>
+       <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              className="modal-inner"
+              overlayClassName="Overlay"
+            
+              > 
+              <div>
+              <h5 className="text-info text-center">Cliente Creado</h5>
+              <hr/> 
+              <Button color="info" ><Link to="./ListadoClientes" className="text-white" onClick={closeModal}> Ver Lista </Link></Button>
+              <Button color="info" className="float-right" onClick={this.crearNuevo}>Crear Nuevo</Button>
+             </div>
+             </Modal>
        </Form>
        </div>
 

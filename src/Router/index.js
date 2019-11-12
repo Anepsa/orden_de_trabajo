@@ -108,14 +108,13 @@ class Menu extends Component  {
             
             <NavItem className="text-right "  ><CloseOutlinedIcon onClick={this.toggle}/></NavItem>
             <div className="left ml-10 text-left ">
-            <NavItem  > <NavLink to="/ListaOrdenes">Orden de trabajo</NavLink></NavItem>
-            <NavItem  > 
-                         <NavLink   to="/OrdenTrabajo">Crear</NavLink>
-            
-            
+            <NavItem>Orden de Trabajo</NavItem>
+            <NavItem> 
+                  <NavLink className="mr-5" to="/ListaOrdenes">Ver</NavLink>
+                <NavLink   to="/OrdenTrabajo">Crear</NavLink>
             </NavItem>
-            <NavItem><NavLink to="/ListadoClientes">Directorio Clientes</NavLink></NavItem>
-            <NavItem  > 
+            <NavItem>Directorio de Clientes</NavItem>
+            <NavItem><NavLink className="mr-5" to="/ListadoClientes">Ver</NavLink>
                          <NavLink   to="/CrearCliente">Crear</NavLink>
             
             
@@ -150,7 +149,7 @@ class Menu extends Component  {
           
             
             
-       
+            <NavItem></NavItem>
             <NavItem><NavLink to="/Visitadores">Visitadores</NavLink></NavItem>
             <NavItem  > 
                          <NavLink   to="/CrearVisitador">Crear</NavLink>
