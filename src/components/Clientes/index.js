@@ -25,6 +25,7 @@ class  ListadoClientes extends React.Component {
     super();
 
     this.onDelete = this.onDelete.bind(this);
+    this.deleteFilter = this.deleteFilter.bind(this)
 
  
   }
@@ -48,6 +49,21 @@ class  ListadoClientes extends React.Component {
      console.log("Error getting documents: ", error);
    });
    }
+
+   deleteFilter() {
+
+    const {obtenerClientes} = this.context;
+    document.getElementsByName("buscadorClave")[0].value = "";
+    document.getElementsByName("buscadorNombre")[0].value = "";
+    document.getElementsByName("buscadorEmpresa")[0].value = "";
+    document.getElementsByName("fechaCliente")[0].value = "";
+    document.getElementsByName("nombreVendedor")[0].value= "";
+    document.getElementsByName("estatus")[0].value="";
+    db.collection("clientes").onSnapshot(obtenerClientes)
+
+  
+  }
+
 
   render () {
     const{  rol,dataClientes, onClickItemCliente, onClickItemUpdateCliente , handleChangeCliente}=this.context
@@ -74,6 +90,11 @@ class  ListadoClientes extends React.Component {
             </Input>
           </th>
           <th>
+            <Input type="text" name="buscadorEmpresa" onChange={handleChangeCliente} placeholder="Empresa" >
+            </Input>
+            
+          </th>
+          <th>
             <Input type="select" name="nombreVendedor" onChange={handleChangeCliente} >
                 <option value="">Vendedor</option>
                 <option value="Ameyalli Brito González">Ame</option>
@@ -85,6 +106,8 @@ class  ListadoClientes extends React.Component {
                 
             </Input>
           </th>
+         
+       
           <th>
           <Input type="date" name="fechaCliente" onChange={handleChangeCliente} >
             Fecha
@@ -101,7 +124,7 @@ class  ListadoClientes extends React.Component {
 
             </Input>
           </th>
-          <th><Button   color="warning text-white" ><RotateLeftIcon/> </Button></th>
+          <th><Button   color="warning text-white" onClick={this.deleteFilter}><RotateLeftIcon/> </Button></th>
         </tr>
         <tr><th></th></tr>
         
@@ -115,7 +138,8 @@ class  ListadoClientes extends React.Component {
           <th></th>
           <th className="text-center"><FolderOpenIcon/></th>
           <th >Clave</th>
-          <th>Nombre</th>
+          <th>Cliente</th>
+          <th>Empresa</th>
           <th>Vendedor</th>
           <th>Fecha</th>
           <th>Estatus</th>
@@ -136,6 +160,7 @@ class  ListadoClientes extends React.Component {
           <Button color="white" id={item.clave} onClick={onClickItemUpdateCliente}><FindInPageOutlinedIcon  id={item.clave} onClick={onClickItemUpdateCliente}/></Button></td>
           <td>{item.clave}</td>
           <td>{item.nombre}</td>
+          <td>{item.empresa}</td>
           <td>{item.vendedor}</td>
           <td>{item.getNewDate}</td>
           <td>{item.estatus}</td>

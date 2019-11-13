@@ -11,9 +11,9 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import db from "../../Fire.js";
 import { CSVLink, CSVDownload } from "react-csv";
-import PictureAsPdfOutlinedIcon from '@material-ui/icons/PictureAsPdfOutlined';
-import Icon from '@material-ui/core/Icon';
-import "font-awesome/css/font-awesome.css";
+
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 
@@ -32,6 +32,7 @@ class  ListaOrdenes extends React.Component {
     
     this.onDelete = this.onDelete.bind(this);
     this.deleteFilter = this.deleteFilter.bind(this)
+    this.generatePDF = this.generatePDF.bind(this)
  
 
  
@@ -56,11 +57,15 @@ class  ListaOrdenes extends React.Component {
      console.log("Error getting documents: ", error);
    });
   }
+  generatePDF(){
+    window.print()
+  }
   deleteFilter() {
 
     const {obtenerBD} = this.context;
     document.getElementsByName("buscador")[0].value = "";
     document.getElementsByName("fechaBuscador")[0].value = "";
+    document.getElementsByName("empresa")[0].value = "";
     document.getElementsByName("nombreVendedor")[0].value= "";
     document.getElementsByName("tipoProyecto")[0].value="";
     db.collection("orden").onSnapshot(obtenerBD)
@@ -70,16 +75,16 @@ class  ListaOrdenes extends React.Component {
 
   render () {
    
-    const{items, rol, handleUpdate, onClickItem,onClickItemUpdate, getName, handleChangeFound ,   handleChangeDate, handleChangeSelect, handleChangeSeller, handleChangeProject}=this.context
+    const{items, rol, handleUpdate, handleChangeOrden, onClickItem,onClickItemUpdate, getName, handleChangeFound ,   handleChangeDate, handleChangeSelect, handleChangeSeller, handleChangeProject}=this.context
     if(rol === "admin") {
       return (
        
         <div> 
            <Link  className="text-white " to="/OrdenTrabajo"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>                 
                
-        <Button  color="white" className=" mt-2 mb-2 mr-3 float-right text-black">< PictureAsPdfOutlinedIcon /></Button> 
-                 
-        <Button className=" mt-2 mb-2 mr-3 float-right"><CSVLink  data={items}>download</CSVLink></Button> 
+        <Button  color="white" className=" mt-2 mb-2 mr-3 float-right text-black" onClick={this.generatePDF}><i className="far fa-file-pdf"></i></Button> 
+         
+        <Button  color="white" className=" mt-2 mb-2 mr-3 float-right  text-black"><CSVLink className=""  data={items}><i className="far fa-file-excel"></i></CSVLink></Button> 
                     <Table>
                   <thead>
                 </thead>
@@ -88,12 +93,17 @@ class  ListaOrdenes extends React.Component {
             <th></th>
             <th>Filtrar por</th>
           <th>
-            <Input type="text" name="buscador" placeholder="Clave" onChange={handleChangeFound} >
+            <Input type="text" name="buscador" placeholder="Clave" onChange={handleChangeOrden} >
             </Input>
             
           </th>
           <th>
-            <Input type="select" name="nombreVendedor" onChange={handleChangeSeller}>
+            <Input type="text" name="empresa" placeholder="Empresa" onChange={handleChangeOrden} >
+            </Input>
+            
+          </th>
+          <th>
+            <Input type="select" name="nombreVendedor" onChange={handleChangeOrden}>
                 <option value="">Vendedor</option>
                 <option value="Ameyalli Brito González">Ame</option>
                         <option value="Yozebeth Brito González">Yoz</option>
@@ -105,7 +115,7 @@ class  ListaOrdenes extends React.Component {
             </Input>
           </th>
           <th>
-             <Input type="select" name="tipoProyecto" onChange={handleChangeProject}>
+             <Input type="select" name="tipoProyecto" onChange={handleChangeOrden}>
                 <option value="">Proyecto</option>
                
        
@@ -119,18 +129,11 @@ class  ListaOrdenes extends React.Component {
             </Input>
           </th>
           <th>
-          <Input type="date" name="fechaBuscador" onChange={handleChangeDate} >
+          <Input type="date" name="fechaBuscador" onChange={handleChangeOrden} >
             Fecha
             </Input>
           </th>
-          {/* <th>
-             <Input type="select" name="estatus" onChange={handleChangeSelect}>
-                <option value="" >Estatus</option>
-                <option value="vendido">Vendido</option>
-                <option value="proceso">En proceso</option>
-                <option value="cancelado">Cancelado</option>
-            </Input>
-          </th> */}
+         
           <th><Button   color="warning text-white" onClick={this.deleteFilter}><RotateLeftIcon/> </Button></th>
         </tr>
         <tr><th></th></tr>
@@ -146,6 +149,7 @@ class  ListaOrdenes extends React.Component {
           <th></th>
           <th className="text-center"><FolderOpenIcon/></th>
           <th >Clave</th>
+          <th>Empresa</th>
           <th>Vendedor</th>
           <th>Proyecto</th>
           <th>Fecha</th>
@@ -164,8 +168,9 @@ class  ListaOrdenes extends React.Component {
         <tr key={index}  className="list">
           <td></td>
           <td className="text-center"><Button className="mr-1" color="white"><EditOutlinedIcon id={item.productClave} onClick={onClickItemUpdate} /></Button>
-          <Button color="white"><FindInPageOutlinedIcon  id={item.productClave} onClick={onClickItem}/></Button></td>
+          <Button color="white"  id="clave" value={item.productClave} onClick={onClickItem}><FindInPageOutlinedIcon  /></Button></td>
           <td>{item.productClave}</td>
+          <td>{item.cliente.empresa}</td>
           <td>{item.vendedor}</td>
           <td>{item.uge}</td>
           <td>{item.getNewDate}</td>
@@ -289,7 +294,9 @@ class  ListaOrdenes extends React.Component {
    
       <tr key={index} className="list">
         <td></td>
-        <td className="text-center"><EditOutlinedIcon  id={item.productClave} onClick={onClickItemUpdate}/><FindInPageOutlinedIcon  id={item.productClave} onClick={onClickItem}/></td>
+        <td className="text-center"><EditOutlinedIcon  id={item.productClave} onClick={onClickItemUpdate}/><FindInPageOutlinedIcon  id={item.productClave} onClick={onClickItem}/>
+        <Button color="white"  id="clave" value={item.productClave} onClick={onClickItem}><FindInPageOutlinedIcon  /></Button>
+        </td>
         <td>{item.productClave}</td>
         <td>{item.vendedor}</td>
         <td>{item.uge}</td>

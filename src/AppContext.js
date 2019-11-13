@@ -38,7 +38,7 @@ export const AppContext = React.createContext()
             nombresClientes:[],
             nombresEmpresas:[],
             estatusEmpresa:"", 
-        
+          modalIsOpen:true,
              
            
             clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",
@@ -58,16 +58,15 @@ export const AppContext = React.createContext()
     this.onClickItemUpdateCliente =this.onClickItemUpdateCliente.bind(this)
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleChangeDate= this.handleChangeDate.bind(this)
-    this.handleChangeFound = this.handleChangeFound.bind(this);
+
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.obtenerBD = this.obtenerBD.bind(this);
+    this.obtenerClientes = this.obtenerClientes.bind(this)
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.handleChangeSeller = this.handleChangeSeller.bind(this);
-    this.handleChangeProject = this.handleChangeProject.bind(this)
     this.handleEmpresa = this.handleEmpresa.bind(this)
+    this.handleChangeOrden = this.handleChangeOrden.bind(this)
 
     }
     //Funcion para cuando aparece el modal
@@ -200,31 +199,6 @@ handleCliente = (e) =>{
 
 
 
-    handleChangeFound= (e)=>{
-        
-      const handle = e.target.value
-      console.log(handle)
-      console.log(this.state.buscador)
-      if(handle === ""){
-
-        db.collection("orden").onSnapshot(this.obtenerBD)
-        }else {
-          db.collection("orden").where("productClave", "==", handle)
-          .get()
-          .then(querySnapshot => {
-              const data = querySnapshot.docs.map(doc => doc.data());
-                  
-                  this.setState({
-                    items:data
-    
-                  })
-                  
-                  
-              });
-        }
-      
-      
-  } 
   
   handleChangeCliente= (e)=>{
     
@@ -264,7 +238,22 @@ handleCliente = (e) =>{
                 
             });
 
-      }  else if(name === "nombreVendedor"){
+      } 
+      else if(name === "buscadorEmpresa"){
+        db.collection("clientes").where("empresa", "==", handle)
+        .get()
+        .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+                
+                this.setState({
+                  dataClientes:data
+  
+                })
+                
+                
+            });
+
+      } else if(name === "nombreVendedor"){
         db.collection("clientes").where("vendedor", "==", handle)
         .get()
         .then(querySnapshot => {
@@ -309,72 +298,20 @@ handleCliente = (e) =>{
 
       }
 } 
-handleChangeNombre = (e) =>{
+
+handleChangeOrden= (e)=>{
+    
   const name = e.target.name
   console.log(name)
   const handle = e.target.value;
+
   console.log(handle)
-   
-  if(handle === ""){
-
-    db.collection("clientes").onSnapshot(this.obtenerClientes)
-    }else {
-      db.collection("clientes").where("clave", "==", handle)
-      .get()
-      .then(querySnapshot => {
-          const data = querySnapshot.docs.map(doc => doc.data());
-              
-              this.setState({
-                dataClientes:data
-
-              })
-              
-              
-          });
-    }    
-} 
-
-
-
-  handleChangeSeller= (e)=>{
-        
-    const handle = e.target.value
-    
-    console.log(handle)
-   
-    if(handle === ""){
-     
-      db.collection("orden").onSnapshot(this.obtenerBD)
-   
-      }else {
-        db.collection("orden").where("vendedor", "==", handle )
-        .get()
-        .then(querySnapshot => {
-            const data = querySnapshot.docs.map(doc => doc.data());
-                
-                this.setState({
-                  items:data
-  
-                })
-                
-                
-            });
-      }
-    
-    
-} 
-handleChangeProject= (e)=>{
-        
-  const handle = e.target.value
-  
-  console.log(handle)
-  console.log(this.state.buscador)
-  if(handle === ""){
-   
-    db.collection("orden").onSnapshot(this.obtenerBD)
  
-    }else {
-      db.collection("orden").where("uge", "==", handle )
+  if(handle === ""){
+
+    db.collection("orden").onSnapshot(this.obtenerBD)
+    }else  if(name === "buscador"){
+      db.collection("orden").where("productClave", "==", handle)
       .get()
       .then(querySnapshot => {
           const data = querySnapshot.docs.map(doc => doc.data());
@@ -386,32 +323,80 @@ handleChangeProject= (e)=>{
               
               
           });
-    }
-  
-  
-} 
-  handleChangeDate = (e) =>{
+    }  else if(name === "tipoProyecto"){
+      db.collection("orden").where("uge", "==", handle)
+      .get()
+      .then(querySnapshot => {
+          const data = querySnapshot.docs.map(doc => doc.data());
+              
+              this.setState({
+                items:data
 
-    const handle = e.target.value.replace(/-/g,"/")
-      
-    console.log(handle)
-    
-    if(handle === ""){
-     
-      db.collection("orden").onSnapshot(this.obtenerBD)
-   
-      }else {
-        db.collection("orden").where("dateToCompare", "==", handle )
-        .get()
-        .then(querySnapshot => {
-            const data = querySnapshot.docs.map(doc => doc.data());
-                
-                this.setState({
-                  items:data
-                })         
-            });
-      }
-  }
+              })
+              
+              
+          });
+
+    } 
+    else if(name === "empresa"){
+      db.collection("orden").where("cliente.empresa", "==", handle)
+      .get()
+      .then(querySnapshot => {
+          const data = querySnapshot.docs.map(doc => doc.data());
+              
+              this.setState({
+                items:data
+
+              })
+              
+              
+          });
+
+    } else if(name === "nombreVendedor"){
+      db.collection("orden").where("vendedor", "==", handle)
+      .get()
+      .then(querySnapshot => {
+          const data = querySnapshot.docs.map(doc => doc.data());
+              
+              this.setState({
+                items:data
+
+              })
+              
+              
+          });
+        
+      }else if (name === "fechaBuscador"){
+      const fecha = handle.replace(/-/g,"/")
+      db.collection("orden").where("dateToCompare", "==", fecha)
+      .get()
+      .then(querySnapshot => {
+          const data = querySnapshot.docs.map(doc => doc.data());
+              
+              this.setState({
+                items:data
+
+              })
+              
+              
+          });
+
+    }else if(name === "estatus"){
+      db.collection("orden").where("estatus", "==", handle)
+      .get()
+      .then(querySnapshot => {
+          const data = querySnapshot.docs.map(doc => doc.data());
+              
+              this.setState({
+                dataClientes:data
+
+              })
+              
+              
+          });
+
+    }
+} 
 
 
     handleUpdate =(e) =>{
@@ -432,7 +417,7 @@ handleChangeProject= (e)=>{
                const    EDOSolicitante=this.state.EDOSolicitante
                const   telSolicitante=this.state.telSolicitante
                const  emailSolicitante =this.state.emailSolicitante
-            
+
                const objetivo=this.state.objetivo
                const otroObj=this.state.otroObj
                const proposito=this.state.proposito
@@ -447,7 +432,7 @@ handleChangeProject= (e)=>{
                const bienes= this.state.bienes
                const otroBien= this.state.otroBien
                const info=this.state.info 
-              //  const otraInfo = this.state.otraInfo
+               const otraInfo = this.state.otraInfo
                const inicio=this.state.inicio
                const entrega=this.state.entrega
                const facturar=this.state.facturar
@@ -466,7 +451,6 @@ handleChangeProject= (e)=>{
             db.collection("orden").doc(doc.id).update({
             
               copia:copia, oferta:oferta, cedido:cedido,proyecto: proyecto, visitador:visitador, 
-          
                 tipoCliente:tipoCliente,
                 nombreSolicitante: nombreSolicitante,
                 empresaSolicitante: empresaSolicitante,
@@ -480,6 +464,7 @@ handleChangeProject= (e)=>{
                 otroObj:otroObj,
                 proposito:proposito,
                 otroProp:otroProp,
+                // visitador
                 presentarse: presentarse,
                 fechaIns: fechaIns,
                 telInsp: telInsp,
@@ -489,8 +474,8 @@ handleChangeProject= (e)=>{
                 observaciones:observaciones,
                 bienes: bienes,
                 otroBien: otroBien,
-                info:info ,
-                // otrainfo: otraInfo,
+                info:info,
+                otraInfo: otraInfo,
                 inicio: inicio,
                 entrega:entrega,
                 facturar:facturar,
@@ -593,7 +578,6 @@ handleChangeProject= (e)=>{
     handleSubmit = (e)  => {
         
         e.preventDefault();
-       
            
             let obtDate=  new Date().toLocaleDateString("zh-TW");   
             const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
@@ -936,11 +920,9 @@ db.collection("visitadores").orderBy("date", "desc")
  
      }
      onClickItem(e){
-      
-      
-      let newid=  e.target.id
+       console.log(e.target)
+      let newid=  document.getElementById("clave").value
       console.log(newid)
-  
        db.collection("orden").where("productClave", "==", newid)
        .get()
        .then(querySnapshot => {
@@ -948,6 +930,7 @@ db.collection("visitadores").orderBy("date", "desc")
         
         console.log(data[0])
              this.setState({
+              consulta:data,
               idItem:newid, 
               getNewDate:data[0].getNewDate,
               comision:data[0].comision,
@@ -976,7 +959,25 @@ db.collection("visitadores").orderBy("date", "desc")
               bienes:data[0].bienes, otroBien:data[0].otroBien, info:data[0].info, 
               otraInfo:data[0].otraInfo, inicio:data[0].inicio,
              entrega:data[0].entrega,  facturar:data[0].facturar, productClave:data[0].productClave,
-              modalIsOpen:true},() => {console.log(this.state)})
+              modalIsOpen:true} 
+              
+              ,() => {
+                const ugeSelect = this.state.uge;
+                db.collection("visitadores").where("uge", "array-contains", ugeSelect)
+                .get()
+                .then(querySnapshot => {
+                    const data = querySnapshot.docs.map(doc => doc.data().nombre);
+                  console.log(data)
+                        
+                        this.setState({
+                          listaVisitador:data,
+              
+              
+                        })
+                        
+                        
+                    });
+              })
              
          });      
   
@@ -1046,10 +1047,7 @@ db.collection("visitadores").orderBy("date", "desc")
           handleSelectUge: this.handleSelectUge,
           handleEmpresa: this.handleEmpresa,
           handleChange: this.handleChange,
-          handleChangeFound: this.handleChangeFound,
-          handleChangeDate: this.handleChangeDate,
-          handleChangeSeller:this.handleChangeSeller,
-          handleChangeProject:this.handleChangeProject,
+         
         
           handleClick: this.handleClick,
           handleUpdateCliente: this.handleUpdateCliente,
@@ -1059,12 +1057,13 @@ db.collection("visitadores").orderBy("date", "desc")
        
           handleSubmit: this.handleSubmit ,
           obtenerBD: this.obtenerBD,
+          obtenerClientes: this.obtenerClientes,
           productClave:this.state.productClave,
           modalIsOpen:this.state.modalIsOpen,
           openModal:this.openModal,
           closeModal:this.closeModal,
           handleUpdate:this.handleUpdate,
-          
+          handleChangeOrden:this.handleChangeOrden,
           handleCliente: this.handleCliente,
           onClickItemCliente:this.onClickItemCliente,
           onClickItemUpdateCliente: this.onClickItemUpdateCliente,

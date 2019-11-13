@@ -9,11 +9,11 @@ import {Button,   Form, FormGroup, Label, Input, Col } from 'reactstrap';
 
 
 class OrdenCreada extends React.Component {
-  
+
 
     render() {
     
-        const{getNewDate, comision, presupuesto, montoVendido, uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,
+        const{getNewDate,  dataClientes,listaVisitador, comision, presupuesto, montoVendido, uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,
            
           closeModal, modalIsOpen,  consulta, handleUpdate,  handleChange, }=this.context
                
@@ -53,75 +53,95 @@ class OrdenCreada extends React.Component {
               
               <Col sm={4}>
               <Label> COPIA PARA </Label> 
-              <Input  type="text" name="copia"  defaultValue={copia} onChange={handleChange}></Input>
+              <Input  type="select" name="copia"  value={copia} onChange={handleChange} >
+                        <option value="">{copia}</option>
+                        <option value="civil">Civil</option>
+                        <option value="direccion">Direccion</option>
+                        <option value="finanzas">Finanzas</option>
+                        <option value="industrial">Industrial</option>
+                        <option value="administracion">Administracion o Contabilidad</option>
+                        <option value="civ-ind">Civil-Industrial</option>
+                        <option value="civ-fin">Civil-Finanzas</option>
+                        <option value="fin-ind">Finanzas-Industrial</option>
+                        <option value="ind-prod">Industrial-Producción</option>
+                        <option value="civ-fin-ind">Civil-Finanzas-Industrial</option>
+                    </Input>
               </Col>
               </FormGroup>
               <FormGroup  row>
                   <Col sm={3}>
               <Label className="ot-color label-input">1. TIPO DE OFERTA </Label>
               
-                  <Input  type="text" defaultValue={oferta}  onChange={handleChange}></Input>
+                  <Input name="oferta" type="text" defaultValue={oferta}  onChange={handleChange}></Input>
               </Col>
              <Col sm={3}>
                   <Label className="ot-color label-input">1.1 CEDIDO DE  </Label>
                   
-                  <Input  type="text"  defaultValue={cedido}  onChange={handleChange}></Input> 
+                  <Input name="cedido" type="text"  defaultValue={cedido}  onChange={handleChange}></Input> 
                  
              </Col>
              <Col sm={3}>
               <Label   className="ot-color label-input">2. TIPO DE PROYECTO </Label>
               
-                  <Input  type="text" defaultValue={proyecto}  onChange={handleChange}></Input>
+                  <Input   name="proyecto" type="text" defaultValue={proyecto}  onChange={handleChange}></Input>
               
               </Col>
              <Col sm={3}>
                   <Label  className="ot-color label-input">3. TIPO DE CLIENTE  </Label>
                  
-                  <Input  type="text"  defaultValue={tipoCliente}  onChange={handleChange}></Input>
+                  <Input name="tipoCliente"  type="text"  defaultValue={tipoCliente}  onChange={handleChange}></Input>
                  
                   
              </Col>
-             {/* <Col sm={12}>
+             
+             {consulta.map(item =>(
+               
+               <FormGroup row>
+                 <Col sm={12}>
                <hr/>
-     */}
-{/*     
              <h6 className="ot-color">4. DATOS DEL CLIENTE</h6>
              </Col>
              <Col sm={4}>
               <Label> Nombre: </Label>
-              <Input type="text"  defaultValue={cliente.nombre} onChange={handleChange}></Input>
+              <Input type="text"  defaultValue={item.cliente.nombre} readOnly></Input>
               </Col>
               <Col sm={4}>
               <Label> Empresa: </Label>
-              <Input type="text"  value={cliente.empresa} readOnly ></Input>
+              <Input type="text"  value={item.cliente.empresa} readOnly ></Input>
               </Col>
              <Col sm={4}>
               <Label>Atencion:</Label>
-              <Input type="text" value={cliente.atencion} readOnly></Input>
+              <Input type="text" value={item.cliente.atencion} readOnly></Input>
               </Col>
               <Col sm={8}>
               <Label> Dirección: </Label> 
-              <Input type="text" value={cliente.direccion} readOnly></Input>
+              <Input type="text" value={item.cliente.direccion} readOnly></Input>
               </Col>
               <Col sm={4}>
               <Label> Ciudad/EDO </Label> 
-              <Input type="text" value={cliente.estado} readOnly></Input>
+              <Input type="text" value={item.cliente.estado} readOnly></Input>
               </Col>
               <Col sm={4}>
               <Label> Teléfono: </Label> 
-              <Input type="text" value={cliente.telefono} readOnly></Input>
+              <Input type="text" value={item.cliente.telefono} readOnly></Input>
               </Col>
               <Col sm={2}>
               <Label> Extension: </Label> 
-              <Input type="text" value={cliente.extTel} readOnly></Input>
+              <Input type="text" value={item.cliente.extTel} readOnly></Input>
               </Col>
               <Col sm={6}>
               <Label> Correo Electrónico: </Label> 
-              <Input type="text" value={cliente.email} readOnly></Input>
-              </Col>
-              <Col sm={12}>
-              <hr/>
-             <h6 className="ot-color">5. SOLICITANTE DEL AVALÚO</h6>
+              <Input type="text" value={item.cliente.email} readOnly></Input>
+              </Col> 
+             
+              </FormGroup>
+             
+              
+        ))
+      } 
+              {/* <Col sm={12}>
+              <hr/> */}
+             {/* <h6 className="ot-color">5. SOLICITANTE DEL AVALÚO</h6>
              </Col>
              <Col sm={4}>
               <Label> Nombre Solicitante: </Label>
@@ -160,15 +180,23 @@ class OrdenCreada extends React.Component {
               <Input type="text" defaultValue={emailSolicitante}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={12}><hr/></Col>
-               */}
-           
+               
+            */}
              <Col sm={6}>
               <Label className="ot-color"> 6. OBJETIVO DEL AVALÚO</Label>
-              <Input type="text" defaultValue={objetivo}  onChange={handleChange}>></Input>
+              <Input type="text" name="objetivo" defaultValue={objetivo}  onChange={handleChange}>></Input>
+              </Col>
+              <Col sm={6}>
+              <Label className="ot-color"> Otro Objetivo</Label>
+              <Input type="text" name="otroObj" defaultValue={otroObj}  onChange={handleChange}>></Input>
               </Col>
              <Col sm={6}>
               <Label className="ot-color">7. PROPOSITO DEL AVALÚO:</Label>
-              <Input type="text" defaultValue={proposito}  onChange={handleChange}>> </Input>
+              <Input type="text"name="proposito" defaultValue={proposito}  onChange={handleChange}>> </Input>
+              </Col>
+              <Col sm={6}>
+              <Label className="ot-color">Otro Propósito</Label>
+              <Input type="text" name="otroProp" defaultValue={otroProp}  onChange={handleChange}>> </Input>
               </Col>
               <Col sm={12}>
               <hr/>
@@ -176,35 +204,44 @@ class OrdenCreada extends React.Component {
              </Col>
              <Col sm={6}>
               <Label>Presentarse con:</Label>
-              <Input type="text"  defaultValue={presentarse}  onChange={handleChange}>></Input>
+              <Input type="text" name="presentarse" defaultValue={presentarse}  onChange={handleChange}>></Input>
               </Col>
              <Col sm={6}>
               <Label>Visitador</Label>
-              <Input type="text" defaultValue={visitador}  onChange={handleChange}>></Input>
+      
+              <Input type="select" name="visitador" defaultValue={visitador} onChange={handleChange} >
+              <option value={visitador}>{visitador}</option>
+                    {listaVisitador.map(item =>(
+
+                        <option value={item}>{item}</option>
+                    )
+                    )
+                    }
+               </Input>
               </Col>
               <Col sm={3}>
               <Label>Fecha</Label>
-              <Input type="text" defaultValue={fechaIns}  onChange={handleChange}>></Input>
+              <Input name="fechaIns" type="text" defaultValue={fechaIns}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={3}>
               <Label>Teléfono</Label>
-              <Input type="text" defaultValue={telInsp} onChange={handleChange}> ></Input>
+              <Input name="telInsp" type="text" defaultValue={telInsp} onChange={handleChange}> ></Input>
               </Col>
               <Col sm={2}>
               <Label>Exten</Label>
-              <Input type="text" defaultValue={extInsp} onChange={handleChange}>></Input>
+              <Input name="extInsp" type="text" defaultValue={extInsp} onChange={handleChange}>></Input>
               </Col>
               <Col sm={4}>
               <Label>Correo Electrónico</Label>
-              <Input type="text" defaultValue={emailInsp} onChange={handleChange}>></Input>
+              <Input name="emailInsp" type="text" defaultValue={emailInsp} onChange={handleChange}>></Input>
               </Col>
               <Col sm={7}>
               <Label>Dirección</Label>
-              <Input type="text" defaultValue={dirInsp} onChange={handleChange}>></Input>
+              <Input name="dirInsp" type="text" defaultValue={dirInsp} onChange={handleChange}>></Input>
               </Col>
               <Col sm={5}>
               <Label>Observaciones</Label>
-              <Input type="text" defaultValue={observaciones} onChange={handleChange}>></Input>
+              <Input name="observaciones" type="text" defaultValue={observaciones} onChange={handleChange}>></Input>
               </Col>
              
               <Col sm={12}>
@@ -213,30 +250,62 @@ class OrdenCreada extends React.Component {
              </Col>
              <Col sm={6}>
               <Label className="ot-color"> 9. BIENES A VALUAR</Label>
-              <Col sm={12}>
+              <FormGroup row >
+              <Col sm={6}>
               <Label>Bienes</Label>
-              <Input type="text" defaultValue={bienes}  onChange={handleChange}>></Input>
+              <Input name="bienes" type="text" defaultValue={bienes}  onChange={handleChange}>></Input>
               </Col>
+              <Col sm={6}>
+              <Label>Otro Bien</Label>
+              <Input name="OtroBien" type="text" defaultValue={otroBien}  onChange={handleChange}>></Input>
+              </Col>
+              </FormGroup>
               </Col>
              <Col sm={6}>
               <Label className="ot-color">10. FECHAS</Label>
               <FormGroup row >
                 <Col sm={6}>
                 <Label>Inicio</Label>
-              <Input type="text" defaultValue={inicio} onChange={handleChange}>></Input>
+              <Input name="inicio" type="date" defaultValue={inicio} onChange={handleChange}>></Input>
               </Col>
               <Col sm={6}>
                 <Label>Entrega</Label>
-              <Input type="text" defaultValue={entrega} onChange={handleChange}>></Input>
+              <Input name="entrega" type="text" defaultValue={entrega} onChange={handleChange}>></Input>
               </Col>
               </FormGroup>
               </Col>
               <Col sm={12}>
               <hr/>
              <h6 className="ot-color"> 11. INFORMACIÓN PROPORCIONADA</h6>
-             
-              <Input type="text.area"  ></Input>
-              </Col>
+            <FormGroup row>
+             <Col sm="4">
+             <Input  type="select" name="info" defaultValue={info} onChange={handleChange} >
+                  <option value="">{info}</option>
+                <option value="AVALÚO ANTERIOR">AVALÚO ANTERIOR</option>
+                <option value="BOLETA DE AGUA">BOLETA DE AGUA</option>
+                <option value="BOLETA PREDIAL">BOLETA PREDIAL</option>
+                <option value="CATÁLOGO DE ARRENDAMIENTO">CATÁLOGO DE ARRENDAMIENTO</option>
+                <option value="CATÁLOGO DE CUENTAS">CATÁLOGO DE CUENTAS</option>
+                <option value="CONTRATO DE COMPRA-VENTA">CONTRATO DE COMPRA-VENTA</option>
+                <option value="ESCRITURAS">ESCRITURAS</option>
+                <option value="FACTURA">FACTURA</option>   
+                <option value="FOLIO REAL">FOLIO REAL</option>
+                <option value="LISTADO CONTABLE">LISTADO CONTABLE</option>
+                <option value="LISTA DE ACTIVO FIJO">LISTA DE ACTIVO FIJO</option>
+                <option value="LISTA DE PROVEEDORES">LISTA DE PROVEEDORES</option>
+                <option value="OFICIO">OFICIO</option>
+                <option value="ORDEN DE COMPRA">ORDEN DE COMPRA</option>
+                <option value="PEDIMIENTO DE IMPORTACIÓN">PEDIMIENTO DE IMPORTACIÓN</option>
+                <option value="PLACAS O ETIQUETAS">PLACAS O ETIQUETAS</option>   
+             </Input>
+            </Col>
+            <Col sm={8}>
+              <Input type="text" name="otraInfo" defaultValue={otraInfo} onChange={handleChange}>></Input>
+            </Col>
+            </FormGroup>
+             </Col>
+            
+
               <Col sm={12}>
               <hr/>
              

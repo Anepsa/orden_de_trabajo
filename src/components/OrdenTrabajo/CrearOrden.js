@@ -16,10 +16,8 @@ class  OrdenTrabajo extends React.Component {
     
     imprimir(){
             const {closeModal} = this.context
+
             closeModal()
-            // .then(() =>{
-            //     window.print()
-            // })
             setTimeout(()=>{ window.print(); }, 100);
             
                
@@ -343,7 +341,7 @@ class  OrdenTrabajo extends React.Component {
                      <Col sm={6}>
                      <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
                     <Col>
-                    <Input  className="solicitante"  type="email" name="emailSolicitante"  placeholder={obtDataCliente.email} value={emailSolicitante} onChange={handleChange} required/> 
+                    <Input  className="solicitante"  type="email" name="emailSolicitante"  placeholder={obtDataCliente.email} value={emailSolicitante} onChange={handleChange} /> 
                     </Col>
                     </Col>
                 </FormGroup>
@@ -459,7 +457,7 @@ class  OrdenTrabajo extends React.Component {
                 <Col sm={3}>
                 <Label sm={12}>Fecha <span className="text-danger">*</span>  </Label>
                 <Col >
-                <Input type="date" name="fechaIns" value={fechaIns} required/>
+                <Input type="date" name="fechaIns" value={fechaIns}  onChange={handleChange}required/>
                 </Col>
                 </Col>
            
@@ -535,20 +533,21 @@ class  OrdenTrabajo extends React.Component {
             </FormGroup>
             </fieldset>
             <hr/>
+
             <fieldset className="fieldset">
             <legend className="ot-color">10. FECHAS <span className="text-danger">*</span> </legend>
             <FormGroup row>
                 <Col sm={6}>
                 <Label sm={10} >Inicio de Proyecto </Label>
                 <Col >
-                    <Input name="inicio" value={inicio} type="date" required/>
+                    <Input name="inicio" value={inicio} type="date" onChange={handleChange} required/>
                 </Col>
                 </Col>
               
                 <Col sm={6}>
                 <Label sm={12}>Entrega de Proyecto</Label>
                 <Col>
-                <Input name="entrega" value={entrega} type="date" required/>
+                <Input name="entrega" value={entrega} type="date" onChange={handleChange} required/>
                 </Col>
                 </Col>
             </FormGroup>
@@ -617,7 +616,7 @@ class  OrdenTrabajo extends React.Component {
                     <Col sm={2}>
                     <Label sm={11}className="ot-color">FACTURAR <span className="text-danger">*</span> </Label>
                     <Col>
-                    <Input name="facturar" value={facturar} type="select" required>
+                    <Input name="facturar" value={facturar} type="select" onChange={handleChange}required>
                         <option value="">-</option>
                         <option value="si">si</option>
                         <option value="no"> no</option>
@@ -1061,7 +1060,7 @@ class  OrdenTrabajo extends React.Component {
                     <Col sm={3}>
                     <Label sm={12}>Fecha <span className="text-danger">*</span>  </Label>
                     <Col >
-                    <Input type="date" required/>
+                    <Input type="date" name="fechaIns" value={fechaIns} onChange={handleChange} required/>
                     </Col>
                     </Col>
                
@@ -1143,14 +1142,14 @@ class  OrdenTrabajo extends React.Component {
                     <Col sm={6}>
                     <Label sm={10} >Inicio de Proyecto </Label>
                     <Col >
-                        <Input type="date" required/>
+                        <Input type="date" name="inicio" value={inicio} onChange={handleChange} required/>
                     </Col>
                     </Col>
                   
                     <Col sm={6}>
                     <Label sm={12}>Entrega de Proyecto</Label>
                     <Col>
-                    <Input type="date" required/>
+                    <Input type="date" name="entrega" value={entrega} onChange={handleChange} required/>
                     </Col>
                     </Col>
                 </FormGroup>
