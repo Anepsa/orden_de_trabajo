@@ -38,10 +38,10 @@ export const AppContext = React.createContext()
             nombresClientes:[],
             nombresEmpresas:[],
             estatusEmpresa:"", 
-          modalIsOpen:true,
+          // modalIsOpen:true,
              
            
-            clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",
+            clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",cargo:"", holding:"", servicios:"",area:"", venta:"", comentarios:"",
             visitadorNombre:"", rfcVisitador:"", direccionVisitador:"", delegacionVisitador:"", EDOVisitador:"", atencionVisitador:"", telvisitador:"", extTelVisitador:"",emailVisitador:"",
            
            
@@ -495,12 +495,15 @@ handleChangeOrden= (e)=>{
     const newid=  this.state.idItem
     console.log(newid)
     const estatus = this.state.estatus
+    const direccion = this.state.direccionCliente
+    const rfc = this.state.rfcCliente
     db.collection("clientes").where("clave", "==", newid )
     .get()
     .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
-            db.collection("clientes").doc(doc.id).update({ estatus: estatus });
+            db.collection("clientes").doc(doc.id).update({ estatus: estatus ,
+            direccion:direccion, rfc:rfc});
         });
    })
   }
@@ -518,21 +521,26 @@ handleChangeOrden= (e)=>{
    }
    
       db.collection("clientes").add({
-        
+        clave: claveUnica,
         nombre: this.state.clienteNombre,
         rfc: this.state.rfcCliente,      
         direccion: this.state.direccionCliente,
         delegacion: this.state.delegacionCliente,
         estado: this.state.EDOCliente,
-        atencion:this.state.atencionCliente,
+        // atencion:this.state.getName,
         telefono: this.state.telCliente,
-        clave: claveUnica,
+        extTel:this.state.extTelCliente,
         email:this.state.emailCliente,
-        contador:contador,
         empresa: this.state.empresa,
         vendedor:this.state.getName,
         estatus:this.state.estatus,
-        extTel:this.state.extTelCliente,
+        cargo: this.state.cargo,
+        holding: this.state.holding,
+        servicios: this.state.servicios,
+        area: this.state.area,
+        venta:this.state.venta,
+        comentarios:this.state.comentarios,
+        contador:contador,
         date: firebase.firestore.FieldValue.serverTimestamp(),
         dateToCompare: new Date().toLocaleDateString("zh-TW"),
         getNewDate: new Date().toLocaleString(),
@@ -985,16 +993,34 @@ db.collection("visitadores").orderBy("date", "desc")
      onClickItemCliente(e){
       
       
-      let newid=  e.target.id
+      let newid=  document.getElementById("clave").value
       console.log(newid)
  
        db.collection("clientes").where("clave", "==", newid)
        .get()
        .then(querySnapshot => {
          const data = querySnapshot.docs.map(doc => doc.data());
-             
-             console.log(data);
-             this.setState({ consultaCliente: data , modalIsOpen:true})
+         
+            
+             this.setState({ consultaCliente: data , modalIsOpen:true,
+              clienteNombre:data[0].nombre,
+              rfcCliente:data[0].rfc,
+               direccionCliente:data[0].direccion, 
+               delegacionCliente:data[0].delegacion, 
+               EDOCliente:data[0].estado,  
+               telCliente:data[0].telefono,
+               extTelCliente:data[0].extTel,
+               emailCliente:data[0].email,
+               empresa:data[0].empresa,
+               estatus:data[0].estatus,
+               cargo:data[0].cargo, 
+               holding:data[0].holding, 
+               servicios:data[0].servicios,
+               area:data[0].area, 
+               venta:data[0].venta, 
+               comentarios:data[0].comentarios,
+         
+            },()=>{console.log(this.state)})
              
          });
      
@@ -1004,21 +1030,36 @@ db.collection("visitadores").orderBy("date", "desc")
      }
      onClickItemUpdateCliente(e){
        
-       
-       let newid=  e.target.id
-       console.log(newid)
-        db.collection("clientes").where("clave", "==", newid)
-      .get()
-      .then(querySnapshot => {
-          const data = querySnapshot.docs.map(doc => doc.data());
-          const ven= data.vendedor
-          console.log(data
-           )
+      let newid=  document.getElementById("clave").value
+      console.log(newid)
+ 
+       db.collection("clientes").where("clave", "==", newid)
+       .get()
+       .then(querySnapshot => {
+         const data = querySnapshot.docs.map(doc => doc.data());
+         
+            
+             this.setState({ consultaCliente: data , modalIsOpen:true,
+              clienteNombre:data[0].nombre,
+              rfcCliente:data[0].rfc,
+               direccionCliente:data[0].direccion, 
+               delegacionCliente:data[0].delegacion, 
+               EDOCliente:data[0].estado,  
+               telCliente:data[0].telefono,
+               extTelCliente:data[0].extTel,
+               emailCliente:data[0].email,
+               empresa:data[0].empresa,
+               estatus:data[0].estatus,
+               cargo:data[0].cargo, 
+               holding:data[0].holding, 
+               servicios:data[0].servicios,
+               area:data[0].area, 
+               venta:data[0].venta, 
+               comentarios:data[0].comentarios,
+         
+            },()=>{console.log(this.state)})
              
-              this.setState({ idItem:newid, consultaCliente: data ,  vendedor:ven,  modalIsOpen:true})
-              
-          });
-      
+         });
          
             
   
@@ -1034,7 +1075,8 @@ db.collection("visitadores").orderBy("date", "desc")
         const {consultaCliente,newOrder, list,dataClientes, estatusEmpresa,items, listaVisitador, nombresEmpresas, dataVisitadores,
           // clienteNombre, rfcCliente, direccionCliente, delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",
           uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,
-          
+          clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
+           
         visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
           consulta,getName,
            user, dateNew,obtDataCliente, message, rol, montoVendido, comision, nombresClientes,presupuesto} = this.state;
@@ -1071,7 +1113,8 @@ db.collection("visitadores").orderBy("date", "desc")
           
           consultaCliente,
           uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,
-          
+          clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
+           
           obtDataCliente,
           estatusEmpresa,
           rol,

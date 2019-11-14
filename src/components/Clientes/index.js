@@ -156,9 +156,9 @@ class  ListadoClientes extends React.Component {
      
         <tr  className="list">
           <td></td>
-          <td className="text-center"><Button className="mr-1 " color="white" id={item.clave} onClick={onClickItemUpdateCliente}><EditOutlinedIcon id={item.clave} onClick={onClickItemUpdateCliente}/></Button>
-          <Button color="white" id={item.clave} onClick={onClickItemUpdateCliente}><FindInPageOutlinedIcon  id={item.clave} onClick={onClickItemUpdateCliente}/></Button></td>
-          <td>{item.clave}</td>
+          <td className="text-center"><Button className="mr-1 " color="white" value={item.clave} onClick={onClickItemCliente}><EditOutlinedIcon/></Button>
+              <Button color="white" id="clave" value={item.clave} onClick={onClickItemCliente}><FindInPageOutlinedIcon/></Button></td>
+               <td>{item.clave}</td>
           <td>{item.nombre}</td>
           <td>{item.empresa}</td>
           <td>{item.vendedor}</td>
@@ -246,8 +246,9 @@ class  ListadoClientes extends React.Component {
 
               <tr  className="list">
               <td></td>
-              <td className="text-center"><Button className="mr-1 " color="white" id={item.clave} onClick={onClickItemUpdateCliente}><EditOutlinedIcon id={item.clave} onClick={onClickItemUpdateCliente}/></Button>
-              <Button color="white" id={item.clave} onClick={onClickItemUpdateCliente}><FindInPageOutlinedIcon  id={item.clave} onClick={onClickItemUpdateCliente}/></Button></td>
+              <td className="text-center"><Button className="mr-1 " color="white" value={item.clave} onClick={onClickItemCliente}><EditOutlinedIcon/></Button>
+              <Button color="white" id="clave" value={item.clave} onClick={onClickItemCliente}><FindInPageOutlinedIcon/></Button></td>
+             
               <td>{item.clave}</td>
               <td>{item.nombre}</td>
 

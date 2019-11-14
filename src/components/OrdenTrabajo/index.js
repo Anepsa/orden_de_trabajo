@@ -4,13 +4,12 @@ import OrdenCreada from "./OrdenCreada"
 import EditarOrden from "./EditarOrden"
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
-
 import { Link } from 'react-router-dom';
 import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import db from "../../Fire.js";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink} from "react-csv";
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -80,11 +79,11 @@ class  ListaOrdenes extends React.Component {
       return (
        
         <div> 
-           <Link  className="text-white " to="/OrdenTrabajo"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>                 
+           <Link  className="text-white " to="/OrdenTrabajo"><Button className='mt-2 mb-2 mr-3 float-right' color="info">Crear</Button></Link>                 
                
-        <Button  color="white" className=" mt-2 mb-2 mr-3 float-right text-black" onClick={this.generatePDF}><i className="far fa-file-pdf"></i></Button> 
+        <Button  color="white" className=" mt-2 mb-2 mr-3 float-right text-black" onClick={this.generatePDF}><i className="far fa-file-pdf icono-pdf"></i></Button> 
          
-        <Button  color="white" className=" mt-2 mb-2 mr-3 float-right  text-black"><CSVLink className=""  data={items}><i className="far fa-file-excel"></i></CSVLink></Button> 
+        <Button  color="white" className=" mt-2 mb-2 mr-3 float-right  text-black"><CSVLink className=""  data={items}><i className="far fa-file-excel icono-excel"></i></CSVLink></Button> 
                     <Table>
                   <thead>
                 </thead>

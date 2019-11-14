@@ -55,7 +55,8 @@ handleLogout(){
 componentWillMount(){
   firebase.auth().onAuthStateChanged(user=>{
     this.setState({
-      user: user
+      user: user,
+      
     });
   });
 }

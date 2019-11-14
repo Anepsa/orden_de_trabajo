@@ -1,0 +1,25 @@
+[debug] [2019-11-14T16:53:46.830Z] ----------------------------------------------------------------------
+[debug] [2019-11-14T16:53:46.836Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\mrque\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2019-11-14T16:53:46.837Z] CLI Version:   7.7.0
+[debug] [2019-11-14T16:53:46.837Z] Platform:      win32
+[debug] [2019-11-14T16:53:46.837Z] Node Version:  v10.16.3
+[debug] [2019-11-14T16:53:46.839Z] Time:          Thu Nov 14 2019 10:53:46 GMT-0600 (GMT-06:00)
+[debug] [2019-11-14T16:53:46.839Z] ----------------------------------------------------------------------
+[debug] [2019-11-14T16:53:46.839Z] 
+[debug] [2019-11-14T16:53:46.856Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-11-14T16:53:46.857Z] > authorizing via signed-in user
+[debug] [2019-11-14T16:53:46.857Z] [iam] checking project anepsaordentrabajo for permissions ["firebase.projects.get"]
+[debug] [2019-11-14T16:53:46.860Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/anepsaordentrabajo:testIamPermissions  
+
+[debug] [2019-11-14T16:53:47.428Z] <<< HTTP RESPONSE 200
+[debug] [2019-11-14T16:53:47.433Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/anepsaordentrabajo  
+ 
+[debug] [2019-11-14T16:53:47.786Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\mrque\Desktop\AYBG\orden_de_trabajo'...
+[info] 
+[debug] [2019-11-14T16:53:47.791Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/anepsaordentrabajo/webApps/-/config  
+ 
+[debug] [2019-11-14T16:53:48.106Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: build
+[info] +  hosting: Local server: http://localhost:5000

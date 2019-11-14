@@ -173,6 +173,16 @@ a span {
     background-color: #0d0e0e8a;
     z-index:5;
 }
+.icono-excel{
+    font-size: 2vw;
+    color:green
+   
+}
+.icono-pdf{
+    font-size: 2vw;
+    color:red
+
+}
 
 @media(min-width: 680px){
 
