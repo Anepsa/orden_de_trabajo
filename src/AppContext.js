@@ -12,7 +12,7 @@ export const AppContext = React.createContext()
         //Datos que se obtienen de las respuestas del formulario
         this.state ={
             // dataOrden:[copia, oferta, cedido, ],
-            uge:"", vendedor:"", copia:"", oferta:"", cedido:"", proyecto:"", tipoCliente:"",  nombreSolicitante:"", empresaSolicitante:"", rfcSolicitante:"", direccionSolicitante:"", delegacionSolicitante:"", EDOSolicitante:"", telSolicitante:"", extTelSolicitante:"", emailSolicitante:"", objetivo:"", otroObj:"", proposito:"", otroProp:"", presentarse:"",visitador:"", fechaIns:"", telInsp:"", extInsp:"", emailInsp:"", dirInsp:"",  observaciones:"", bienes:"", otroBien:"", info:"", otraInfo:"", inicio:"", entrega:"",  facturar:"",
+            uge:"", vendedor:"", copia:"", oferta:"", cedido:"", proyecto:"", tipoCliente:"",  nombreSolicitante:"", empresaSolicitante:"", rfcSolicitante:"",holdingSolicitante:"",servicioSolicitante:"",ventaSolicitante:"", comentariosSolicitante:"",direccionSolicitante:"", delegacionSolicitante:"", EDOSolicitante:"", telSolicitante:"", extTelSolicitante:"", emailSolicitante:"", objetivo:"", otroObj:"", proposito:"", otroProp:"", presentarse:"",visitador:"", fechaIns:"", telInsp:"", extInsp:"", emailInsp:"", dirInsp:"",  observaciones:"", bienes:"", otroBien:"", info:"", otraInfo:"", inicio:"", entrega:"",  facturar:"",
             presupuesto: 0,
             comision:0,
             montoVendido:0,             
@@ -124,9 +124,27 @@ export const AppContext = React.createContext()
 
 
           })
+  
           
           
       });
+      db.collection("clientes").where("area", "==", ugeSelect)
+      .get()
+      .then(querySnapshot => {
+          const dataNom = querySnapshot.docs.map(doc => doc.data().nombre);
+          const dataEmp = querySnapshot.docs.map(doc => doc.data().empresa);
+        // console.log(data)
+              
+              this.setState({
+                nombresClientes:dataNom,
+                nombresEmpresas:dataEmp,
+    
+    
+              })
+      
+              
+              
+          });
 }
     handleEmpresa = (e) =>{
       e.preventDefault();
@@ -399,7 +417,7 @@ handleChangeOrden= (e)=>{
 } 
 
 
-    handleUpdate =(e) =>{
+    handleUpdate () {
 
                
     const newid=  this.state.idItem
@@ -449,7 +467,7 @@ handleChangeOrden= (e)=>{
         querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
             db.collection("orden").doc(doc.id).update({
-            
+             
               copia:copia, oferta:oferta, cedido:cedido,proyecto: proyecto, visitador:visitador, 
                 tipoCliente:tipoCliente,
                 nombreSolicitante: nombreSolicitante,
@@ -495,8 +513,11 @@ handleChangeOrden= (e)=>{
     const newid=  this.state.idItem
     console.log(newid)
     const estatus = this.state.estatus
+    console.log(estatus)
     const direccion = this.state.direccionCliente
+    console.log(direccion)
     const rfc = this.state.rfcCliente
+    console.log(rfc)
     db.collection("clientes").where("clave", "==", newid )
     .get()
     .then(function(querySnapshot) {
@@ -606,13 +627,19 @@ handleChangeOrden= (e)=>{
               } else { 
                  claveUnica = newDate + dateClave + ugeClave + contador
               }
- 
-         
+              const nombreVerificar = document.getElementById("nombreSolicitante").value
+              console.log(nombreVerificar)
+             if( nombreVerificar === ""){ 
           db.collection("orden").add({
           
             productClave: claveUnica,
             contador: contador,
             mes:dateClave,
+            // clienteNombre:this.state.clienteNombre, rfcCliente:this.state.rfcCliente, direccionCliente:this.state.direccionCliente, delegacionCliente:this.state.delegacionCliente, EDOCliente:this.state.EDOCliente, atencionCliente:this.state.atencionCliente, telCliente:this.state.telCliente, extTelCliente:this.state.extTelCliente,emailCliente:this.state.emailCliente
+            // ,empresa:this.state.empresa,estatus:this.state.estatus,cargo:this.state.cargo, holding:this.state.holdgin, servicios:this.state.servicios,area:this.state.area, venta:this.state.venta, comentarios:this.state.comentarios,
+          
+            
+    
             date: firebase.firestore.FieldValue.serverTimestamp(),
             dateToCompare: new Date().toLocaleDateString("zh-TW"),
             getNewDate: new Date().toLocaleString(),
@@ -625,14 +652,21 @@ handleChangeOrden= (e)=>{
             proyecto: this.state.proyecto,
             visitador: this.state.visitador,
             tipoCliente:this.state.tipoCliente,
-            nombreSolicitante: this.state.nombreSolicitante,
-            empresaSolicitante: this.state.empresaSolicitante,
-            rfcSolicitante:this.state.rfcSolicitante,
-            direccionSolicitante: this.state.direccionSolicitante,
-            delegacionSolicitante:this.state.delegacionSolicitante,
-            EDOSolicitante:this.state.EDOSolicitante,
-            telSolicitante:this.state.telSolicitante,
-            emailSolicitante: this.state.emailSolicitante,
+            nombreSolicitante: this.state.obtDataCliente.nombre,
+            empresaSolicitante: this.state.obtDataCliente.empresa,
+            cargoSolicitante: this.state.obtDataCliente.cargo,
+            areaSolicitante: this.state.obtDataCliente.area,
+            holdingSolicitante: this.state.obtDataCliente.holdingSolicitante,
+            servicioSolicitante: this.state.obtDataCliente.servicios,
+            ventaSolicitante: this.state.obtDataCliente.venta,
+            proveedorSolicitante:this.state.obtDataCliente.vendedor,
+            comentariosSolicitante: this.state.obtDataCliente.comentarios,
+            rfcSolicitante:this.state.obtDataCliente.rfc,
+            direccionSolicitante: this.state.obtDataCliente.direccion,
+            delegacionSolicitante:this.state.obtDataCliente.delegacion,
+            EDOSolicitante:this.state.obtDataCliente.estado,
+            telSolicitante:this.state.obtDataCliente.telefono,
+            emailSolicitante: this.state.obtDataCliente.email,
             objetivo:this.state.objetivo,
             otroObj:this.state.otroObj,
             proposito:this.state.proposito,
@@ -646,8 +680,8 @@ handleChangeOrden= (e)=>{
             observaciones:this.state.observaciones,
             bienes: this.state.bienes,
             otroBien: this.state.otroBien,
-           info:this.state.info ,
-           otrainfo: this.state.otraInfo,
+            info:this.state.info ,
+            otrainfo: this.state.otraInfo,
             inicio: this.state.inicio,
             entrega:this.state.entrega,
             facturar:this.state.facturar,
@@ -656,7 +690,69 @@ handleChangeOrden= (e)=>{
             montoVendido:this.state.montoVendido, 
 
 
+          })}else {
+            db.collection("orden").add({
+          
+              productClave: claveUnica,
+              contador: contador,
+              mes:dateClave,
+              // clienteNombre:this.state.clienteNombre, rfcCliente:this.state.rfcCliente, direccionCliente:this.state.direccionCliente, delegacionCliente:this.state.delegacionCliente, EDOCliente:this.state.EDOCliente, atencionCliente:this.state.atencionCliente, telCliente:this.state.telCliente, extTelCliente:this.state.extTelCliente,emailCliente:this.state.emailCliente
+              // ,empresa:this.state.empresa,estatus:this.state.estatus,cargo:this.state.cargo, holding:this.state.holdgin, servicios:this.state.servicios,area:this.state.area, venta:this.state.venta, comentarios:this.state.comentarios,
+            
+              
+      
+              date: firebase.firestore.FieldValue.serverTimestamp(),
+              dateToCompare: new Date().toLocaleDateString("zh-TW"),
+              getNewDate: new Date().toLocaleString(),
+              cliente: this.state.obtDataCliente,
+            
+              vendedor: this.state.vendedor,
+              uge: this.state.uge,      
+              copia:this.state.copia,
+              oferta:this.state.oferta,
+              cedido:this.state.cedido,
+              proyecto: this.state.proyecto,
+              visitador: this.state.visitador,
+              tipoCliente:this.state.tipoCliente,
+              nombreSolicitante: this.state.nombreSolicitante,
+              empresaSolicitante: this.state.empresaSolicitante,
+              rfcSolicitante:this.state.rfcSolicitante,
+              areaSolicitante: this.state.uge,
+              holdingSolicitante: this.state.holdingSolicitante,
+              servicioSolicitante: this.state.servicioSolicitante,
+              ventaSolicitante: this.state.ventaSolicitante,
+              proveedorSolicitante:this.state.obtDataCliente.vendedor,
+              comentariosSolicitante: this.state.comentariosSolicitante,
+              direccionSolicitante: this.state.direccionSolicitante,
+              delegacionSolicitante:this.state.delegacionSolicitante,
+              EDOSolicitante:this.state.EDOSolicitante,
+              telSolicitante:this.state.telSolicitante,
+              emailSolicitante: this.state.emailSolicitante,
+              objetivo:this.state.objetivo,
+              otroObj:this.state.otroObj,
+              proposito:this.state.proposito,
+              otroProp: this.state.otroProp,
+              presentarse: this.state.presentarse,
+              fechaIns: this.state.fechaIns,
+              telInsp: this.state.telInsp,
+              extInsp: this.state.extInsp,
+              emailInsp: this.state.emailInsp,
+              dirInsp: this.state.dirInsp,
+              observaciones:this.state.observaciones,
+              bienes: this.state.bienes,
+              otroBien: this.state.otroBien,
+              info:this.state.info ,
+              otrainfo: this.state.otraInfo,
+              inicio: this.state.inicio,
+              entrega:this.state.entrega,
+              facturar:this.state.facturar,
+              presupuesto: this.state.presupuesto,
+              comision:this.state.presupuesto,
+              montoVendido:this.state.montoVendido, 
+
           })
+      
+        }
          
           this.setState({
             modalIsOpen:true,
@@ -764,7 +860,7 @@ handleChangeOrden= (e)=>{
       .then(querySnapshot => {
         const data = querySnapshot.docs.map(doc => doc.data());
         console.log(data)
-        const newobj = data[0].contador
+        const newobj = data[0].contador 
        const newmes = data[0].mes
        console.log(newobj, newmes)
         this.setState({ items: data, getDate:newobj, mes:newmes });
@@ -826,27 +922,27 @@ db.collection("visitadores").orderBy("date", "desc")
               .then(querySnapshot => {
                 const dataClientes = querySnapshot.docs.map(doc =>  doc.data())
                   const news = dataClientes[0].contador
-                  const dataNombres = querySnapshot.docs.map(doc =>  doc.data().nombre)
-                 const dataEmpresa = querySnapshot.docs.map(doc =>  doc.data().empresa)
+                  // const dataNombres = querySnapshot.docs.map(doc =>  doc.data().nombre)
+                //  const dataEmpresa = querySnapshot.docs.map(doc =>  doc.data().empresa)
                   console.log(news)
-                  console.log(dataEmpresa)
-                this.setState({ dataClientes:dataClientes, nombresClientes:dataNombres, contClientes: news,  nombresEmpresas: dataEmpresa});
+                  // console.log(dataEmpresa)
+                this.setState({ dataClientes:dataClientes,  contClientes: news});
                 
               
               }, console.log(this.state.dataClientes));
 
-              db.collection("clientes").where("estatus", "==", "vendido")
-              .get()
-              .then(querySnapshot => {
+              // db.collection("clientes").where("estatus", "==", "vendido")
+              // .get()
+              // .then(querySnapshot => {
                   
-                  const dataNombres = querySnapshot.docs.map(doc =>  doc.data().nombre)
+              //     const dataNombres = querySnapshot.docs.map(doc =>  doc.data().nombre)
                  
-                  console.log(dataNombres)
+              //     console.log(dataNombres)
                   
-                this.setState({ nombresClientes:dataNombres});
+              //   this.setState({ nombresClientes:dataNombres});
                 
               
-              }, console.log(this.state.dataClientes));
+              // }, console.log(this.state.dataClientes));
     
     
             } else{
@@ -859,22 +955,22 @@ db.collection("visitadores").orderBy("date", "desc")
                const dataClientes =  querySnapshot.docs.map(doc => doc.data());
                const news = dataClientes[0].contador
           
-               const dataEmpresa = querySnapshot.docs.map(doc =>  doc.data().empresa)
-                console.log(dataEmpresa)
+              //  const dataEmpresa = querySnapshot.docs.map(doc =>  doc.data().empresa)
+                // console.log(dataEmpresa)
                
-                this.setState({  dataClientes:dataClientes, contClientes: news,  nombresEmpresas: dataEmpresa});
+                this.setState({  dataClientes:dataClientes, contClientes: news});
               });
 
-              db.collection("clientes").where("vendedor", "==", obtName).where("estatus","==","vendido")
-              .get()
-              .then(querySnapshot => { 
+              // db.collection("clientes").where("vendedor", "==", obtName).where("estatus","==","vendido")
+              // .get()
+              // .then(querySnapshot => { 
                
-               const dataNombres = querySnapshot.docs.map(doc =>  doc.data().nombre)
+              //  const dataNombres = querySnapshot.docs.map(doc =>  doc.data().nombre)
               
-                console.log(dataNombres)
+              //   console.log(dataNombres)
                
-                this.setState({ nombresClientes:dataNombres, });
-              });
+              //   this.setState({ nombresClientes:dataNombres, });
+              // });
           }
      }
 
@@ -929,7 +1025,7 @@ db.collection("visitadores").orderBy("date", "desc")
      }
      onClickItem(e){
        console.log(e.target)
-      let newid=  document.getElementById("clave").value
+       const newid=  e.target.value
       console.log(newid)
        db.collection("orden").where("productClave", "==", newid)
        .get()
@@ -1002,7 +1098,7 @@ db.collection("visitadores").orderBy("date", "desc")
          const data = querySnapshot.docs.map(doc => doc.data());
          
             
-             this.setState({ consultaCliente: data , modalIsOpen:true,
+             this.setState({ idItem: newid,consultaCliente: data , modalIsOpen:true,
               clienteNombre:data[0].nombre,
               rfcCliente:data[0].rfc,
                direccionCliente:data[0].direccion, 
@@ -1074,7 +1170,7 @@ db.collection("visitadores").orderBy("date", "desc")
     render() {
         const {consultaCliente,newOrder, list,dataClientes, estatusEmpresa,items, listaVisitador, nombresEmpresas, dataVisitadores,
           // clienteNombre, rfcCliente, direccionCliente, delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",
-          uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,
+          uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, holdingSolicitante,servicioSolicitante, ventaSolicitante, comentariosSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,
           clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
            
         visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
@@ -1112,7 +1208,7 @@ db.collection("visitadores").orderBy("date", "desc")
          visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
           
           consultaCliente,
-          uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,
+          uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,holdingSolicitante,servicioSolicitante, ventaSolicitante, comentariosSolicitante,
           clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
            
           obtDataCliente,

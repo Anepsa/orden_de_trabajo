@@ -161,7 +161,7 @@ class  DirectorioClientes extends React.Component {
         <Col sm={6}>
             <Label sm={12}>Dirección  </Label>
             <Col>
-            <Input  type="text" name="direccionCliente" value={direccionCliente} onChange={handleChange} /> 
+            <Input  type="text" name="direccionCliente" value={direccionCliente} onChange={handleChange} required/> 
             </Col>
             </Col> 
             <Col sm={3}>

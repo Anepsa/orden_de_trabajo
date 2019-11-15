@@ -167,7 +167,7 @@ class  ListaOrdenes extends React.Component {
         <tr key={index}  className="list">
           <td></td>
           <td className="text-center"><Button className="mr-1" color="white"><EditOutlinedIcon id={item.productClave} onClick={onClickItemUpdate} /></Button>
-          <Button color="white"  id="clave" value={item.productClave} onClick={onClickItem}><FindInPageOutlinedIcon  /></Button></td>
+          <Button color="white"  id="productClave" value={item.productClave} onClick={onClickItem}><FindInPageOutlinedIcon/></Button></td>
           <td>{item.productClave}</td>
           <td>{item.cliente.empresa}</td>
           <td>{item.vendedor}</td>
@@ -294,7 +294,7 @@ class  ListaOrdenes extends React.Component {
       <tr key={index} className="list">
         <td></td>
         <td className="text-center"><EditOutlinedIcon  id={item.productClave} onClick={onClickItemUpdate}/><FindInPageOutlinedIcon  id={item.productClave} onClick={onClickItem}/>
-        <Button color="white"  id="clave" value={item.productClave} onClick={onClickItem}><FindInPageOutlinedIcon  /></Button>
+        <Button color="white"  id="productClave" value={item.productClave} onClick={onClickItem}><FindInPageOutlinedIcon  /></Button>
         </td>
         <td>{item.productClave}</td>
         <td>{item.vendedor}</td>

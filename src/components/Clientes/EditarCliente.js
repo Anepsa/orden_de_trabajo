@@ -158,8 +158,8 @@ class EditarCliente extends React.Component {
         <Col sm={6}>
             <Label sm={12}>Dirección  </Label>
             <Col>
-            <Input  type="text"  name="direccionCliente" defaultValue={direccionCliente} onchange={handleChange} /> 
-            </Col>
+            <Input  type="text" name="direccionCliente" defaultValue={direccionCliente} onChange={handleChange}/> 
+           </Col>
             </Col> 
             <Col sm={3}>
             <Label sm={12}>Deleg/Municipio  </Label>

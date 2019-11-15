@@ -139,37 +139,37 @@ class OrdenCreada extends React.Component {
               
         ))
       } 
-              {/* <Col sm={12}>
-              <hr/> */}
-             {/* <h6 className="ot-color">5. SOLICITANTE DEL AVALÚO</h6>
+              <Col sm={12}>
+              <hr/> 
+              <h6 className="ot-color">5. SOLICITANTE DEL AVALÚO</h6>
              </Col>
              <Col sm={4}>
               <Label> Nombre Solicitante: </Label>
-              <Input  type="text"  defaultValue={nombreSolicitante}  onChange={handleChange}>></Input>
+              <Input  type="text"  name="nombreSolicitante" defaultValue={nombreSolicitante}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={4}>
               <Label> Empresa </Label>
-              <Input  type="text"  defaultValue={empresaSolicitante}  onChange={handleChange}> ></Input>
+              <Input  type="text"  name="empresaSolicitante" defaultValue={empresaSolicitante}  onChange={handleChange}> ></Input>
               </Col>
              <Col sm={4}>
               <Label>Dirección:</Label>
-              <Input type="text" defaultValue={direccionSolicitant}  onChange={handleChange}>></Input>
+              <Input type="text" name="direccionSolicitante" defaultValue={direccionSolicitante}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={4}>
               <Label> RFC </Label> 
-              <Input type="text"  defaultValue={rfcSolicitante}  onChange={handleChange}>></Input>
+              <Input type="text"  name="rfcSolicitante" defaultValue={rfcSolicitante}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={4}>
               <Label> Deleg/Municipio: </Label> 
-              <Input type="text" defaultValue={delegacion}  onChange={handleChange}>></Input>
+              <Input type="text" name="delegacionSolicitante" defaultValue={delegacionSolicitante}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={4}>
               <Label> Ciudad/Estado </Label> 
-              <Input type="text"  defaultValue = {EDOSolicitante} onChange={handleChange}> ></Input>
+              <Input type="text"  name="EDOSolicitante" defaultValue = {EDOSolicitante} onChange={handleChange}> ></Input>
               </Col>
               <Col sm={4}>
               <Label> Teléfono: </Label> 
-              <Input type="text" defaultValue={telSolicitante}  onChange={handleChange}>></Input>
+              <Input type="text" name="telSolicitante" defaultValue={telSolicitante}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={2}>
               <Label> Extension: </Label> 
@@ -177,11 +177,11 @@ class OrdenCreada extends React.Component {
               </Col>
               <Col sm={6}>
               <Label> Correo Electrónico: </Label> 
-              <Input type="text" defaultValue={emailSolicitante}  onChange={handleChange}>></Input>
+              <Input type="text" name="emailSolicitante" defaultValue={emailSolicitante}  onChange={handleChange}>></Input>
               </Col>
               <Col sm={12}><hr/></Col>
                
-            */}
+           
              <Col sm={6}>
               <Label className="ot-color"> 6. OBJETIVO DEL AVALÚO</Label>
               <Input type="text" name="objetivo" defaultValue={objetivo}  onChange={handleChange}>></Input>
