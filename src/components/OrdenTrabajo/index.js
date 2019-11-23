@@ -89,19 +89,19 @@ class  ListaOrdenes extends React.Component {
                 </thead>
                 <tbody>
           <tr  className="filtrar-style">
-            <th></th>
-            <th>Filtrar por</th>
-          <th>
+            
+            <th colspan="2">Filtrar por</th>
+          <th colspan="2">
             <Input type="text" name="buscador" placeholder="Clave" onChange={handleChangeOrden} >
             </Input>
             
           </th>
-          <th>
+          <th  colspan="2">
             <Input type="text" name="empresa" placeholder="Empresa" onChange={handleChangeOrden} >
             </Input>
             
           </th>
-          <th>
+          <th  colspan="2">
             <Input type="select" name="nombreVendedor" onChange={handleChangeOrden}>
                 <option value="">Vendedor</option>
                 <option value="Ameyalli Brito González">Ame</option>
@@ -113,9 +113,9 @@ class  ListaOrdenes extends React.Component {
                 
             </Input>
           </th>
-          <th>
+          <th >
              <Input type="select" name="tipoProyecto" onChange={handleChangeOrden}>
-                <option value="">Proyecto</option>
+                <option value="">UGE</option>
                
        
                 <option value="CIVIL">CIVIL</option>
@@ -127,15 +127,81 @@ class  ListaOrdenes extends React.Component {
                          <option value="CIVIL-FINANCIERA-INDUSTRIAL">CIVIL-FINANCIERA-INDUSTRIAL</option>
             </Input>
           </th>
+  
           <th>
           <Input type="date" name="fechaBuscador" onChange={handleChangeOrden} >
             Fecha
             </Input>
           </th>
          
+         
           <th><Button   color="warning text-white" onClick={this.deleteFilter}><RotateLeftIcon/> </Button></th>
         </tr>
-        <tr><th></th></tr>
+        <tr>
+          <th colspan="2"></th>
+        <th colspan="2">
+            <Input type="text" name="cliente" placeholder="Cliente" onChange={handleChangeOrden} >
+            </Input>
+            
+          </th>
+          <th colspan="2">
+            <Input type="select" name="bienes"  onChange={handleChangeOrden} >
+            <option value="">Bienes</option>
+                    <option value="CONSTRUCCIONES">CONSTRUCCIONES</option>
+                    <option value="DIVERSOS">DIVERSOS</option>
+                    <option value="EQUIPO DE CÓMPUTO">EQUIPO DE CÓMPUTO</option>
+                    <option value="HERRAMIENTAS">HERRAMIENTAS</option>
+                    <option value="INMUEBLES">INMUEBLES</option>
+                    <option value="INTANGIBLES">INTANGIBLES</option>
+                    <option value="JOYAS">JOYAS</option>
+                    <option value="MEJORAS">MEJORAS</option>
+                    <option value="MAQUINARIA Y EQUIPO">MAQUINARIA Y EQUIPO</option>
+                    <option value="MOLDES Y TROQUELES">MOLDES Y TROQUELES</option>
+                    <option value="MUEBLES Y ENSERES">MUEBLES Y ENSERES</option>
+                    <option value="OBRAS DE ARTE">OBRAS DE ARTE</option>
+                    <option value="TERRENO(S)">TERRENO(S)</option>
+                    <option value="TRACTOCAMIÓN">TRACTOCAMIÓN</option>
+                    <option value="VEHÍCULOS">VEHÍCULOS</option>
+
+            </Input>
+            
+          </th>
+          <th colspan="2">
+            <Input type="select" name="proyecto" placeholder="Proyecto" onChange={handleChangeOrden} >
+            <option value="">Proyecto</option>
+                    <option value="MICRO">MICRO</option>
+                    <option value="MECRO">MECRO</option>
+                    <option value="MACRO">MACRO</option>
+           
+            </Input>
+            
+          </th>
+          <th>
+            <Input type="select" name="proposito" placeholder="Proposito" onChange={handleChangeOrden} >
+            <option value="">Proposito</option>
+                <option value="ASEGURAR EL INMUEBLE">ASEGURAR EL INMUEBLE</option>
+                <option value="CRÉDITO HIPOTECARIO">CRÉDITO HIPOTECARIO</option>
+                <option value="DACIÓN DE PAGO">DACIÓN DE PAGO</option>
+                <option value="ESCRITURACIÓN">ESCRITURACIÓN</option>
+                <option value="GARANTÍA FISCAL">GARANTÍA FISCAL</option>
+                <option value="INTESTADO">INTESTADO</option>
+                <option value="JUSTIPRECIACION DE RENTAS">JUSTIPRECIACION DE RENTAS</option>
+                <option value="POSTURA DE COMPRA-VENTA">POSTURA DE COMPRA-VENTA</option>
+                <option value="REMATE">REMATE</option>
+                <option value="SUCESIÓN TESTAMENTARIA">SUCESIÓN TESTAMENTARIA</option>
+                <option value="TRASLADO DE DOMINIO">TRASLADO DE DOMINIO</option>
+                <option value="TOMA DE DECISIONES INTERNAS">TOMA DE DECISIONES INTERNAS</option>
+                <option value="OTRO PROPÓSITO">OTRO PROPÓSITO</option>
+                
+            
+            </Input>
+            
+          </th>
+          <th >
+           
+          </th>
+          
+         </tr>
 
         </tbody>
 
@@ -145,12 +211,17 @@ class  ListaOrdenes extends React.Component {
         <tr  className="tabla-style">
         
 
-          <th></th>
+         
           <th className="text-center"><FolderOpenIcon/></th>
           <th >Clave</th>
           <th>Empresa</th>
           <th>Vendedor</th>
+          <th>UGE</th>
+          <th>Cliente</th>
+          <th>Bienes</th>
           <th>Proyecto</th>
+          {/* <th>Tipo Cliente</th> */}
+          <th>Proposito</th>
           <th>Fecha</th>
          
           <th></th>
@@ -165,15 +236,21 @@ class  ListaOrdenes extends React.Component {
             
      
         <tr key={index}  className="list">
-          <td></td>
+         
           <td className="text-center"><Button className="mr-1" color="white"><EditOutlinedIcon id={item.productClave} onClick={onClickItemUpdate} /></Button>
           <Button color="white"  id="productClave" value={item.productClave} onClick={onClickItem}><FindInPageOutlinedIcon/></Button></td>
           <td>{item.productClave}</td>
           <td>{item.cliente.empresa}</td>
           <td>{item.vendedor}</td>
           <td>{item.uge}</td>
+          <td>{item.cliente.nombre}</td>
+          <td>{item.bienes  }</td>
+          <td>{item.proyecto}</td>
+          {/* <td>{item.tipoCliente}</td> */}
+          <td>{item.proposito}</td>
+          
           <td>{item.getNewDate}</td>
-          {/* <td>{item.estatus}</td> */}
+          
           <td><DeleteOutlineOutlinedIcon id={item.productClave} onClick={this.onDelete}/></td>
         </tr>
         

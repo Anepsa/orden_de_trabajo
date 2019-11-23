@@ -67,7 +67,7 @@ class  DirectorioClientes extends React.Component {
         </FormGroup>
         <FormGroup row>
         <Col sm={3}>
-                 <Label sm={12} >UGE <span className="text-danger">*</span>   </Label>
+                 <Label sm={12} >Área <span className="text-danger">*</span>   </Label>
                  <Col >
                      <Input type="select"  className="obligatorio" name="area" value={area} onChange={handleChange} required>
                         <option value="" selected>Selecciona</option>
@@ -89,6 +89,7 @@ class  DirectorioClientes extends React.Component {
                 <option value="Anepsa">Anepsa</option>
                 <option value="Syvaprec">Syvaprec</option>
                 <option value="SAAF">SAAF</option>
+                <option value="otro">otro</option>
                                     
             </Input> 
             </Col>
@@ -129,10 +130,10 @@ class  DirectorioClientes extends React.Component {
             <Col >
                 <Input  type="select" name="venta" value={venta} onChange={handleChange} >
                 <option value="">Selecciona</option>
-                <option value="PROPIO">PROPIO</option>
-                <option value="CEDIDO">CEDIDO</option>
-                <option value="MARKETING DIGITAL">MARKETING DIGITAL</option>
-                <option value="ASOCIADO">ASOCIADO</option>
+                <option value="MARKETING">MARKETING</option>
+                <option value="REFERIDO">REFERIDO</option>
+                <option value="CEDIDO ">CEDIDO</option>
+                <option value="EXTERNO">EXTERNO</option>
                 
                 </Input>
             </Col>
@@ -143,14 +144,14 @@ class  DirectorioClientes extends React.Component {
            <Col sm={4}>
              <Label  sm={12}>Proveedor de Servicio</Label>
             <Col sm={12}>
-                <Input  type="text" name="atencion" value={getName} /> </Col>
+                <Input  type="text" name="atencion" value={getName} readOnly/> </Col>
              </Col>
           
 
            <Col sm={8}>
             <Label sm={12}>Comentarios Presupuesto y Servicio<span className="text-danger">*</span>   </Label>
             <Col>
-            <Input  type="text" name="comentarios" value={comentarios} onChange={handleChange} required/> 
+            <Input  type="textarea" name="comentarios" value={comentarios} onChange={handleChange} required/> 
             </Col>
             </Col>
             

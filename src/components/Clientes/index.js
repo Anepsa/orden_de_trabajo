@@ -77,24 +77,25 @@ class  ListadoClientes extends React.Component {
                 </thead>
                 <tbody>
           <tr  className="filtrar-style">
-            <th></th>
-            <th>Filtrar por</th>
-          <th>
+            
+            <th  colspan="2">Filtrar por</th>
+            
+          <th  colspan="2">
             <Input type="text" name="buscadorClave" onChange={handleChangeCliente} placeholder="Clave" >
             </Input>
             
           </th>
        
-          <th>
+          <th  colspan="2">
           <Input type="text" name="buscadorNombre" onChange={handleChangeCliente}  placeholder="Cliente" >
             </Input>
           </th>
-          <th>
+          <th  colspan="2">
             <Input type="text" name="buscadorEmpresa" onChange={handleChangeCliente} placeholder="Empresa" >
             </Input>
             
           </th>
-          <th>
+          <th colspan="2" >
             <Input type="select" name="nombreVendedor" onChange={handleChangeCliente} >
                 <option value="">Vendedor</option>
                 <option value="Ameyalli Brito González">Ame</option>
@@ -107,12 +108,6 @@ class  ListadoClientes extends React.Component {
             </Input>
           </th>
          
-       
-          <th>
-          <Input type="date" name="fechaCliente" onChange={handleChangeCliente} >
-            Fecha
-            </Input>
-          </th>
           <th>
              <Input type="select" name="estatus" onChange={handleChangeCliente} >
                 <option value="" >Estatus</option>
@@ -126,7 +121,67 @@ class  ListadoClientes extends React.Component {
           </th>
           <th><Button   color="warning text-white" onClick={this.deleteFilter}><RotateLeftIcon/> </Button></th>
         </tr>
-        <tr><th></th></tr>
+        <tr>
+        <th colspan="2"></th>
+        <th  colspan="2"><Input type="select"  name="area" onChange={handleChangeCliente} >
+                        <option value="" selected>Area</option>
+                        <option value="CIVIL">CIVIL</option>
+                         <option value="FINANCIERA">FINANCIERA</option>
+                         <option value="INDUSTRIAL">INDUSTRIAL</option>
+                         <option value="CIVIL-INDUSTRIAL">CIVIL-INDUSTRIAL</option>
+                         <option value="CIVIL-FINANCIERA">CIVIL-FINANCIERA</option>
+                         <option value="FINANCIERA-INDUSTRIAL">FINANCIERA-INDUSTRIAL</option>
+                         <option value="CIVIL-FINANCIERA-INDUSTRIAL">CIVIL-FINANCIERA-INDUSTRIAL</option>
+            </Input>
+            </th>
+          <th colspan="2">
+          <Input  type="select" name="holding" onChange={handleChangeCliente} >
+                <option value="">Holding</option>
+                <option value="Anepsa">Anepsa</option>
+                <option value="Syvaprec">Syvaprec</option>
+                <option value="SAAF">SAAF</option>
+                <option value="otro">otro</option>
+                                    
+            </Input> 
+            </th>
+          <th colspan="2"><Input type="text" name="cargo" onChange={handleChangeCliente}  placeholder="Cargo Empresa" >
+            </Input></th>
+          <th colspan="2">
+          <Input  type="select" name="servicios" onChange={handleChangeCliente} >
+                <option value="">Servicio</option>
+                    <option value="AVALÚO BANCARIO">AVALÚO BANCARIO</option>
+                    <option value="AVALÚO CATASTRAL">AVALÚO CATASTRAL</option>
+                    <option value="AVALÚO COMERCIAL">AVALÚO COMERCIAL</option>
+                    <option value="AVALÚO INDUSTRIAL COMERCIAL">AVALÚO INDUSTRIAL COMERCIAL</option>
+                    <option value="AVALÚO INDUSTRIAL VALOR RAZONABLE">AVALÚO INDUSTRIAL VALOR RAZONABLE</option>
+                    <option value="AVALÚO INDUSTRIAL VRN">AVALÚO INDUSTRIAL VRN</option>
+                    <option value="AVALÚO SEGUROS">AVALÚO SEGUROS</option>
+                    <option value="AVALÚO SHF">AVALÚO SHF</option>
+                    <option value="CAF">CAF</option>
+                    <option value="CAPACITACIÓN">CAPACITACIÓN</option>
+                    <option value="C6">C6</option>
+                    <option value="C15">C15</option>
+                    <option value="INVENTARIO  ACTIVO FIJO">INVENTARIO  ACTIVO FIJO</option>
+                    <option value="INVENTARIO DE CIRCULANTE">INVENTARIO DE CIRCULANTE</option>
+                    <option value="MARCA">MARCA</option>
+                    <option value="NEGOCIO EN MARCHA">NEGOCIO EN MARCHA</option>
+                    <option value="NORMA INTERNACIONAL">NORMA INTERNACIONAL</option>
+                    <option value="NEGOCIACIÓN">NEGOCIACIÓN</option>
+                    <option value="SAAF">SAAF</option>
+                    <option value="PLACAS">PLACAS</option>
+                    <option value="OTRO OBJETIVO">OTRO OBJETIVO</option>
+
+                </Input> 
+            
+            </th>
+            <th>
+          <Input type="date" name="fechaCliente" onChange={handleChangeCliente} >
+            Fecha
+            </Input>
+          </th>
+          
+          
+          </tr>
         
         </tbody>
  
@@ -135,14 +190,19 @@ class  ListadoClientes extends React.Component {
         <tr  className="tabla-style">
         
 
-          <th></th>
+          
           <th className="text-center"><FolderOpenIcon/></th>
           <th >Clave</th>
           <th>Cliente</th>
           <th>Empresa</th>
           <th>Vendedor</th>
-          <th>Fecha</th>
+          <th>Cargo Empresa</th>
+          <th>Area</th>
+          <th>Holding</th>
+          <th>Servicio</th>
           <th>Estatus</th>
+          <th>Fecha</th>
+          
           <th></th>
           
         </tr>
@@ -155,15 +215,19 @@ class  ListadoClientes extends React.Component {
             
      
         <tr  className="list">
-          <td></td>
+         
           <td className="text-center"><Button className="mr-1 " color="white" value={item.clave} onClick={onClickItemCliente}><EditOutlinedIcon/></Button>
               <Button color="white" id="clave" value={item.clave} onClick={onClickItemCliente}><FindInPageOutlinedIcon/></Button></td>
-               <td>{item.clave}</td>
+          <td>{item.clave}</td>
           <td>{item.nombre}</td>
           <td>{item.empresa}</td>
           <td>{item.vendedor}</td>
-          <td>{item.getNewDate}</td>
+          <td>{item.cargo}</td>
+          <td>{item.area}</td>
+          <td>{item.holding}</td>
+          <td>{item.servicios}</td>
           <td>{item.estatus}</td>
+          <td>{item.getNewDate}</td>
           
           <td><Button color="white"><DeleteOutlineOutlinedIcon  id={item.clave} onClick={this.onDelete}/></Button></td>
         </tr>

@@ -8,7 +8,7 @@ class EditarCliente extends React.Component {
 
     render() {
         const{ consultaCliente,closeModal, modalIsOpen,  handleUpdateCliente,  handleChange, getName,
-            clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
+            clienteNombre, rfcCliente, direccionCliente, dateToCompare, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
            
         }=this.context
  
@@ -64,7 +64,7 @@ class EditarCliente extends React.Component {
         </FormGroup>
         <FormGroup row>
         <Col sm={3}>
-                 <Label sm={12} >UGE <span className="text-danger">*</span>   </Label>
+                 <Label sm={12} >Area<span className="text-danger">*</span>   </Label>
                  <Col >
                      <Input type="select"  className="obligatorio" name="area" value={area} readOnly>
                         <option value="" selected>Selecciona</option>
@@ -142,9 +142,14 @@ class EditarCliente extends React.Component {
             <Col sm={12}>
                 <Input  type="text" name="atencion" value={getName}  readOnly/> </Col>
              </Col>
+             <Col sm={2}>
+             <Label  sm={12}>Fecha</Label>
+            <Col sm={12}>
+                <Input  type="text" name="atencion" value={dateToCompare}  readOnly/> </Col>
+             </Col>
           
 
-           <Col sm={8}>
+           <Col sm={6}>
             <Label sm={12}>Comentarios Presupuesto y Servicio<span className="text-danger">*</span>   </Label>
             <Col>
             <Input  type="text" name="comentarios" value={comentarios} readOnly/> 
