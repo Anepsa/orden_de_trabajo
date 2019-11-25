@@ -1,8 +1,14 @@
 .ot-color{
     color:#6161c1;
-    margin: 20px;
+    /* margin: 20px; */
     width: auto;
     font-size:1.1vw;
+}
+.color-gray{
+    color:gray;
+    font-size:1.1vw;
+    width: auto;
+
 }
 .ot-center{
     text-align: center;
@@ -26,6 +32,12 @@
     position: relative;
 
 
+}
+.col-form-label {
+    font-size: 1vw !important;
+}
+.form-control{
+    font-size:1vw !important;
 }
 a span {
     height: 1px;
@@ -183,6 +195,9 @@ a span {
     color:red
 
 }
+.ocultar{
+    display:none;
+}
 
 @media(min-width: 680px){
 
@@ -192,6 +207,8 @@ a span {
     
     
 }
+
+
 
 
 
@@ -230,18 +247,47 @@ a span {
     padding-bottom: 5%;
     
     }
+    .col-sm-2 {
+    padding:0 !important;
+    }
+    .col-sm-3 {
+        padding:0 !important;
+        }
+    .col-sm-1 {
+            padding:0 !important;
+     }
 
+    .col-sm-5{
+        padding:0 !important;
+    }
+    .col-sm-4{
+        padding:0 !important;
+    }
+    .col-sm-9{
+        padding:0 !important;
+    }
+    
+    fieldset{
+    padding-left: 2% !important;
+    padding-right: 2% !important;
+    }
+    
     .center-box{
-        margin-left: 4%;
-        margin-right: 4%;
+        /* margin-left: 4%;
+        margin-right: 4%; */
         
 
-        padding-top:2%;
+        padding-top:1%;
+        padding-bottom: 0% !important;
         border-width: thin;
         border-color: gray;
 
         
 
+    }
+    .form-ocultar{
+        margin-bottom:0%!important;
+        
     }
     .flex-direction-row{
         display: flex;
@@ -268,10 +314,10 @@ a span {
         margin-left: 42.5%;
         width: 15%;
     }
-    .div-form{
+    /* .div-form{
         padding-top: 3%;
         background: linear-gradient(to bottom, #e9f4ff 0%, #dde3f3 7%, #cdcde2 19%, #b8b5d0 31%, #ceccda 44%, #c3d1d8 55%, #cad9e0 67%, #e7e6ea 77%, #c3bde4 89%, #ccd3dc 100%)
-    }
+    } */
     .style-form{
         
         background: white;
