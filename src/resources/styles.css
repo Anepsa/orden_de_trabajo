@@ -28,7 +28,7 @@
 .center-box{
     display: flex;
     flex-direction: column;
-    padding: 5%;
+    padding: 4%;
     position: relative;
 
 
@@ -314,10 +314,17 @@ a span {
         margin-left: 42.5%;
         width: 15%;
     }
-    /* .div-form{
+    .div-form{
         padding-top: 3%;
+        padding-left:3%;
+        padding-right:3%;
         background: linear-gradient(to bottom, #e9f4ff 0%, #dde3f3 7%, #cdcde2 19%, #b8b5d0 31%, #ceccda 44%, #c3d1d8 55%, #cad9e0 67%, #e7e6ea 77%, #c3bde4 89%, #ccd3dc 100%)
-    } */
+    }
+    .div-form-ocultar{
+        padding-top: 0%;
+        padding-left:0%;
+        padding-right: 0%;
+        }
     .style-form{
         
         background: white;

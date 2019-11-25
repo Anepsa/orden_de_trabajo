@@ -30,6 +30,9 @@ class  OrdenTrabajo extends React.Component {
            
             ocultarFormato.className += "form-ocultar";
 
+            var ocultarColor = document.getElementById("OrdenCreada");
+           
+            ocultarColor.className += " div-form-ocultar";
 
             setTimeout(()=>{ 
                
@@ -40,6 +43,7 @@ class  OrdenTrabajo extends React.Component {
               ;
                 elemento.classList.remove('ocultar');
                 ocultarBoton.classList.remove('ocultar')
+                ocultarColor.classList.remove('div-form-ocultar')
             
             }, 100);
           
@@ -76,7 +80,7 @@ class  OrdenTrabajo extends React.Component {
     if(rol === "admin"){
     return ( 
         //Ceacion formulario
-        <div id="OrdenCreada"className="div-form imprimir">
+        <div id="OrdenCreada" className="div-form imprimir">
             
             <Form  className="center-box style-form" id="formClear" onSubmit={handleSubmit}>
            
