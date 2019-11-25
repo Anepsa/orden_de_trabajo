@@ -22,15 +22,15 @@ class  OrdenTrabajo extends React.Component {
             console.log(elemento)
             elemento.className += " ocultar";
             
-            var ocultarBoton = document.getElementById("ocultarEnviar");
+            const ocultarBoton = document.getElementById("ocultarEnviar");
           
             ocultarBoton.className += " ocultar";
 
-            var ocultarFormato = document.getElementById("formOcultar");
+            const ocultarFormato = document.getElementById("formOcultar");
            
             ocultarFormato.className += "form-ocultar";
 
-            var ocultarColor = document.getElementById("OrdenCreada");
+            const ocultarColor = document.getElementById("OrdenCreada");
            
             ocultarColor.className += " div-form-ocultar";
 
