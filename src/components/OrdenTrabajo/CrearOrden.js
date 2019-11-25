@@ -43,6 +43,7 @@ class  OrdenTrabajo extends React.Component {
               ;
                 elemento.classList.remove('ocultar');
                 ocultarBoton.classList.remove('ocultar')
+                ocultarFormato.classList.remove('form-ocultar')
                 ocultarColor.classList.remove('div-form-ocultar')
             
             }, 100);
