@@ -38,7 +38,7 @@ export const AppContext = React.createContext()
             nombresClientes:[],
             nombresEmpresas:[],
             estatusEmpresa:"", 
-          modalIsOpen:true,
+          // modalIsOpen:true,
              
            
             clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", dateToCompare:"",telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",cargo:"", holding:"", servicios:"",area:"", venta:"", comentarios:"",
