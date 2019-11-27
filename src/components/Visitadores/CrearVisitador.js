@@ -26,7 +26,7 @@ class  Visitadores extends React.Component {
     render(){
        
         
-        const {modalIsOpen, closeModal,handleChange, handleSubmitVisitador, visitadorNombre,handleClick, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencion, telVisitador, extTel,emailVisitador } = this.context
+        const {modalIsOpen, crearNuevo,closeModal,handleChange, handleSubmitVisitador, visitadorNombre,handleClick, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencion, telVisitador, extTel,emailVisitador } = this.context
     return(
         <div className="div-form">
              
@@ -147,7 +147,7 @@ class  Visitadores extends React.Component {
               <h5 className="text-info text-center">Visitador Creado</h5>
               <hr/> 
               <Button color="info" ><Link to="./Visitadores" className="text-white" onClick={closeModal}> Ver Lista </Link></Button>
-              <Button color="info" className="float-right" onClick={this.crearNuevo}>Crear Nuevo</Button>
+              <Button color="info" className="float-right" onClick={crearNuevo}>Crear Nuevo</Button>
              </div>
              </Modal>
        </Form>

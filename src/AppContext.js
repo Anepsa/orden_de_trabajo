@@ -23,6 +23,7 @@ export const AppContext = React.createContext()
             mes: [],
             getDate:[],
             consulta:[],
+            nuevaClave:"",
             consultaCliente:[],
             obtDataCliente:[],
             obtDataEmpresa:[],
@@ -38,9 +39,9 @@ export const AppContext = React.createContext()
             nombresClientes:[],
             nombresEmpresas:[],
             estatusEmpresa:"", 
-          // modalIsOpen:true,
+          modalIsOpen:true,
              
-           
+           getNewDate:"",
             clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", dateToCompare:"",telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",cargo:"", holding:"", servicios:"",area:"", venta:"", comentarios:"",
             visitadorNombre:"", rfcVisitador:"", direccionVisitador:"", delegacionVisitador:"", EDOVisitador:"", atencionVisitador:"", telvisitador:"", extTelVisitador:"",emailVisitador:"",
            
@@ -58,7 +59,8 @@ export const AppContext = React.createContext()
     this.onClickItemUpdateCliente =this.onClickItemUpdateCliente.bind(this)
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-
+    
+    this.crearNuevo = this.crearNuevo.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.obtenerBD = this.obtenerBD.bind(this);
@@ -82,7 +84,7 @@ export const AppContext = React.createContext()
    
         
         this.setState({ 
-            [e.target.name]:e.target.value
+            [e.target.name]:e.target.value.toUpperCase()
         },()=>{console.log(this.state)
           const montoVendido= parseInt(this.state.presupuesto) + parseInt(this.state.comision)
           this.setState({
@@ -97,6 +99,7 @@ export const AppContext = React.createContext()
     } 
     handleClick = (e) =>{
       const list = this.state.ugeList
+      console.log(list)
      const value=  e.target.value;
      const newvalue = [value, ...list]
       
@@ -156,7 +159,7 @@ export const AppContext = React.createContext()
     if(empresa === ""){
       this.setState({
         obtDataCliente:[],
-      })  
+      },console.log(this.state.obtDataCliente))  
       
     }else{
       db.collection("clientes").where("nombre", "==", empresa )
@@ -177,14 +180,12 @@ handleCliente = (e) =>{
       console.log(cliente)
       this.setState({ 
       estatusEmpresa: cliente,
-    
     })
     if(cliente === ""){
       this.setState({
         obtDataCliente:[],
       })  
     }else{
-
       db.collection("clientes").where("empresa", "==", cliente )
       .get()
       .then(querySnapshot => {
@@ -728,9 +729,10 @@ handleChangeOrden= (e)=>{
   }
     //Validacion del for=mulario
     handleSubmit = (e)  => {
+      
         
         e.preventDefault();
-           
+
             let obtDate=  new Date().toLocaleDateString("zh-TW");   
             const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
             const dateClave = obtDate.slice(5,7).replace("/","")
@@ -752,6 +754,7 @@ handleChangeOrden= (e)=>{
               }
               const nombreVerificar = document.getElementById("nombreSolicitante").value
               console.log(nombreVerificar)
+              
              if( nombreVerificar === ""){ 
           db.collection("orden").add({
           
@@ -787,7 +790,7 @@ handleChangeOrden= (e)=>{
             EDOSolicitante:this.state.obtDataCliente.estado,
             telSolicitante:this.state.obtDataCliente.telefono,
             emailSolicitante: this.state.obtDataCliente.email,
-            objetivo:this.state.objetivo,
+            objetivo:this.state.obtDataCliente.servicios,
             otroObj:this.state.otroObj,
             proposito:this.state.proposito,
             otroProp: this.state.otroProp,
@@ -845,7 +848,7 @@ handleChangeOrden= (e)=>{
               EDOSolicitante:this.state.EDOSolicitante,
               telSolicitante:this.state.telSolicitante,
               emailSolicitante: this.state.emailSolicitante,
-              objetivo:this.state.objetivo,
+              objetivo:this.state.obtDataCliente.servicios,
               otroObj:this.state.otroObj,
               proposito:this.state.proposito,
               otroProp: this.state.otroProp,
@@ -874,6 +877,7 @@ handleChangeOrden= (e)=>{
           this.setState({
             modalIsOpen:true,
             newcontador: contador,
+            nuevaClave: claveUnica,
            
             
 
@@ -908,7 +912,7 @@ handleChangeOrden= (e)=>{
         EDOSolicitante:this.state.EDOSolicitante,
         telSolicitante:this.state.telSolicitante,
         emailSolicitante: this.state.emailSolicitante,
-        objetivo:this.state.objetivo,
+        objetivo:this.state.obtDataCliente.servicios,
         otroObj:this.state.otroObj,
         proposito:this.state.proposito,
         otroProp: this.state.otroProp,
@@ -932,20 +936,39 @@ handleChangeOrden= (e)=>{
 
       
      })
-    this.setState({
-      vendedor:"",
-      uge:"",
-      fecha:"",
-
-      productClave:"",
-      newcontador: contador,
+  
    
      
 
-      }, () => {console.log(this.state.mes)})
     }
+    // document.getElementById("clienteSelect").value = ""
+       
+  
+
   }
 
+  crearNuevo = () => 
+  {
+   
+      this.setState({
+        obtDataCliente:[],
+        nombresClientes:[],
+        nombresEmpresas:[],
+        montoVendido:"",
+        nuevaClave:"",
+       
+        presupuesto: "",
+              comision:"",
+        uge:"", vendedor:"", copia:"", oferta:"", cedido:"", proyecto:"", tipoCliente:"",  nombreSolicitante:"", empresaSolicitante:"", rfcSolicitante:"",holdingSolicitante:"",servicioSolicitante:"",ventaSolicitante:"", comentariosSolicitante:"",direccionSolicitante:"", delegacionSolicitante:"", EDOSolicitante:"", telSolicitante:"", extTelSolicitante:"", emailSolicitante:"", objetivo:"", otroObj:"", proposito:"", otroProp:"", presentarse:"",visitador:"", fechaIns:"", telInsp:"", extInsp:"", emailInsp:"", dirInsp:"",  observaciones:"", bienes:"", otroBien:"", info:"", otraInfo:"", inicio:"", entrega:"",  facturar:"",
+        modalIsOpen:false, 
+        clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", dateToCompare:"",telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",cargo:"", holding:"", servicios:"",area:"", venta:"", comentarios:"",
+        visitadorNombre:"", rfcVisitador:"", direccionVisitador:"", delegacionVisitador:"", EDOVisitador:"", atencionVisitador:"", telvisitador:"", extTelVisitador:"",emailVisitador:"",
+
+
+    })
+    
+  
+  }
 
   obtenerUser= ()=>{
     const usuario = this.state.user
@@ -1163,6 +1186,7 @@ db.collection("visitadores").orderBy("date", "desc")
               oferta:data[0].oferta, 
               cedido:data[0].cedido, 
               proyecto:data[0].proyecto,
+              tipoCliente:data[0].tipoCliente,
               nombreSolicitante:data[0].nombreSolicitante,
               empresaSolicitante:data[0].empresaSolicitante,
               direccionSolicitante:data[0].direccionSolicitante,
@@ -1292,8 +1316,8 @@ db.collection("visitadores").orderBy("date", "desc")
           clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
            
         visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
-          consulta,getName,
-           user, dateNew,obtDataCliente, message, rol, montoVendido, comision, nombresClientes,presupuesto, 
+          consulta,getName, getNewDate,
+           user, dateNew,obtDataCliente, nuevaClave, message, rol, montoVendido, comision, nombresClientes,presupuesto, 
           dateToCompare} = this.state;
       return (
         <AppContext.Provider
@@ -1325,8 +1349,9 @@ db.collection("visitadores").orderBy("date", "desc")
           onClickItemCliente:this.onClickItemCliente,
           onClickItemUpdateCliente: this.onClickItemUpdateCliente,
          visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
-          
+          crearNuevo: this.crearNuevo,
           consultaCliente,
+          getNewDate,
           uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,holdingSolicitante,servicioSolicitante, ventaSolicitante, comentariosSolicitante,
           clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
            dateToCompare,
@@ -1349,7 +1374,7 @@ db.collection("visitadores").orderBy("date", "desc")
           presupuesto,
           listaVisitador,
           dataVisitadores,
-         
+          nuevaClave,
 
         }}
         >

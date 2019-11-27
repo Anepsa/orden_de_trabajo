@@ -14,7 +14,7 @@ class OrdenCreada extends React.Component {
     render() {
     
         const{getNewDate,  dataClientes,listaVisitador, comision, presupuesto, montoVendido, uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,
-           
+           productClave,
           closeModal, modalIsOpen,  consulta, handleUpdate,  handleChange, }=this.context
                
         return (
@@ -35,7 +35,7 @@ class OrdenCreada extends React.Component {
                   <FormGroup row>
                     <Col sm={4}>
               <Label> Clave: </Label>
-              <Input type="text"  defaultValue={uge} readOnly></Input>
+              <Input type="text"  defaultValue={productClave} readOnly></Input>
               </Col>
              <Col sm={8}>
                
@@ -48,7 +48,7 @@ class OrdenCreada extends React.Component {
               </Col>
               <Col sm={4}>
               <Label> FECHA OT: </Label> 
-              <Input name="dateNew" type="text" value={getNewDate} readOnly></Input>
+              <Input name="getNewDate" type="text" value={getNewDate} readOnly></Input>
               </Col>
               
               <Col sm={4}>
@@ -80,7 +80,7 @@ class OrdenCreada extends React.Component {
                   <Input name="cedido" type="text"  defaultValue={cedido}  onChange={handleChange}></Input> 
                  
              </Col>
-             <Col sm={3}>
+             <Col sm={3}> 
               <Label   className="ot-color label-input">2. TIPO DE PROYECTO </Label>
               
                   <Input   name="proyecto" type="text" defaultValue={proyecto}  onChange={handleChange}></Input>

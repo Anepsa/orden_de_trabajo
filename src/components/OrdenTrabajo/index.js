@@ -74,12 +74,12 @@ class  ListaOrdenes extends React.Component {
 
   render () {
    
-    const{items, rol, handleUpdate, handleChangeOrden, onClickItem,onClickItemUpdate, getName, handleChangeFound ,   handleChangeDate, handleChangeSelect, handleChangeSeller, handleChangeProject}=this.context
+    const{items, rol, handleUpdate,crearNuevo, handleChangeOrden, onClickItem,onClickItemUpdate, getName, handleChangeFound ,   handleChangeDate, handleChangeSelect, handleChangeSeller, handleChangeProject}=this.context
     if(rol === "admin") {
       return (
        
         <div> 
-           <Link  className="text-white " to="/OrdenTrabajo"><Button className='mt-2 mb-2 mr-3 float-right' color="info">Crear</Button></Link>                 
+           <Link  className="text-white " to="/OrdenTrabajo"><Button className='mt-2 mb-2 mr-3 float-right' color="info" onclick={crearNuevo}>Crear</Button></Link>                 
                
         <Button  color="white" className=" mt-2 mb-2 mr-3 float-right text-black" onClick={this.generatePDF}><i className="far fa-file-pdf icono-pdf"></i></Button> 
          
@@ -275,7 +275,7 @@ class  ListaOrdenes extends React.Component {
            
 
 
-                <Link  className="text-white " to="/OrdenTrabajo"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>
+                <Link  className="text-white " to="/OrdenTrabajo"><Button className='mt-2 mb-2 mr-3 float-right' color="success " onclick={crearNuevo}>Crear</Button></Link>
             
                 
                 

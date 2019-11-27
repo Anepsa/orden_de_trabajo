@@ -8,19 +8,19 @@ class  DirectorioClientes extends React.Component {
         super();
     
        
-        this.crearNuevo = this.crearNuevo.bind(this)
+        // this.crearNuevo = this.crearNuevo.bind(this)
     
      
       }
-      crearNuevo(){
-        const {closeModal} = this.context
-        closeModal()
-        document.getElementById("formClear").reset();
+    //   crearNuevo(){
+    //     const {closeModal} = this.context
+    //     closeModal()
+    //     document.getElementById("formClear").reset();
 
-    }
+    // }
       
     render(){
-        const {modalIsOpen, closeModal, handleChange, handleSubmitCliente,  getName,
+        const {modalIsOpen, closeModal,crearNuevo, handleChange, handleSubmitCliente,  getName,
             cargo, holding, servicios,area, venta, comentarios, estatus, empresa, clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente,  telCliente, extTelCliente,emailCliente } = this.context
     return(
         <div className="div-form">
@@ -86,10 +86,10 @@ class  DirectorioClientes extends React.Component {
             <Col>
             <Input  type="select" name="holding" value={holding} onChange={handleChange} required>
                 <option value="">Selecciona</option>
-                <option value="Anepsa">Anepsa</option>
-                <option value="Syvaprec">Syvaprec</option>
+                <option value="ANEPSA">Anepsa</option>
+                <option value="SYVAPREC">Syvaprec</option>
                 <option value="SAAF">SAAF</option>
-                <option value="otro">otro</option>
+                <option value="OTRO">otro</option>
                                     
             </Input> 
             </Col>
@@ -205,11 +205,11 @@ class  DirectorioClientes extends React.Component {
             <Col>
             <Input type="select" name="estatus" value={estatus} onChange={handleChange} required>
                 <option value="">Selecciona</option>
-                <option value="perdido">Perdido</option>
-                        <option value="contacto inicial">Contacto Inicial </option>
-                        <option value="posible cierre">Posible Cierre</option>
-                        <option value="estancado">Estancado</option>
-                        <option value="vendido">Vendido</option>
+                <option value="PERDIDO">Perdido</option>
+                        <option value="CONTACTO INICIAL">Contacto Inicial </option>
+                        <option value="POSIBLE CIERRE">Posible Cierre</option>
+                        <option value="ESTANCADO">Estancado</option>
+                        <option value="VENDIDO">Vendido</option>
                                  
             </Input>
             </Col>
@@ -229,7 +229,7 @@ class  DirectorioClientes extends React.Component {
               <h5 className="text-info text-center">Cliente Creado</h5>
               <hr/> 
               <Button color="info" ><Link to="./ListadoClientes" className="text-white" onClick={closeModal}> Ver Lista </Link></Button>
-              <Button color="info" className="float-right" onClick={this.crearNuevo}>Crear Nuevo</Button>
+              <Button color="info" className="float-right" onClick={crearNuevo}>Crear Nuevo</Button>
              </div>
              </Modal>
        </Form>
