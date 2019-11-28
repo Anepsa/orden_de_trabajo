@@ -3,6 +3,8 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +13,7 @@ class  Visitadores extends React.Component {
     constructor() {
         super();
         this.crearNuevo = this.crearNuevo.bind(this)
-    
+        this.reload = this.reload.bind(this)
      
       }
   
@@ -21,12 +23,19 @@ class  Visitadores extends React.Component {
         document.getElementById("formClear").reset();
 
     }
+    reload(){
+        const {closeModal} =this.context
+        closeModal()
+        var container = document.getElementById("radioCheck");
+        var content = container.innerHTML;
+        container.innerHTML= content; 
+    }
 
     
     render(){
        
         
-        const {modalIsOpen, crearNuevo,closeModal,handleChange, handleSubmitVisitador, visitadorNombre,handleClick, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencion, telVisitador, extTel,emailVisitador } = this.context
+        const {modalIsOpen, reload,crearNuevo,closeModal,handleChange, handleSubmitVisitador, visitadorNombre,handleClick, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencion, telVisitador, extTelVisitador,emailVisitador } = this.context
     return(
         <div className="div-form">
              
@@ -44,14 +53,14 @@ class  Visitadores extends React.Component {
        
             <Label sm={12}>Nombre <span className="text-danger">*</span>  </Label>
             <Col >
-                <Input  type="text" name="visitadorNombre" value={visitadorNombre}   onChange={handleChange}/> 
+                <Input  type="text" name="visitadorNombre" value={visitadorNombre}   onChange={handleChange} required/> 
             </Col> 
             </Col>
         <Col sm={5}>
       
             <Label sm={12} >RFC </Label>
             <Col >
-                <Input  type="text" name="rfcVisitador" value={rfcVisitador} onChange={handleChange}/> 
+                <Input  type="text" name="rfcVisitador" value={rfcVisitador} onChange={handleChange} /> 
             </Col>
             </Col> 
             
@@ -82,19 +91,19 @@ class  Visitadores extends React.Component {
             <Col sm={3}>
             <Label sm={12} >Teléfono <span className="text-danger">*</span> </Label>
             <Col>
-            <Input    type="text" name="telVisitador" value={telVisitador} onChange={handleChange} />
+            <Input    type="text" name="telVisitador" value={telVisitador} onChange={handleChange} required/>
             </Col>
              </Col> 
              <Col sm={2}>
             <Label sm={12}>Exten </Label>
             <Col>
-                <Input type="text"   name="extTel" value={extTel} onChange={handleChange} />
+                <Input type="text"   name="extTelVisitador" value={extTelVisitador} onChange={handleChange} />
                 </Col>
              </Col>
              <Col sm={4}>
              <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
             <Col>
-            <Input   type="email" name="emailVisitador" value={emailVisitador} onChange={handleChange} /> 
+            <Input   type="email" name="emailVisitador" value={emailVisitador} onChange={handleChange} required/> 
             </Col>
             </Col>
         </FormGroup>
@@ -129,13 +138,13 @@ class  Visitadores extends React.Component {
         <FormControlLabel control={<Checkbox value="CIVIL-FINANCIERA-INDUSTRIAL" onChange={handleClick} />} label=" Civil-Financiera-Industrial" />
         </Col>
         </FormGroup> 
-     
+      
     
 
     
        </fieldset>
        <hr/>
-       <Button className="button-enviar" type="submit"  >Enviar</Button><br/>
+       <Button className="button-enviar"  type="submit"  >Enviar </Button><br/>
        <Modal
               isOpen={modalIsOpen}
               onRequestClose={closeModal}
@@ -147,7 +156,7 @@ class  Visitadores extends React.Component {
               <h5 className="text-info text-center">Visitador Creado</h5>
               <hr/> 
               <Button color="info" ><Link to="./Visitadores" className="text-white" onClick={closeModal}> Ver Lista </Link></Button>
-              <Button color="info" className="float-right" onClick={crearNuevo}>Crear Nuevo</Button>
+              <Button color="info" className="float-right" onClick={() =>{window.location.reload()}}>Crear Nuevo</Button>
              </div>
              </Modal>
        </Form>

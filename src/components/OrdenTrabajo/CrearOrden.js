@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import './ordes.css';
 
 class  OrdenTrabajo extends React.Component {
     constructor() {

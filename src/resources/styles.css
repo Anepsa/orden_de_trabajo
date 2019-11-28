@@ -247,30 +247,7 @@ a span {
     padding-bottom: 5%;
     
     }
-    .col-sm-2 {
-    padding:0 !important;
-    }
-    .col-sm-3 {
-        padding:0 !important;
-        }
-    .col-sm-1 {
-            padding:0 !important;
-     }
 
-    .col-sm-5{
-        padding:0 !important;
-    }
-    .col-sm-4{
-        padding:0 !important;
-    }
-    .col-sm-9{
-        padding:0 !important;
-    }
-    
-    fieldset{
-    padding-left: 2% !important;
-    padding-right: 2% !important;
-    }
     
     .center-box{
         /* margin-left: 4%;
