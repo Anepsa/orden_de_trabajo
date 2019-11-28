@@ -3,8 +3,7 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 
@@ -35,7 +34,7 @@ class  Visitadores extends React.Component {
     render(){
        
         
-        const {modalIsOpen, reload,crearNuevo,closeModal,handleChange, handleSubmitVisitador, visitadorNombre,handleClick, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencion, telVisitador, extTelVisitador,emailVisitador } = this.context
+        const {modalIsOpen,closeModal,handleChange, handleSubmitVisitador, visitadorNombre,handleClick, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador,  telVisitador, extTelVisitador,emailVisitador } = this.context
     return(
         <div className="div-form">
              

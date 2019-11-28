@@ -1,13 +1,11 @@
 import React from 'react';
 import {Table, Button, Input} from 'reactstrap';
 import CrearVisitador from '../Visitadores/CrearVisitador';
-import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
-import { Col} from 'reactstrap';
+
 import { Link } from 'react-router-dom';
-import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
-import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+
 import db from "../../Fire.js";
 
 
@@ -40,7 +38,7 @@ class  ListadoVisitadores extends React.Component {
   
   }
   render () {
-    const{ dataVisitadores, handleChangeVisitador,nomonDeleteCliente, onClickItemCliente, onClickItemUpdateCliente }=this.context
+    const{ dataVisitadores, handleChangeVisitador }=this.context
       return (
       <div>
                   <Link  className="text-white " to="/CrearVisitador"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>

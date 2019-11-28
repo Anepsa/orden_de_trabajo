@@ -66,7 +66,7 @@ class  ListadoClientes extends React.Component {
 
 
   render () {
-    const{  rol,dataClientes, onClickItemCliente, onClickItemUpdateCliente , handleChangeCliente}=this.context
+    const{  rol,dataClientes, onClickItemCliente, handleChangeCliente}=this.context
     if(rol === "admin"){ 
     return (
         

@@ -124,7 +124,7 @@ class Menu extends Component  {
            
             <NavItem>
            
-         <Button  onClick={handleLogout} className="log-out center">Cerrar Sesión</Button>
+         <Button  onClick={this.handleLogout} className="log-out center">Cerrar Sesión</Button>
     
             </NavItem>
 

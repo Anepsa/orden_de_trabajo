@@ -74,7 +74,7 @@ class  ListaOrdenes extends React.Component {
 
   render () {
    
-    const{items, rol, handleUpdate,crearNuevo, handleChangeOrden, onClickItem,onClickItemUpdate, getName, handleChangeFound ,   handleChangeDate, handleChangeSelect, handleChangeSeller, handleChangeProject}=this.context
+    const{items, rol,crearNuevo, handleChangeOrden, onClickItem,onClickItemUpdate, getName, handleChangeFound ,   handleChangeDate, handleChangeSelect,  handleChangeProject}=this.context
     if(rol === "admin") {
       return (
        

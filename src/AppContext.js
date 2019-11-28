@@ -800,7 +800,7 @@ handleChangeOrden= (e)=>{
       this.setState({ modalIsOpen:true,
         nombreVisitador:"", rfcVisitador:"", direccionVisitador:"", delegacionVisitador:"", EDOVisitador:"", atencionVisitador:"", telVisitador:"", extTelVisitador:"",emailVisitador:"",ugeList:[],
       
-          ugeList: []
+          
         
       }, () => {console.log(this.state.mes)})
 

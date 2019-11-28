@@ -7,8 +7,8 @@ import {Button,   Form, FormGroup, Label, Input, Col } from 'reactstrap';
 class EditarCliente extends React.Component {
 
     render() {
-        const{ consultaCliente,closeModal, modalIsOpen,  handleUpdateCliente,  handleChange, getName,
-            clienteNombre, rfcCliente, direccionCliente, dateToCompare, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
+        const{ closeModal, modalIsOpen,  handleUpdateCliente,  handleChange, getName,
+            clienteNombre, rfcCliente, direccionCliente, dateToCompare, delegacionCliente, EDOCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
            
         }=this.context
  

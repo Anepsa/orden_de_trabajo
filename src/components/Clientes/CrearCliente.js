@@ -4,20 +4,10 @@ import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 
 class  DirectorioClientes extends React.Component {
-    constructor() {
-        super();
+    
     
        
-        // this.crearNuevo = this.crearNuevo.bind(this)
-    
      
-      }
-    //   crearNuevo(){
-    //     const {closeModal} = this.context
-    //     closeModal()
-    //     document.getElementById("formClear").reset();
-
-    // }
       
     render(){
         const {modalIsOpen, closeModal,crearNuevo, handleChange, handleSubmitCliente,  getName,
