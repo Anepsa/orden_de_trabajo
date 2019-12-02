@@ -53,13 +53,11 @@ class Menu extends Component  {
     }
     toggle() {
       this.setState({
-        // isOpen: !this.state.isOpen,
         drawerOpen: !this.state.drawerOpen
       });
     }
     toggleConfig() {
       this.setState({
-        // isOpen: !this.state.isOpen,
         drawerOpenConfig: !this.state.drawerOpenConfig
       });
     }
@@ -83,8 +81,7 @@ class Menu extends Component  {
         </Col>
         <Col sm={6}></Col>
        <Col sm={3}>
-        {/* <p>{user} </p> */}
-        <p>Hola, {getName} </p>
+        <p> {getName} </p>
         <p>{dateNew}</p>
         </Col>
         <Col sm={1}>
@@ -215,8 +212,7 @@ class Menu extends Component  {
        
       </Navbar>
       </Col>
-    
-        <Drawer
+      <Drawer
         anchor="right"
         open={this.state.drawerOpen}
         onClose={this.toggle}
@@ -227,14 +223,13 @@ class Menu extends Component  {
             
             <NavItem className="text-right "  ><CloseOutlinedIcon onClick={this.toggle}/></NavItem>
             <div className="left ml-10 text-left ">
-            <NavItem  > <NavLink to="/ListaOrdenes">Orden de trabajo</NavLink></NavItem>
-            <NavItem  > 
-                         <NavLink   to="/OrdenTrabajo">Crear</NavLink>
-            
-            
+            <NavItem>Orden de Trabajo</NavItem>
+            <NavItem> 
+                  <NavLink className="mr-5" to="/ListaOrdenes">Ver</NavLink>
+                <NavLink   to="/OrdenTrabajo">Crear</NavLink>
             </NavItem>
-            <NavItem><NavLink to="/ListadoClientes">Directorio Clientes</NavLink></NavItem>
-            <NavItem  > 
+            <NavItem>Directorio de Clientes</NavItem>
+            <NavItem><NavLink className="mr-5" to="/ListadoClientes">Ver</NavLink>
                          <NavLink   to="/CrearCliente">Crear</NavLink>
             
             
@@ -244,7 +239,7 @@ class Menu extends Component  {
            
             <NavItem>
            
-         <Button  onClick={handleLogout} className="log-out center">Cerrar Sesión</Button>
+         <Button  onClick={this.handleLogout} className="log-out center">Cerrar Sesión</Button>
     
             </NavItem>
 
@@ -255,6 +250,7 @@ class Menu extends Component  {
           </Nav>
      
         </Drawer>
+        
         <Drawer
         anchor="right"
         open={this.state.drawerOpenConfig}

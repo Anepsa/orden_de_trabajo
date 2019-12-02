@@ -17,7 +17,8 @@ firebase.initializeApp({
     storageBucket: "anepsa-1571938449294.appspot.com",
     messagingSenderId: "149747388023",
     appId: "1:149747388023:web:171e3d682a72d17addc072"
-  });
+  
+});
   const db = firebase.firestore();
   db.settings({})
 

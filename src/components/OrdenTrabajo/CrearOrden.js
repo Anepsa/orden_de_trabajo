@@ -111,12 +111,12 @@ class  OrdenTrabajo extends React.Component {
                 <Col >
                     <Input   className="obligatorio" type="select" name="vendedor" value={vendedor} onChange={handleChange} required >
                     <option value="" >Selecciona</option>
-                        <option value="AMEYALLI BRITO">AME</option>
-                        <option value="YOZEBETH BRITO">YOZ</option>
-                        <option value="LAZO SANTIAGO">Lazo Santiago Rubens</option>
-                        <option value="VICENTE">Vicente Galicia Salazar</option>
-                        <option value="AMERICA">America Jimenez Carlon</option>
-                        <option value="DANIEL HURTADO">Daniel Hurtado Sanchez</option>
+                        <option value="AMEYALLI BRITO GONZÁLEZ">AME</option>
+                        <option value="YOZEBETH BRITO GONZÁLEZ">YOZ</option>
+                        <option value="LAZO SANTIAGO RUBENS">Lazo Santiago Rubens</option>
+                        <option value="VICENTE GALICIA SALAZAR">Vicente Galicia Salazar</option>
+                        <option value="AMERICA JIMENEZ CARLON">America Jimenez Carlon</option>
+                        <option value="DANIEL HURTADO SANCHEZ">Daniel Hurtado Sanchez</option>
                         
                         </Input>
                 </Col>
@@ -132,16 +132,16 @@ class  OrdenTrabajo extends React.Component {
                 <Col >
                     <Input  type="select" name="copia"  value={copia} onChange={handleChange} required>
                         <option value="">Selecciona</option>
-                        <option value="CIVIL">Civil</option>
-                        <option value="DIRECCION">Direccion</option>
-                        <option value="FINANZAS">Finanzas</option>
-                        <option value="INDUSTRIAL">Industrial</option>
-                        <option value="ADMINISTRACION">Administracion o Contabilidad</option>
-                        <option value="CIV-IND">Civil-Industrial</option>
-                        <option value="CIV-FIN">Civil-Finanzas</option>
-                        <option value="FIN-IND">Finanzas-Industrial</option>
-                        <option value="IND-PROD">Industrial-Producción</option>
-                        <option value="CIV-FIN-IND">Civil-Finanzas-Industrial</option>
+                        <option value="CIVIL">CIVIL</option>
+                        <option value="DIRECCION">DIRECCION</option>
+                        <option value="FINANZAS">FINANZAS</option>
+                        <option value="INDUSTRIAL">INDUSTRIAL</option>
+                        <option value="ADMINISTRACION">ADMINISTRACIÓN O CONTABILIDAD</option>
+                        <option value="CIV-IND">CIVIL-INDUSTRIAL</option>
+                        <option value="CIV-FIN">CIVIL-FINANZAS</option>
+                        <option value="FIN-IND">FINANZAS-INDUSTRIAL</option>
+                        <option value="IND-PROD">INDUSTRIAL-PRODUCCIÓN</option>
+                        <option value="CIV-FIN-IND">CIVIL-FINANZAS-INDUSTRIAL</option>
                     </Input>
                 </Col>
                 </Col> 
@@ -580,7 +580,7 @@ class  OrdenTrabajo extends React.Component {
                 <Col sm={1}>
                 <Label sm={12} >Ext </Label>
                 <Col >
-                <Input  type="text" name="extenInsp" value={extInsp} onChange={handleChange}  /> 
+                <Input  type="text" name="extInsp" value={extInsp} onChange={handleChange}  /> 
                 </Col>
                 </Col>
                </FormGroup>
@@ -654,7 +654,7 @@ class  OrdenTrabajo extends React.Component {
             <Col sm={6}>
            
             <fieldset className="fieldset">
-            <legend className="ot-color">11. INFORMACIÓN PROPORCIONADA</legend>      
+            <legend className="ot-color">10. INFORMACIÓN PROPORCIONADA</legend>      
             <FormGroup row>
              <Col sm={3}>
                  <Label sm={12}>Información</Label>
@@ -694,8 +694,8 @@ class  OrdenTrabajo extends React.Component {
            <FormGroup row id="formOcultar" className="algo ">
                 
             <Col sm={4}>
-            <fieldset className="fieldset">
-            <legend className="ot-color">10. FECHAS <span className="text-danger">*</span> </legend>
+            <fieldset className="fieldset ml-3">
+            <legend className="ot-color">11. FECHAS <span className="text-danger">*</span> </legend>
             <FormGroup row>
                 <Col sm={6}>
                 <Label sm={10} >Inicio de Proyecto </Label>
@@ -716,7 +716,7 @@ class  OrdenTrabajo extends React.Component {
             
             <Col sm={8}>
                 
-            <fieldset className="fieldset"><legend className="color-gray">Todos los montos son sin objeto de IVA <span className="text-danger">*</span> </legend>
+            <fieldset className="fieldset" ><legend className="color-gray">Todos los montos son sin objeto de IVA <span className="text-danger">*</span> </legend>
             
             <FormGroup row >
                      <Col sm={3}>
@@ -745,8 +745,8 @@ class  OrdenTrabajo extends React.Component {
                     <Col>
                     <Input name="facturar" value={facturar} type="select" onChange={handleChange}required>
                         <option value="">-</option>
-                        <option value="SI">si</option>
-                        <option value="NO"> no</option>
+                        <option value="SI">SI</option>
+                        <option value="NO"> NO</option>
                     </Input>
                     </Col>
                     </Col>
@@ -837,16 +837,16 @@ class  OrdenTrabajo extends React.Component {
                 <Col >
                     <Input  type="select" name="copia"  value={copia} onChange={handleChange} required>
                         <option value="">Selecciona</option>
-                        <option value="CIVIL">Civil</option>
-                        <option value="DIRECCION">Direccion</option>
-                        <option value="FINANZAS">Finanzas</option>
-                        <option value="INDUSTRIAL">Industrial</option>
-                        <option value="ADMINISTRACION">Administracion o Contabilidad</option>
-                        <option value="CIV-IND">Civil-Industrial</option>
-                        <option value="CIV-FIN">Civil-Finanzas</option>
-                        <option value="FIN-IND">Finanzas-Industrial</option>
-                        <option value="IND-PROD">Industrial-Producción</option>
-                        <option value="CIV-FIN-IND">Civil-Finanzas-Industrial</option>
+                        <option value="CIVIL">CIVIL</option>
+                        <option value="DIRECCION">DIRECCION</option>
+                        <option value="FINANZAS">FINANZAS</option>
+                        <option value="INDUSTRIAL">INDUSTRIAL</option>
+                        <option value="ADMINISTRACION">ADMINISTRACIÓN O CONTABILIDAD</option>
+                        <option value="CIV-IND">CIVIL-INDUSTRIAL</option>
+                        <option value="CIV-FIN">CIVIL-FINANZAS</option>
+                        <option value="FIN-IND">FINANZAS-INDUSTRIAL</option>
+                        <option value="IND-PROD">INDUSTRIAL-PRODUCCIÓN</option>
+                        <option value="CIV-FIN-IND">CIVIL-FINANZAS-INDUSTRIAL</option>
                     </Input>
                 </Col>
                 </Col> 
@@ -1285,7 +1285,7 @@ class  OrdenTrabajo extends React.Component {
                 <Col sm={1}>
                 <Label sm={12} >Ext </Label>
                 <Col >
-                <Input  type="text" name="extenInsp" value={extInsp} onChange={handleChange}  /> 
+                <Input  type="text" name="extInsp" value={extInsp} onChange={handleChange}  /> 
                 </Col>
                 </Col>
                </FormGroup>
@@ -1359,7 +1359,7 @@ class  OrdenTrabajo extends React.Component {
             <Col sm={6}>
            
             <fieldset className="fieldset">
-            <legend className="ot-color">11. INFORMACIÓN PROPORCIONADA</legend>      
+            <legend className="ot-color">10. INFORMACIÓN PROPORCIONADA</legend>      
             <FormGroup row>
              <Col sm={3}>
                  <Label sm={12}>Información</Label>
@@ -1400,7 +1400,7 @@ class  OrdenTrabajo extends React.Component {
                 
             <Col sm={4}>
             <fieldset className="fieldset">
-            <legend className="ot-color">10. FECHAS <span className="text-danger">*</span> </legend>
+            <legend className="ot-color">11. FECHAS <span className="text-danger">*</span> </legend>
             <FormGroup row>
                 <Col sm={6}>
                 <Label sm={10} >Inicio de Proyecto </Label>
@@ -1450,8 +1450,8 @@ class  OrdenTrabajo extends React.Component {
                     <Col>
                     <Input name="facturar" value={facturar} type="select" onChange={handleChange}required>
                         <option value="">-</option>
-                        <option value="SI">si</option>
-                        <option value="NO"> no</option>
+                        <option value="SI">SI</option>
+                        <option value="NO"> NO</option>
                     </Input>
                     </Col>
                     </Col>

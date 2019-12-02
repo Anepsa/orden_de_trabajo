@@ -12,7 +12,7 @@ class EditarCliente extends React.Component {
            
         }=this.context
  
-        // const{ list} = this.context}
+
         
         
         return (
@@ -25,37 +25,37 @@ class EditarCliente extends React.Component {
               
             > 
             <CloseOutlinedIcon className="float-right" onClick={closeModal}/>
-            <p className="text-info text-center">Editar Estatus</p>
+            <p className="text-info text-center">Editar Cliente</p>
             <hr/>
        
                 <Form >
                 <FormGroup >
             
                 <FormGroup row>
-        <Col sm={3}>
+        <Col md={3}>
        
-            <Label sm={12}>Cliente<span className="text-danger">*</span>  </Label>
+            <Label md={12}>Cliente<span className="text-danger">*</span>  </Label>
             <Col >
                 <Input  className="form-size" type="text"  value={clienteNombre} readOnly/> 
             </Col> 
             </Col>
-            <Col sm={3}>
+            <Col md={3}>
       
-      <Label sm={12} >Empresa <span className="text-danger">*</span> </Label>
+      <Label md={12} >Empresa <span className="text-danger">*</span> </Label>
       <Col >
           <Input  type="text" name="empresa" value={empresa}  readOnly/> 
       </Col>
       </Col> 
-      <Col sm={3}>
+      <Col md={3}>
       
-      <Label sm={12} >Cargo Empresa <span className="text-danger">*</span> </Label>
+      <Label md={12} >Cargo Empresa <span className="text-danger">*</span> </Label>
       <Col >
           <Input  type="text" name="cargo" value={cargo}  readOnly/> 
       </Col>
       </Col> 
-        <Col sm={3}>
+        <Col md={3}>
       
-            <Label sm={12} >RFC </Label>
+            <Label md={12} >RFC </Label>
             <Col >
                 <Input  type="text" name="rfcCliente" defaultValue={rfcCliente} onChange={handleChange}/> 
             </Col>
@@ -63,8 +63,8 @@ class EditarCliente extends React.Component {
             
         </FormGroup>
         <FormGroup row>
-        <Col sm={3}>
-                 <Label sm={12} >Area<span className="text-danger">*</span>   </Label>
+        <Col md={3}>
+                 <Label md={12} >Area<span className="text-danger">*</span>   </Label>
                  <Col >
                      <Input type="select"  className="obligatorio" name="area" value={area} readOnly>
                         <option value="" selected>Selecciona</option>
@@ -78,8 +78,8 @@ class EditarCliente extends React.Component {
             </Input>
                  </Col>
                  </Col>
-            <Col sm={3}>
-            <Label sm={12}> Holding/Particular<span className="text-danger">*</span>   </Label>
+            <Col md={3}>
+            <Label md={12}> Holding/Particular<span className="text-danger">*</span>   </Label>
             <Col>
             <Input  type="select" name="holding" value={holding} readOnly>
                 <option value="">Selecciona</option>
@@ -91,8 +91,8 @@ class EditarCliente extends React.Component {
             </Col>
             </Col>
           
-                 <Col sm={3}>
-              <Label sm={12}>Servicio<span className="text-danger">*</span>  </Label>
+                 <Col md={3}>
+              <Label md={12}>Servicio<span className="text-danger">*</span>  </Label>
               <Col>
                 <Input  type="select" name="servicios" value={servicios} readOnly>
                 <option value="">Selecciona</option>
@@ -121,8 +121,8 @@ class EditarCliente extends React.Component {
                 </Input> 
                 </Col>
                 </Col>
-                <Col sm={3}>
-            <Label  sm={12} >Origen de Venta</Label>
+                <Col md={3}>
+            <Label  md={12} >Origen de Venta</Label>
             <Col >
                 <Input  type="select" name="venta" value={venta} readOnly>
                 <option value="">Selecciona</option>
@@ -137,20 +137,20 @@ class EditarCliente extends React.Component {
                 
              </FormGroup>
            <FormGroup row>
-           <Col sm={4}>
-             <Label  sm={12}>Proveedor de Servicio</Label>
-            <Col sm={12}>
+           <Col md={4}>
+             <Label  md={12}>Proveedor de Servicio</Label>
+            <Col md={12}>
                 <Input  type="text" name="atencion" value={getName}  readOnly/> </Col>
              </Col>
-             <Col sm={2}>
-             <Label  sm={12}>Fecha</Label>
-            <Col sm={12}>
+             <Col md={2}>
+             <Label  md={12}>Fecha</Label>
+            <Col md={12}>
                 <Input  type="text" name="atencion" value={dateToCompare}  readOnly/> </Col>
              </Col>
           
 
-           <Col sm={6}>
-            <Label sm={12}>Comentarios Presupuesto y Servicio<span className="text-danger">*</span>   </Label>
+           <Col md={6}>
+            <Label md={12}>Comentarios Presupuesto y Servicio<span className="text-danger">*</span>   </Label>
             <Col>
             <Input  type="text" name="comentarios" value={comentarios} readOnly/> 
             </Col>
@@ -160,21 +160,21 @@ class EditarCliente extends React.Component {
          </FormGroup>
       
         <FormGroup row> 
-        <Col sm={6}>
-            <Label sm={12}>Dirección  </Label>
+        <Col md={6}>
+            <Label md={12}>Dirección  </Label>
             <Col>
             <Input  type="text" name="direccionCliente" defaultValue={direccionCliente} onChange={handleChange}/> 
            </Col>
             </Col> 
-            <Col sm={3}>
-            <Label sm={12}>Deleg/Municipio  </Label>
+            <Col md={3}>
+            <Label md={12}>Deleg/Municipio  </Label>
             <Col>
             <Input  type="text" name="delegacionCliente"     value={delegacionCliente} readOnly /> 
             </Col>
              </Col> 
-             <Col sm={3}>
+             <Col md={3}>
            
-             <Label  sm={12}>Ciudad/EDO </Label>
+             <Label  md={12}>Ciudad/EDO </Label>
             <Col>
              <Input  type="text" name="EDOCliente"   value={EDOCliente} readOnly />
                 </Col>
@@ -183,26 +183,26 @@ class EditarCliente extends React.Component {
         </FormGroup>
        
         <FormGroup row>  
-            <Col sm={3}>
-            <Label sm={12} >Teléfono <span className="text-danger">*</span> </Label>
+            <Col md={3}>
+            <Label md={12} >Teléfono <span className="text-danger">*</span> </Label>
             <Col>
             <Input    type="text" name="telCliente" value={telCliente} readOnly/>
             </Col>
              </Col> 
-             <Col sm={2}>
-            <Label sm={12}>Exten </Label>
+             <Col md={2}>
+            <Label md={12}>Exten </Label>
             <Col>
                 <Input type="text"   name="extTel" value={extTelCliente} readOnly />
                 </Col>
              </Col>
-             <Col sm={4}>
-             <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
+             <Col md={4}>
+             <Label  md={12}>Correo electronico <span className="text-danger">*</span> </Label>
             <Col>
             <Input   type="email" name="emailCliente" value={emailCliente} readOnly /> 
             </Col>
             </Col>
-            <Col sm={3}>
-             <Label  sm={12}>Estatus <span className="text-danger">*</span> </Label>
+            <Col md={3}>
+             <Label  md={12}>Estatus <span className="text-danger">*</span> </Label>
             <Col>
             <Input type="select" name="estatus"  onChange={handleChange} >
         <option value="">{estatus}</option>

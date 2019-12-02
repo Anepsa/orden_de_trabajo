@@ -25,30 +25,30 @@ class  DirectorioClientes extends React.Component {
         <FormGroup >
             
         <FormGroup row>
-        <Col sm={3}>
+        <Col md={3}>
        
-            <Label sm={12}>Cliente<span className="text-danger">*</span>  </Label>
+            <Label md={12}>Cliente<span className="text-danger">*</span>  </Label>
             <Col >
                 <Input  className="form-size" type="text" name="clienteNombre" value={clienteNombre}  onChange={handleChange}  required/> 
             </Col> 
             </Col>
-            <Col sm={3}>
+            <Col md={3}>
       
-      <Label sm={12} >Empresa <span className="text-danger">*</span> </Label>
+      <Label md={12} >Empresa <span className="text-danger">*</span> </Label>
       <Col >
           <Input  type="text" name="empresa" value={empresa} onChange={handleChange} required/> 
       </Col>
       </Col> 
-      <Col sm={3}>
+      <Col md={3}>
       
-      <Label sm={12} >Cargo Empresa <span className="text-danger">*</span> </Label>
+      <Label md={12} >Cargo Empresa <span className="text-danger">*</span> </Label>
       <Col >
           <Input  type="text" name="cargo" value={cargo} onChange={handleChange}/> 
       </Col>
       </Col> 
-        <Col sm={3}>
+        <Col md={3}>
       
-            <Label sm={12} >RFC </Label>
+            <Label md={12} >RFC </Label>
             <Col >
                 <Input  type="text" name="rfcCliente" value={rfcCliente} onChange={handleChange}/> 
             </Col>
@@ -56,8 +56,8 @@ class  DirectorioClientes extends React.Component {
             
         </FormGroup>
         <FormGroup row>
-        <Col sm={3}>
-                 <Label sm={12} >Área <span className="text-danger">*</span>   </Label>
+        <Col md={3}>
+                 <Label  md={12} >Área <span className="text-danger">*</span>   </Label>
                  <Col >
                      <Input type="select"  className="obligatorio" name="area" value={area} onChange={handleChange} required>
                         <option value="" selected>Selecciona</option>
@@ -71,8 +71,8 @@ class  DirectorioClientes extends React.Component {
             </Input>
                  </Col>
                  </Col>
-            <Col sm={3}>
-            <Label sm={12}> Holding/Particular<span className="text-danger">*</span>   </Label>
+            <Col md={3}>
+            <Label md={12}> Holding/Particular<span className="text-danger">*</span>   </Label>
             <Col>
             <Input  type="select" name="holding" value={holding} onChange={handleChange} required>
                 <option value="">Selecciona</option>
@@ -85,8 +85,8 @@ class  DirectorioClientes extends React.Component {
             </Col>
             </Col>
           
-                 <Col sm={3}>
-              <Label sm={12}>Servicio<span className="text-danger">*</span>  </Label>
+                 <Col md={3}>
+              <Label md={12}>Servicio<span className="text-danger">*</span>  </Label>
               <Col>
                 <Input  type="select" name="servicios" value={servicios} onChange={handleChange} required>
                 <option value="">Selecciona</option>
@@ -115,8 +115,8 @@ class  DirectorioClientes extends React.Component {
                 </Input> 
                 </Col>
                 </Col>
-                <Col sm={3}>
-            <Label  sm={12} >Origen de Venta</Label>
+                <Col md={3}>
+            <Label  md={12} >Origen de Venta</Label>
             <Col >
                 <Input  type="select" name="venta" value={venta} onChange={handleChange} >
                 <option value="">Selecciona</option>
@@ -131,15 +131,15 @@ class  DirectorioClientes extends React.Component {
                 
              </FormGroup>
            <FormGroup row>
-           <Col sm={4}>
-             <Label  sm={12}>Proveedor de Servicio</Label>
-            <Col sm={12}>
+           <Col md={4}>
+             <Label  md={12}>Proveedor de Servicio</Label>
+            <Col md={12}>
                 <Input  type="text" name="atencion" value={getName} readOnly/> </Col>
              </Col>
           
 
-           <Col sm={8}>
-            <Label sm={12}>Comentarios Presupuesto y Servicio<span className="text-danger">*</span>   </Label>
+           <Col md={8}>
+            <Label md={12}>Comentarios Presupuesto y Servicio<span className="text-danger">*</span>   </Label>
             <Col>
             <Input  type="textarea" name="comentarios" value={comentarios} onChange={handleChange} required/> 
             </Col>
@@ -149,21 +149,21 @@ class  DirectorioClientes extends React.Component {
          </FormGroup>
       
         <FormGroup row> 
-        <Col sm={6}>
-            <Label sm={12}>Dirección  </Label>
+        <Col md={6}>
+            <Label md={12}>Dirección  </Label>
             <Col>
             <Input  type="text" name="direccionCliente" value={direccionCliente} onChange={handleChange} required/> 
             </Col>
             </Col> 
-            <Col sm={3}>
-            <Label sm={12}>Deleg/Municipio  </Label>
+            <Col md={3}>
+            <Label md={12}>Deleg/Municipio  </Label>
             <Col>
             <Input  type="text" name="delegacionCliente"     value={delegacionCliente} onChange={handleChange} /> 
             </Col>
              </Col> 
-             <Col sm={3}>
+             <Col md={3}>
            
-             <Label  sm={12}>Ciudad/EDO </Label>
+             <Label  md={12}>Ciudad/EDO </Label>
             <Col>
              <Input  type="text" name="EDOCliente"   value={EDOCliente} onChange={handleChange} />
                 </Col>
@@ -172,26 +172,26 @@ class  DirectorioClientes extends React.Component {
         </FormGroup>
        
         <FormGroup row>  
-            <Col sm={3}>
-            <Label sm={12} >Teléfono <span className="text-danger">*</span> </Label>
+            <Col md={3}>
+            <Label md={12} >Teléfono <span className="text-danger">*</span> </Label>
             <Col>
             <Input    type="text" name="telCliente" value={telCliente} onChange={handleChange} required/>
             </Col>
              </Col> 
-             <Col sm={2}>
-            <Label sm={12}>Exten </Label>
+             <Col md={2}>
+            <Label md={12}>Exten </Label>
             <Col>
-                <Input type="text"   name="extTel" value={extTelCliente} onChange={handleChange} />
+                <Input type="text"   name="extTelCliente" value={extTelCliente} onChange={handleChange} />
                 </Col>
              </Col>
-             <Col sm={4}>
-             <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
+             <Col md={4}>
+             <Label  md={12}>Correo electronico <span className="text-danger">*</span> </Label>
             <Col>
             <Input   type="email" name="emailCliente" value={emailCliente} onChange={handleChange} required /> 
             </Col>
             </Col>
-            <Col sm={3}>
-             <Label  sm={12}>Estatus <span className="text-danger">*</span> </Label>
+            <Col md={3}>
+             <Label  md={12}>Estatus <span className="text-danger">*</span> </Label>
             <Col>
             <Input type="select" name="estatus" value={estatus} onChange={handleChange} required>
                 <option value="">Selecciona</option>

@@ -198,6 +198,33 @@ a span {
 .ocultar{
     display:none;
 }
+.clave{
+    height: 1.4em;
+    background-image: url("../assets/editar.png");
+    background-position-x: center;
+     background-size: contain;
+    background-repeat: no-repeat; 
+}
+
+.busqueda{
+    height: 1.4em;
+    background-image: url("../assets/expediente.png");
+    background-position-x: center;
+     background-size: contain;
+    background-repeat: no-repeat
+
+}
+.borrar{
+    height: 1.4em;
+    background-image: url("../assets/borrar.png");
+    background-position-x: center;
+     background-size: contain;
+    background-repeat: no-repeat
+
+}
+.toUppercase{
+    /* text-transform: lowercase; */
+}
 
 @media(min-width: 680px){
 
@@ -332,6 +359,7 @@ a span {
     width: 100%;
    }
 
+  
    
    
    

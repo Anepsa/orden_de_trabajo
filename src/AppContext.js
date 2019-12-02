@@ -38,7 +38,7 @@ export const AppContext = React.createContext()
             nombresClientes:[],
             nombresEmpresas:[],
             estatusEmpresa:"", 
-          // modalIsOpen:true,
+         
              
            getNewDate:"",
             clienteNombre:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencionCliente:"", dateToCompare:"",telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",cargo:"", holding:"", servicios:"",area:"", venta:"", comentarios:"",
@@ -53,9 +53,8 @@ export const AppContext = React.createContext()
     this.handleSubmitVisitador = this.handleSubmitVisitador.bind(this);
     this.handleSelectUge = this.handleSelectUge.bind(this)
     this.onClickItem = this.onClickItem.bind(this)
-    this.onClickItemUpdate =this.onClickItemUpdate.bind(this)
     this.onClickItemCliente = this.onClickItemCliente.bind(this)
-    this.onClickItemUpdateCliente =this.onClickItemUpdateCliente.bind(this)
+
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleChangeVisitador = this.handleChangeVisitador.bind(this);
@@ -85,7 +84,7 @@ export const AppContext = React.createContext()
         
         this.setState({ 
             [e.target.name]:e.target.value.toUpperCase()
-        },()=>{console.log(this.state)
+        },()=>{
           const montoVendido= parseInt(this.state.presupuesto) + parseInt(this.state.comision)
           this.setState({
             montoVendido: montoVendido,
@@ -97,23 +96,24 @@ export const AppContext = React.createContext()
         
         
     } 
+    //Lista  de las UGE de los vendedores
     handleClick = (e) =>{
-      const check = e.target
-      console.log(check)
+
       const list = this.state.ugeList
-      console.log(list)
+
      const value=  e.target.value;
      const newvalue = [value, ...list]
       
      this.setState({
        ugeList: newvalue
-     }, () => {console.log(this.state.ugeList)})
+     })
     }
 
+
+//Cambio de estado al selecionar un UGE en formulario crear orden
     handleSelectUge = (e) =>{
 
       const ugeSelect = e.target.value;
-      console.log(ugeSelect)
       this.setState({
         uge:ugeSelect
       })
@@ -121,9 +121,7 @@ export const AppContext = React.createContext()
   db.collection("visitadores").where("uge", "array-contains", ugeSelect)
   .get()
   .then(querySnapshot => {
-      const data = querySnapshot.docs.map(doc => doc.data().nombre);
-    console.log(data)
-          
+      const data = querySnapshot.docs.map(doc => doc.data().nombre);          
           this.setState({
             listaVisitador:data,
 
@@ -137,9 +135,7 @@ export const AppContext = React.createContext()
       .get()
       .then(querySnapshot => {
           const dataNom = querySnapshot.docs.map(doc => doc.data().nombre);
-          const dataEmp = querySnapshot.docs.map(doc => doc.data().empresa);
-        // console.log(data)
-              
+          const dataEmp = querySnapshot.docs.map(doc => doc.data().empresa);  
               this.setState({
                 nombresClientes:dataNom,
                 nombresEmpresas:dataEmp,
@@ -151,35 +147,34 @@ export const AppContext = React.createContext()
               
           });
 }
+
+//Filtro de Empresa al seleccionar en formulario crearOrden
     handleEmpresa = (e) =>{
       e.preventDefault();
       const empresa = e.target.value
-      console.log(empresa)
       this.setState({ 
       estatusEmpresa: empresa
     })
     if(empresa === ""){
       this.setState({
         obtDataCliente:[],
-      },console.log(this.state.obtDataCliente))  
+      })
       
     }else{
       db.collection("clientes").where("nombre", "==", empresa )
       .get()
       .then(querySnapshot => {
-          const data = querySnapshot.docs.map(doc => doc.data());
-          console.log(data[0])      
+          const data = querySnapshot.docs.map(doc => doc.data());     
               this.setState({
                 obtDataCliente:data[0],
               })   
           });
     }
     }
-
+//Filtro de Cliente al seleccionar en formulario crearOrden
 handleCliente = (e) =>{
   e.preventDefault();
   const cliente = e.target.value
-      console.log(cliente)
       this.setState({ 
       estatusEmpresa: cliente,
     })
@@ -192,8 +187,6 @@ handleCliente = (e) =>{
       .get()
       .then(querySnapshot => {
           const data = querySnapshot.docs.map(doc => doc.data());
-          console.log(data[0])
-              
               this.setState({
                 obtDataCliente:data[0],
 
@@ -204,28 +197,11 @@ handleCliente = (e) =>{
     
   }
 }
-
-
-
-    handleChangeCost = (e)=>{
-        
-      this.setState({ 
-          [e.target.name]:e.target.value
-      })
-    
-      
-      
-  } 
-   
-
-
+  
+//Filtros de Los Visitadores
 handleChangeVisitador = (e) =>{
   const name = e.target.name
-  console.log(name)
   const handle = e.target.value;
-
-  console.log(handle)
- 
   if(handle === ""){
 
     db.collection("visitadores").onSnapshot(this.obtenerVisitadores)
@@ -289,15 +265,13 @@ handleChangeVisitador = (e) =>{
 
 
 }
-  
+
+//Filtro  de los Clientes
   handleChangeCliente= (e)=>{
     
     const name = e.target.name
-    console.log(name)
-    const handle = e.target.value;
- 
-    console.log(handle)
-   
+    const handle = e.target.value.toUpperCase();
+
     if(handle === ""){
 
       db.collection("clientes").onSnapshot(this.obtenerClientes)
@@ -450,14 +424,13 @@ handleChangeVisitador = (e) =>{
       }
 } 
 
+
+//Filtro de las Ordenes
 handleChangeOrden= (e)=>{
     
   const name = e.target.name
-  console.log(name)
-  const handle = e.target.value;
 
-  console.log(handle)
- 
+  const handle = e.target.value.toUpperCase()
   if(handle === ""){
 
     db.collection("orden").onSnapshot(this.obtenerBD)
@@ -611,7 +584,7 @@ handleChangeOrden= (e)=>{
     }
 } 
 
-
+//Editar orden de trabajo
     handleUpdate () {
 
                
@@ -625,13 +598,15 @@ handleChangeOrden= (e)=>{
                const  nombreSolicitante = this.state.nombreSolicitante
                const  empresaSolicitante = this.state.empresaSolicitante
                const rfcSolicitante=this.state.rfcSolicitante
+               const holdingSolicitante = this.state.holdingSolicitante
                const direccionSolicitante= this.state.direccionSolicitante
                const delegacionSolicitante=this.state.delegacionSolicitante
                const    EDOSolicitante=this.state.EDOSolicitante
                const   telSolicitante=this.state.telSolicitante
                const  emailSolicitante =this.state.emailSolicitante
-
-               const objetivo=this.state.objetivo
+              const cargoSolicitante = this.state.cargoSolicitante
+              const ventaSolicitante = this.state.ventaSolicitante 
+              const objetivo=this.state.objetivo
                const otroObj=this.state.otroObj
                const proposito=this.state.proposito
                const otroProp= this.state.otroProp
@@ -652,18 +627,18 @@ handleChangeOrden= (e)=>{
                const presupuesto= this.state.presupuesto
                const comision=this.state.comision
                const montoVendido=this.state.montoVendido  
-       
-
-    console.log(newid)
 
     db.collection("orden").where("productClave", "==", newid )
     .get()
     .then(querySnapshot =>  {
         querySnapshot.forEach(function(doc) {
-            console.log(doc.id, " => ", doc.data());
             db.collection("orden").doc(doc.id).update({
              
-              copia:copia, oferta:oferta, cedido:cedido,proyecto: proyecto, visitador:visitador, 
+              copia:copia, 
+              oferta:oferta, 
+              cedido:cedido,
+              proyecto: proyecto, 
+              visitador:visitador, 
                 tipoCliente:tipoCliente,
                 nombreSolicitante: nombreSolicitante,
                 empresaSolicitante: empresaSolicitante,
@@ -673,11 +648,13 @@ handleChangeOrden= (e)=>{
                 EDOSolicitante:EDOSolicitante,
                 telSolicitante:telSolicitante,
                 emailSolicitante: emailSolicitante,
+                cargoSolicitante:cargoSolicitante,
+                holdingSolicitante:holdingSolicitante,
+                ventaSolicitante:ventaSolicitante,
                 objetivo:objetivo,
                 otroObj:otroObj,
                 proposito:proposito,
                 otroProp:otroProp,
-                // visitador
                 presentarse: presentarse,
                 fechaIns: fechaIns,
                 telInsp: telInsp,
@@ -702,28 +679,27 @@ handleChangeOrden= (e)=>{
         });
    })
   }
+
+  //Editar cliente
   handleUpdateCliente=(e) =>{
 
                
     const newid=  this.state.idItem
-    console.log(newid)
     const estatus = this.state.estatus
-    console.log(estatus)
     const direccion = this.state.direccionCliente
-    console.log(direccion)
     const rfc = this.state.rfcCliente
-    console.log(rfc)
     db.collection("clientes").where("clave", "==", newid )
     .get()
     .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-            console.log(doc.id, " => ", doc.data());
             db.collection("clientes").doc(doc.id).update({ estatus: estatus ,
             direccion:direccion, rfc:rfc});
         });
    })
   }
 
+
+  //Enviar formulario Cliente firebase
   handleSubmitCliente =(e)=>{
     e.preventDefault();
     let contador = parseInt(this.state.contClientes) + 1 ;
@@ -743,7 +719,6 @@ handleChangeOrden= (e)=>{
         direccion: this.state.direccionCliente,
         delegacion: this.state.delegacionCliente,
         estado: this.state.EDOCliente,
-        // atencion:this.state.getName,
         telefono: this.state.telCliente,
         extTel:this.state.extTelCliente,
         email:this.state.emailCliente,
@@ -758,7 +733,7 @@ handleChangeOrden= (e)=>{
         comentarios:this.state.comentarios,
         contador:contador,
         date: firebase.firestore.FieldValue.serverTimestamp(),
-        dateToCompare: new Date().toLocaleDateString("zh-TW"),
+        dateToCompare: new Date().toLocaleDateString("zh-TW", { year: 'numeric', month: '2-digit', day: '2-digit'}),
         getNewDate: new Date().toLocaleString(),
       })
 
@@ -766,11 +741,11 @@ handleChangeOrden= (e)=>{
      
       this.setState({modalIsOpen:true,
         contClientes:"",nombreCliente:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencion:"", telCliente:"", extTel:"",emailCliente:"",
-     }, () => {console.log(this.state.mes)})
+     })
 
   }
 
-
+//Enviar formulario Visitador Firebase
   handleSubmitVisitador =(e)=>{
 
     e.preventDefault();
@@ -785,13 +760,10 @@ handleChangeOrden= (e)=>{
         direccion: this.state.direccionVisitador,
         delegacion: this.state.delegacionVisitador,
         estado: this.state.EDOVisitador,
-        // atencion:this.state.atencionVisitador,
         telefono: this.state.telVisitador,
         extension : this.state.extTelVisitador,
         email:this.state.emailVisitador,
-        // vendedor:this.state.getName,
-        // uge:this.state.ugeList,
-        newDate: new Date().toLocaleDateString("zh-TW"),
+        newDate: new Date().toLocaleDateString("zh-TW", { year: 'numeric', month: '2-digit', day: '2-digit'}),
         date: firebase.firestore.FieldValue.serverTimestamp(),
         getNewDate: new Date().toLocaleString(),
 
@@ -802,10 +774,11 @@ handleChangeOrden= (e)=>{
       
           
         
-      }, () => {console.log(this.state.mes)})
+      })
 
   }
-    //Validacion del for=mulario
+
+ //Enviar formulario orden Firebase
     handleSubmit = (e)  => {
       
         
@@ -815,7 +788,7 @@ handleChangeOrden= (e)=>{
             const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
             const dateClave = obtDate.slice(5,7).replace("/","")
             const newDate = obtDate.slice(0, 2)
-            
+            const nombreVerificar = document.getElementById("nombreSolicitante").value   
            if(dateClave ===
              this.state.mes){
               
@@ -830,8 +803,7 @@ handleChangeOrden= (e)=>{
               } else { 
                  claveUnica = newDate + dateClave + ugeClave + contador
               }
-              const nombreVerificar = document.getElementById("nombreSolicitante").value
-              console.log(nombreVerificar)
+             
               
              if( nombreVerificar === ""){ 
           db.collection("orden").add({
@@ -839,10 +811,8 @@ handleChangeOrden= (e)=>{
             productClave: claveUnica,
             contador: contador,
             mes:dateClave,
-            // clienteNombre:this.state.clienteNombre, rfcCliente:this.state.rfcCliente, direccionCliente:this.state.direccionCliente, delegacionCliente:this.state.delegacionCliente, EDOCliente:this.state.EDOCliente, atencionCliente:this.state.atencionCliente, telCliente:this.state.telCliente, extTelCliente:this.state.extTelCliente,emailCliente:this.state.emailCliente
-            // ,empresa:this.state.empresa,estatus:this.state.estatus,cargo:this.state.cargo, holding:this.state.holdgin, servicios:this.state.servicios,area:this.state.area, venta:this.state.venta, comentarios:this.state.comentarios,
             date: firebase.firestore.FieldValue.serverTimestamp(),
-            dateToCompare: new Date().toLocaleDateString("zh-TW"),
+            dateToCompare: new Date().toLocaleDateString("zh-TW", { year: 'numeric', month: '2-digit', day: '2-digit'}),
             getNewDate: new Date().toLocaleString(),
             cliente: this.state.obtDataCliente,
             vendedor: this.state.vendedor,
@@ -867,6 +837,7 @@ handleChangeOrden= (e)=>{
             delegacionSolicitante:this.state.obtDataCliente.delegacion,
             EDOSolicitante:this.state.obtDataCliente.estado,
             telSolicitante:this.state.obtDataCliente.telefono,
+            extTelSolicitante:this.state.obtDataCliente.extTel,
             emailSolicitante: this.state.obtDataCliente.email,
             objetivo:this.state.obtDataCliente.servicios,
             otroObj:this.state.otroObj,
@@ -882,7 +853,7 @@ handleChangeOrden= (e)=>{
             bienes: this.state.bienes,
             otroBien: this.state.otroBien,
             info:this.state.info ,
-            otrainfo: this.state.otraInfo,
+            otraInfo: this.state.otraInfo,
             inicio: this.state.inicio,
             entrega:this.state.entrega,
             facturar:this.state.facturar,
@@ -900,7 +871,7 @@ handleChangeOrden= (e)=>{
               // clienteNombre:this.state.clienteNombre, rfcCliente:this.state.rfcCliente, direccionCliente:this.state.direccionCliente, delegacionCliente:this.state.delegacionCliente, EDOCliente:this.state.EDOCliente, atencionCliente:this.state.atencionCliente, telCliente:this.state.telCliente, extTelCliente:this.state.extTelCliente,emailCliente:this.state.emailCliente
               // ,empresa:this.state.empresa,estatus:this.state.estatus,cargo:this.state.cargo, holding:this.state.holdgin, servicios:this.state.servicios,area:this.state.area, venta:this.state.venta, comentarios:this.state.comentarios,
               date: firebase.firestore.FieldValue.serverTimestamp(),
-              dateToCompare: new Date().toLocaleDateString("zh-TW"),
+              dateToCompare: new Date().toLocaleDateString("zh-TW", { year: 'numeric', month: '2-digit', day: '2-digit'}),
               getNewDate: new Date().toLocaleString(),
               cliente: this.state.obtDataCliente,
             
@@ -925,6 +896,7 @@ handleChangeOrden= (e)=>{
               delegacionSolicitante:this.state.delegacionSolicitante,
               EDOSolicitante:this.state.EDOSolicitante,
               telSolicitante:this.state.telSolicitante,
+              
               emailSolicitante: this.state.emailSolicitante,
               objetivo:this.state.obtDataCliente.servicios,
               otroObj:this.state.otroObj,
@@ -940,7 +912,7 @@ handleChangeOrden= (e)=>{
               bienes: this.state.bienes,
               otroBien: this.state.otroBien,
               info:this.state.info ,
-              otrainfo: this.state.otraInfo,
+              otraInfo: this.state.otraInfo,
               inicio: this.state.inicio,
               entrega:this.state.entrega,
               facturar:this.state.facturar,
@@ -961,18 +933,21 @@ handleChangeOrden= (e)=>{
             
 
  
-         }, () => {console.log(this.state.mes)})
+         })
 
     }
    else {
     const contador = 1;
     const claveUnica = newDate + dateClave + ugeClave + '00'+ contador
-
+       
+    if( nombreVerificar === ""){ 
       db.collection("orden").add({
+      
         productClave: claveUnica,
         contador: contador,
         mes:dateClave,
         date: firebase.firestore.FieldValue.serverTimestamp(),
+        dateToCompare: new Date().toLocaleDateString("zh-TW",{ year: 'numeric', month: '2-digit', day: '2-digit'}),
         getNewDate: new Date().toLocaleString(),
         cliente: this.state.obtDataCliente,
         vendedor: this.state.vendedor,
@@ -983,14 +958,22 @@ handleChangeOrden= (e)=>{
         proyecto: this.state.proyecto,
         visitador: this.state.visitador,
         tipoCliente:this.state.tipoCliente,
-        nombreSolicitante: this.state.nombreSolicitante,
-        empresaSolicitante: this.state.empresaSolicitante,
-        rfcSolicitante:this.state.rfcSolicitante,
-        direccionSolicitante: this.state.direccionSolicitante,
-        delegacionSolicitante:this.state.delegacionSolicitante,
-        EDOSolicitante:this.state.EDOSolicitante,
-        telSolicitante:this.state.telSolicitante,
-        emailSolicitante: this.state.emailSolicitante,
+        nombreSolicitante: this.state.obtDataCliente.nombre,
+        empresaSolicitante: this.state.obtDataCliente.empresa,
+        cargoSolicitante: this.state.obtDataCliente.cargo,
+        areaSolicitante: this.state.obtDataCliente.area,
+        holdingSolicitante: this.state.obtDataCliente.holding,
+        servicioSolicitante: this.state.obtDataCliente.servicios,
+        ventaSolicitante: this.state.obtDataCliente.venta,
+        proveedorSolicitante:this.state.obtDataCliente.vendedor,
+        comentariosSolicitante: this.state.obtDataCliente.comentarios,
+        rfcSolicitante:this.state.obtDataCliente.rfc,
+        direccionSolicitante: this.state.obtDataCliente.direccion,
+        delegacionSolicitante:this.state.obtDataCliente.delegacion,
+        EDOSolicitante:this.state.obtDataCliente.estado,
+        telSolicitante:this.state.obtDataCliente.telefono,
+        extTelSolicitante:this.state.obtDataCliente.extTel,
+        emailSolicitante: this.state.obtDataCliente.email,
         objetivo:this.state.obtDataCliente.servicios,
         otroObj:this.state.otroObj,
         proposito:this.state.proposito,
@@ -1004,8 +987,8 @@ handleChangeOrden= (e)=>{
         observaciones:this.state.observaciones,
         bienes: this.state.bienes,
         otroBien: this.state.otroBien,
-       info:this.state.info ,
-       otrainfo: this.state.otraInfo,
+        info:this.state.info ,
+        otraInfo: this.state.otraInfo,
         inicio: this.state.inicio,
         entrega:this.state.entrega,
         facturar:this.state.facturar,
@@ -1013,22 +996,89 @@ handleChangeOrden= (e)=>{
         comision:this.state.presupuesto,
         montoVendido:this.state.montoVendido, 
 
+
+      })}else {
+        db.collection("orden").add({
       
-     })
+          productClave: claveUnica,
+          contador: contador,
+          mes:dateClave,
+           date: firebase.firestore.FieldValue.serverTimestamp(),
+          dateToCompare: new Date().toLocaleDateString("zh-TW", { year: 'numeric', month: '2-digit', day: '2-digit'}),
+          getNewDate: new Date().toLocaleString(),
+          cliente: this.state.obtDataCliente,
+        
+          vendedor: this.state.vendedor,
+          uge: this.state.uge,      
+          copia:this.state.copia,
+          oferta:this.state.oferta,
+          cedido:this.state.cedido,
+          proyecto: this.state.proyecto,
+          visitador: this.state.visitador,
+          tipoCliente:this.state.tipoCliente,
+          nombreSolicitante: this.state.nombreSolicitante,
+          empresaSolicitante: this.state.empresaSolicitante,
+          rfcSolicitante:this.state.rfcSolicitante,
+          areaSolicitante: this.state.uge,
+          holdingSolicitante: this.state.holdingSolicitante,
+          servicioSolicitante: this.state.servicioSolicitante,
+          ventaSolicitante: this.state.ventaSolicitante,
+          proveedorSolicitante:this.state.obtDataCliente.vendedor,
+          comentariosSolicitante: this.state.comentariosSolicitante,
+          direccionSolicitante: this.state.direccionSolicitante,
+          delegacionSolicitante:this.state.delegacionSolicitante,
+          EDOSolicitante:this.state.EDOSolicitante,
+          telSolicitante:this.state.telSolicitante,
+          emailSolicitante: this.state.emailSolicitante,
+          objetivo:this.state.obtDataCliente.servicios,
+          otroObj:this.state.otroObj,
+          proposito:this.state.proposito,
+          otroProp: this.state.otroProp,
+          presentarse: this.state.presentarse,
+          fechaIns: this.state.fechaIns,
+          telInsp: this.state.telInsp,
+          extInsp: this.state.extInsp,
+          emailInsp: this.state.emailInsp,
+          dirInsp: this.state.dirInsp,
+          observaciones:this.state.observaciones,
+          bienes: this.state.bienes,
+          otroBien: this.state.otroBien,
+          info:this.state.info ,
+          otraInfo: this.state.otraInfo,
+          inicio: this.state.inicio,
+          entrega:this.state.entrega,
+          facturar:this.state.facturar,
+          presupuesto: this.state.presupuesto,
+          comision:this.state.presupuesto,
+          montoVendido:this.state.montoVendido, 
+
+      })
   
-   
+    }
+     
+      this.setState({
+        modalIsOpen:true,
+        newcontador: contador,
+        nuevaClave: claveUnica,
+
+       
+        
+
+
+     })
      
 
     }
-    // document.getElementById("clienteSelect").value = ""
        
   
 
   }
 
+
+//Eliminar estado para Crear Nuevo Formulario
   crearNuevo = () => 
+
   {
-   
       this.setState({
         obtDataCliente:[],
         nombresClientes:[],
@@ -1049,18 +1099,15 @@ handleChangeOrden= (e)=>{
   
   }
 
+
+//Obteneder rol y nombre  de usuarios
   obtenerUser= ()=>{
     const usuario = this.state.user
-    console.log(usuario)
-
     db.collection("usuarios").where("email","==",  usuario ).get().then(querySnapshot => {
       const data = querySnapshot.docs.map(doc => doc.data());
       
       const getUser = data[0].name
       const admin = data[0].rol
-      const dataNew = data
-      console.log(admin, dataNew, getUser)
-
             this.setState({ getName: getUser,
             rol:admin })
           }) 
@@ -1068,72 +1115,56 @@ handleChangeOrden= (e)=>{
     
   }
 
-
+// obtener base de orden de trabajo
   obtenerBD=()=>{
         const obtRol = this.state.rol
         const obtName = this.state.getName
-        console.log(obtRol, obtName)
         if(obtRol === "admin"){
     db.collection("orden").orderBy("date", "desc")
       .get()
       .then(querySnapshot => {
         const data = querySnapshot.docs.map(doc => doc.data());
-        console.log(data)
         const newobj = data[0].contador 
        const newmes = data[0].mes
-       console.log(newobj, newmes)
         this.setState({ items: data, getDate:newobj, mes:newmes });
        
-      }, console.log(this.state.items));
+      });
 
     } else{
       db.collection("orden").orderBy("date", "desc").limit(1)
       .get()
       .then(querySnapshot => {
         const data = querySnapshot.docs.map(doc => doc.data());
-        console.log(data)
-        console.log(data)
         const newobj = data[0].contador
        const newmes = data[0].mes
-       console.log(newobj, newmes)
         this.setState({  getDate:newobj, mes:newmes });
       })
       db.collection("orden").where("vendedor", "==", obtName).orderBy("date", "desc")
       .get()
       .then(querySnapshot => {
         const data = querySnapshot.docs.map(doc => doc.data());
-        console.log(data)
-
- 
-
         this.setState({ items: data ,});
-      }, console.log(this.state.items));
+      });
     }
   }
 
-  
+//obtener base de datos Visitadores  
   obtenerVisitadores=()=>{
-
-    const obtRol = this.state.rol
-    const obtName = this.state.getName
-    console.log(obtRol, obtName)
    
 db.collection("visitadores").orderBy("date", "desc")
   .get()
   .then(querySnapshot => {
     const data = querySnapshot.docs.map(doc => doc.data());
-    console.log(data)
     this.setState({ dataVisitadores: data});
    
-  }, console.log(this.state.dataVisitadores));
+  });
 
 }
 
-
+//obtener base de datos Clientes
   obtenerClientes=()=>{
     const obtRol = this.state.rol
     const obtName = this.state.getName
-    console.log(obtRol, obtName)
     if(obtRol === "admin"){
 
             db.collection("clientes").orderBy("date", "desc")
@@ -1141,28 +1172,10 @@ db.collection("visitadores").orderBy("date", "desc")
               .then(querySnapshot => {
                 const dataClientes = querySnapshot.docs.map(doc =>  doc.data())
                   const news = dataClientes[0].contador
-                  // const dataNombres = querySnapshot.docs.map(doc =>  doc.data().nombre)
-                //  const dataEmpresa = querySnapshot.docs.map(doc =>  doc.data().empresa)
-                  console.log(news)
-                  // console.log(dataEmpresa)
                 this.setState({ dataClientes:dataClientes,  contClientes: news});
                 
               
-              }, console.log(this.state.dataClientes));
-
-              // db.collection("clientes").where("estatus", "==", "vendido")
-              // .get()
-              // .then(querySnapshot => {
-                  
-              //     const dataNombres = querySnapshot.docs.map(doc =>  doc.data().nombre)
-                 
-              //     console.log(dataNombres)
-                  
-              //   this.setState({ nombresClientes:dataNombres});
-                
-              
-              // }, console.log(this.state.dataClientes));
-    
+              });
     
             } else{
 
@@ -1173,23 +1186,8 @@ db.collection("visitadores").orderBy("date", "desc")
               .then(querySnapshot => { 
                const dataClientes =  querySnapshot.docs.map(doc => doc.data());
                const news = dataClientes[0].contador
-          
-              //  const dataEmpresa = querySnapshot.docs.map(doc =>  doc.data().empresa)
-                // console.log(dataEmpresa)
-               
                 this.setState({  dataClientes:dataClientes, contClientes: news});
               });
-
-              // db.collection("clientes").where("vendedor", "==", obtName).where("estatus","==","vendido")
-              // .get()
-              // .then(querySnapshot => { 
-               
-              //  const dataNombres = querySnapshot.docs.map(doc =>  doc.data().nombre)
-              
-              //   console.log(dataNombres)
-               
-              //   this.setState({ nombresClientes:dataNombres, });
-              // });
           }
      }
 
@@ -1221,37 +1219,14 @@ db.collection("visitadores").orderBy("date", "desc")
           }
     
 
+//Obtener data modal orden 
 
-    onClickItemUpdate(e){
-      
-      
-      let newid=  e.target.id
-       db.collection("orden").where("productClave", "==", newid)
-     .get()
-     .then(querySnapshot => {
-         const data = querySnapshot.docs.map(doc => doc.data());
-         const ven= data.vendedor
-         console.log(data
-          )
-            
-             this.setState({ idItem:newid, consulta: data ,  vendedor:ven,  modalIsOpen:true})
-             
-         });
-     
-        
-           
- 
-     }
      onClickItem(e){
-       console.log(e.target)
        const newid=  e.target.value
-      console.log(newid)
        db.collection("orden").where("productClave", "==", newid)
        .get()
        .then(querySnapshot => {
          const data = querySnapshot.docs.map(doc => doc.data());
-        
-        console.log(data[0])
              this.setState({
               consulta:data,
               idItem:newid, 
@@ -1268,8 +1243,13 @@ db.collection("visitadores").orderBy("date", "desc")
               tipoCliente:data[0].tipoCliente,
               nombreSolicitante:data[0].nombreSolicitante,
               empresaSolicitante:data[0].empresaSolicitante,
+              cargoSolicitante:data[0].cargoSolicitante,
               direccionSolicitante:data[0].direccionSolicitante,
               delegacionSolicitante:data[0].delegacionSolicitante,
+              areaSolicitante:data[0].areaSolicitante,
+              holdingSolicitante:data[0].holdingSolicitante,
+              rfcSolicitante:data[0].rfcSolicitante,
+              ventaSolicitante:data[0].ventaSolicitante,
               EDOSolicitante:data[0].EDOSolicitante,
               telSolicitante:data[0].telSolicitante,
               extTelSolicitante:data[0].extTelSolicitante,
@@ -1291,9 +1271,7 @@ db.collection("visitadores").orderBy("date", "desc")
                 .get()
                 .then(querySnapshot => {
                     const data = querySnapshot.docs.map(doc => doc.data().nombre);
-                  console.log(data)
-                        
-                        this.setState({
+                      this.setState({
                           listaVisitador:data,
               
               
@@ -1306,18 +1284,16 @@ db.collection("visitadores").orderBy("date", "desc")
          });      
   
      }
+
+     //obtender data modal cliente
      onClickItemCliente(e){
       
       
-      let newid=  document.getElementById("clave").value
-      console.log(newid)
- 
+      let newid=  e.target.value
        db.collection("clientes").where("clave", "==", newid)
        .get()
        .then(querySnapshot => {
          const data = querySnapshot.docs.map(doc => doc.data());
-         
-            
              this.setState({ idItem: newid,consultaCliente: data , modalIsOpen:true,
               clienteNombre:data[0].nombre,
               rfcCliente:data[0].rfc,
@@ -1337,7 +1313,7 @@ db.collection("visitadores").orderBy("date", "desc")
                comentarios:data[0].comentarios,
                dateToCompare:data[0].dateToCompare,
          
-            },()=>{console.log(this.state)})
+            })
              
          });
      
@@ -1345,57 +1321,16 @@ db.collection("visitadores").orderBy("date", "desc")
            
  
      }
-     onClickItemUpdateCliente(e){
-       
-      let newid=  document.getElementById("clave").value
-      console.log(newid)
- 
-       db.collection("clientes").where("clave", "==", newid)
-       .get()
-       .then(querySnapshot => {
-         const data = querySnapshot.docs.map(doc => doc.data());
-         
-            
-             this.setState({ consultaCliente: data , modalIsOpen:true,
-              clienteNombre:data[0].nombre,
-              rfcCliente:data[0].rfc,
-               direccionCliente:data[0].direccion, 
-               delegacionCliente:data[0].delegacion, 
-               EDOCliente:data[0].estado,  
-               telCliente:data[0].telefono,
-               extTelCliente:data[0].extTel,
-               emailCliente:data[0].email,
-               empresa:data[0].empresa,
-               estatus:data[0].estatus,
-               cargo:data[0].cargo, 
-               holding:data[0].holding, 
-               servicios:data[0].servicios,
-               area:data[0].area, 
-               venta:data[0].venta, 
-               comentarios:data[0].comentarios,
-         
-            },()=>{console.log(this.state)})
-             
-         });
-         
-            
-  
-      }
-
-
-    //Generador de clave unica
 
     
-
-      
     render() {
         const {consultaCliente,newOrder, list,dataClientes, estatusEmpresa,items, listaVisitador, nombresEmpresas, dataVisitadores,
           // clienteNombre, rfcCliente, direccionCliente, delegacionCliente:"", EDOCliente:"", atencionCliente:"", telCliente:"", extTelCliente:"",emailCliente:"",empresa:"",estatus:"",
           uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, holdingSolicitante,servicioSolicitante, ventaSolicitante, comentariosSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,
           clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
-           
+         areaSolicitante,  cargoSolicitante,
         visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
-          consulta,getName, getNewDate,
+          consulta,getName, getNewDate, 
            user, dateNew,obtDataCliente, nuevaClave, message, rol, montoVendido, comision, nombresClientes,presupuesto, 
           dateToCompare} = this.state;
       return (
@@ -1403,12 +1338,9 @@ db.collection("visitadores").orderBy("date", "desc")
         value={{
           handleChangeCliente: this.handleChangeCliente,
           onClickItem: this.onClickItem,
-          onClickItemUpdate: this.onClickItemUpdate,
           handleSelectUge: this.handleSelectUge,
           handleEmpresa: this.handleEmpresa,
           handleChange: this.handleChange,
-         
-        
           handleClick: this.handleClick,
           handleUpdateCliente: this.handleUpdateCliente,
           handleSubmitCliente: this.handleSubmitCliente,
@@ -1427,11 +1359,12 @@ db.collection("visitadores").orderBy("date", "desc")
           handleChangeOrden:this.handleChangeOrden,
           handleCliente: this.handleCliente,
           onClickItemCliente:this.onClickItemCliente,
-          onClickItemUpdateCliente: this.onClickItemUpdateCliente,
+
          visitadorNombre, rfcVisitador, direccionVisitador, delegacionVisitador, EDOVisitador, atencionVisitador, telVisitador, extTelVisitador,emailVisitador,
           crearNuevo: this.crearNuevo,
           consultaCliente,
           getNewDate,
+          areaSolicitante,cargoSolicitante,
           uge, vendedor, copia, oferta, cedido, proyecto, tipoCliente,  nombreSolicitante, empresaSolicitante, rfcSolicitante, direccionSolicitante, delegacionSolicitante, EDOSolicitante, telSolicitante, extTelSolicitante, emailSolicitante, objetivo, otroObj, proposito, otroProp, presentarse,visitador, fechaIns, telInsp, extInsp, emailInsp, dirInsp,  observaciones, bienes, otroBien, info, otraInfo, inicio, entrega,  facturar,holdingSolicitante,servicioSolicitante, ventaSolicitante, comentariosSolicitante,
           clienteNombre, rfcCliente, direccionCliente, delegacionCliente, EDOCliente, atencionCliente, telCliente, extTelCliente,emailCliente,empresa,estatus,cargo, holding, servicios,area, venta, comentarios,
            dateToCompare,

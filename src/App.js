@@ -1,22 +1,13 @@
 import React, {Component} from 'react';
-// import {BrowserRouter, Route} from 'react-router-dom'
-// import Navegador from './components/Navbar'
 import './resources/styles.css';
 import Menu from './Router'
 import firebase from 'firebase';
 import ImgNegocios from './assets/negocios.jpg'
 import LogoAnepsa from './assets/anepsa.png'
-// import ImgNegocios from './assets/negocios.jpg'
-// import ListaOrdenes from './components/ListaOrdenes'
-// import OrdenTrabajo from "./components/OrdenTrabajo"
-// import OrdenCreada from "./components/OrdenCreada"
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import {AppContextProvider, AppContext} from "./AppContext";
 
 Menu.contextType = AppContext;
-// OrdenTrabajo.contextType = AppContext;
-// ListaOrdenes.contextType = AppContext;
-// OrdenCreada.contextType = AppContext;
 
 
 class App extends Component{
@@ -33,17 +24,13 @@ handleAuth() {
   const email = document.getElementById("email").value
   const password = document.getElementById("password").value
   firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-    // Handle Errors here.
+
     var errorCode = error.code;
     var errorMessage = error.message;
     console.log(errorCode)
     console.log(errorMessage)
     // ...
   });
-  // const provider = new firebase.auth.GoogleAuthProvider(); 
-  // firebase.auth().signInWithPopup(provider)
-  // .then(result => console.log(`${result.user.email} ha iniciado seción`))
-  // .catch(error => console.log(`Error ${error.code}: ${error.message}`));
 }
 
 handleLogout(){
@@ -84,8 +71,6 @@ handleRender() {
         <div className="login-right">
           <Form className="login">
             <img src={LogoAnepsa} alt="logo-anepsa" className="LogoAnepsa"></img>
-            
-            {/* <Label className="font-label-sub">Gestión de Ordenes de Trabajo</Label> */}
             <FormGroup className="text-important">
             <hr/>
             <Label>Correo Electrónico</Label>
@@ -109,34 +94,8 @@ handleRender() {
       return ( 
         <div>{this.handleRender()}</div>
         )
-      //return this.state.data ? <Menu></Menu> : 'trayendo data...';
   }
 } 
- 
-  
-//   render(){
-//   return (
-  
-//    <AppContextProvider >
- 
-//     <BrowserRouter>
-//     <div className="App">
-//             <Navegador></Navegador>
-//             <Route exact path="/" render={() => <ListaOrdenes />} />
-//             <Route path="/OrdenTrabajo" render={() => <OrdenTrabajo />} />
-//             <Route path="/OrdenCreada" render={() => <OrdenCreada />} />
-//    </div>
-      
-//       </BrowserRouter>
-      
-      
-      
-//       </AppContextProvider>
-     
-       
-      
-//   );
-// }
-// }
+
 
 export default App;
