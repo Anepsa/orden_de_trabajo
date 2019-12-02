@@ -14,10 +14,6 @@ class OrdenCreada extends React.Component {
     render() {
   
         const{ closeModal, modalIsOpen,  consulta,handleChange, vendedor}=this.context
- 
-        // const{ list} = this.context}
-        
-        
         return (
         
             <Modal
