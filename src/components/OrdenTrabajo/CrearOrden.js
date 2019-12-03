@@ -535,7 +535,7 @@ class  OrdenTrabajo extends React.Component {
             </Col>
             </FormGroup>
             <hr/>
-            <FormGroup>
+            <FormGroup className="mb-0">
            
             
             <fieldset className="fieldset">
