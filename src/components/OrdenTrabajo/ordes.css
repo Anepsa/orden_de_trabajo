@@ -1,0 +1,48 @@
+.col-sm-2 {
+    padding:0;
+}
+.col-sm-3 {
+    padding:0 ;
+}
+.col-sm-1 {
+    padding:0;
+}
+.col-sm-5{
+    padding:0 ;
+}
+.col-sm-4{
+    padding:0 ;
+}
+    
+fieldset{
+    padding-left: 2% ;
+    padding-right: 2% ;
+}
+
+
+.imprimir div{
+    margin:0px;
+    padding: 4px;
+    padding-top: 0px;
+    padding-bottom: 2px;
+}
+
+.imprimir label{
+    font-size: 14px !important;
+    font-weight: bold;
+    margin:0px;
+    padding:0px;
+}
+
+.imprimir input{
+    font-size: 14px !important;
+    font-weight: bold;
+    margin:0px;
+    padding:0px;
+}
+.imprimir textarea{
+    font-size: 14px !important;
+    font-weight: bold;
+    margin:0px;
+    padding:0px;
+}
